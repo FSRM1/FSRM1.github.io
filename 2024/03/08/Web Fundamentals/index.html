@@ -93,8 +93,17 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403081021326.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403081045437.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403082316313.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403122035395.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131358159.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131359093.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131403882.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131913142.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132242159.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132343773.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132344494.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132348902.png">
 <meta property="article:published_time" content="2024-03-08T15:55:20.810Z">
-<meta property="article:modified_time" content="2024-03-09T15:47:54.570Z">
+<meta property="article:modified_time" content="2024-03-13T15:51:45.428Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -332,7 +341,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k 字
+          15k 字
         
       </span>
     
@@ -343,7 +352,7 @@
         
         
         
-          106 分钟
+          124 分钟
         
       </span>
     
@@ -914,6 +923,89 @@
 <p>修复:</p>
 <p>1.白名单，对于一些不允许输入的字符串进行一个替换</p>
 <p>2.对用户输入的特殊字符进行转义处理</p>
+<h2 id="Web-Hacking-Fundamentals"><a href="#Web-Hacking-Fundamentals" class="headerlink" title="Web Hacking Fundamentals"></a>Web Hacking Fundamentals</h2><h3 id="OWASP-Top-10-2021"><a href="#OWASP-Top-10-2021" class="headerlink" title="OWASP Top 10 - 2021"></a>OWASP Top 10 - 2021</h3><p>Broken Access Control</p>
+<p>其实就是一个未授权访问</p>
+<p>Broken Access Control (IDOR Challenge)</p>
+<p>IDOR漏洞 可以访问其他用户的相关信息 可能会造成敏感信息的泄露 漏洞原因:应用程序没有对用户是否具有相关权限访问做出限制。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403122035395.png" srcset="/img/loading.gif" lazyload alt="image-20240312203542028"></p>
+<p>Cryptographic Failures</p>
+<p>简单的来讲就是用户和服务之间通信的加密不是那么的严格，容易被破解，从而导致信息的泄露。</p>
+<p>在更复杂的级别上，利用某些加密故障通常涉及诸如“中间人攻击”之类的技术，攻击者会通过他们控制的设备强制用户连接。然后，他们将利用对任何传输数据的弱加密来访问截获的信息（如果数据首先被加密）。当然，许多示例要简单得多，并且可以在 Web 应用程序中找到漏洞，而无需高级网络知识即可利用这些漏洞。事实上，在某些情况下，敏感数据可以直接在 Web 服务器本身上找到。</p>
+<p>Cryptographic Failures (Supporting Material 1)</p>
+<p>有些数据库也可以存储为文件 被称为平面文件数据库 然后我们可以下载下来</p>
+<p>具体操作:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1.</span>sqlite3 &lt;<span class="hljs-keyword">database</span>-<span class="hljs-type">name</span>&gt;<br><span class="hljs-number">2.</span> .<span class="hljs-keyword">tables</span>  //查看表名<br><span class="hljs-number">3.</span> PRAGMA table_info(<span class="hljs-built_in">table_name</span>); //可以出现列名<br><span class="hljs-number">4.</span> <span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> <span class="hljs-built_in">table_name</span>;    //查看表里面的内容<br></code></pre></td></tr></table></figure>
+
+<p>有的时候我们得到的密码是一些经过nd5加密后的 然后我们需要去一些平台去解密</p>
+<p><a target="_blank" rel="noopener" href="https://crackstation.net/">CrackStation - 在线密码哈希破解 - MD5、SHA1、Linux、Rainbow Tables 等</a></p>
+<p>挑战:</p>
+<p>在login网页源代码中发现信息 /assets</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131358159.png" srcset="/img/loading.gif" lazyload alt="image-20240313135757037"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131359093.png" srcset="/img/loading.gif" lazyload alt="image-20240313135925920"></p>
+<p>然后下载下来</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131403882.png" srcset="/img/loading.gif" lazyload alt="image-20240313140356643"></p>
+<p>拿到了密码登录即可</p>
+<p>Injection</p>
+<p>简要概括了一下sql注入和命令注入。</p>
+<ul>
+<li><strong>SQL注入：</strong>当用户控制的输入传递给 SQL 查询时，会发生这种情况。因此，攻击者可以传入 SQL 查询来操纵此类查询的结果。当此输入传递到数据库查询时，攻击者可能会访问、修改和删除数据库中的信息。这意味着攻击者可以窃取敏感信息，例如个人详细信息和凭据。</li>
+<li><strong>命令注入：</strong>当用户输入传递给系统命令时，会发生这种情况。因此，攻击者可以在应用程序服务器上执行任意系统命令，从而可能允许他们访问用户的系统。</li>
+</ul>
+<p>防止注入攻击的主要防御措施是确保用户控制的输入不会被解释为查询或命令。有不同的方法可以做到这一点：</p>
+<ul>
+<li><strong>使用允许列表：</strong>当输入发送到服务器时，此输入将与安全输入或字符列表进行比较。如果输入被标记为安全，则对其进行处理。否则，它将被拒绝，并且应用程序将引发错误。</li>
+<li><strong>剥离输入：</strong> 如果输入包含危险字符，则在处理之前删除这些字符。</li>
+</ul>
+<p>实例:</p>
+<p>反引号命令执行 </p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-string">`cmd`</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403131913142.png" srcset="/img/loading.gif" lazyload alt="image-20240313191313732"></p>
+<p>hgame2024某个题就是这样的</p>
+<p>就有一个点:</p>
+<p>在linux中sbin目录通常存放着系统管理员 可以在/etc/passwd中查看</p>
+<p>Insecure Design</p>
+<p>这个是在开发过程中，开发人员为了测试便捷，可能会有一些不安全的地方，然后在实际生产的环境中，忘记修改了导致一些漏洞的产生。</p>
+<p>实例:</p>
+<p>首先根据说明，先在忘记密码那里输入joseph用户</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132242159.png" srcset="/img/loading.gif" lazyload alt="image-20240313224235733"></p>
+<p>然后有三个问题，我们选择第二个，这个容易进行猜测，试试红，蓝，白，绿等常见的颜色，最后发现是绿。</p>
+<p>最后可以得到joseph用户的密码</p>
+<ol start="5">
+<li>Security Misconfiguration</li>
+</ol>
+<p>安全配置错误与其他前 10 大漏洞不同，因为它们发生在可以适当配置安全性但未正确配置的情况下。即使您下载了最新的软件，糟糕的配置也可能使您的安装容易受到攻击。</p>
+<p>安全错误配置包括：</p>
+<ul>
+<li>对云服务（如 S3 存储桶）的权限配置不当。</li>
+<li>启用不必要的功能，例如服务、页面、帐户或权限。</li>
+<li>密码未更改的默认帐户。</li>
+<li>错误消息过于详细，允许攻击者了解有关系统的更多信息。</li>
+<li>不使用 <a target="_blank" rel="noopener" href="https://owasp.org/www-project-secure-headers/">HTTP 安全标头</a>。</li>
+</ul>
+<p>此漏洞通常会导致更多漏洞，例如允许您访问敏感数据的默认凭据、XML 外部实体 （XXE） 或管理页面上的命令注入。</p>
+<p>还可能会导致一些ssti漏洞</p>
+<p>实例:先访问/console 进入控制台，可以执行python命令 在ssti中有的是需要计算pin码，然后再进入控制台执行命令</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">import <span class="hljs-built_in">os</span>;<span class="hljs-built_in">os</span>.<span class="hljs-built_in">popen</span>(<span class="hljs-string">&#x27;ls /&#x27;</span>).<span class="hljs-built_in">read</span>();<br></code></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li>Vulnerable and Outdated Components</li>
+</ol>
+<p>有时，您可能会发现您正在渗透测试的公司/实体正在使用具有已知漏洞的程序。</p>
+<p>例如，假设一家公司已经有几年没有更新他们的 WordPress 版本了，使用 <a target="_blank" rel="noopener" href="https://wpscan.com/wordpress-security-scanner">WPScan</a> 等工具，您会发现它是 4.6 版。一些快速研究将揭示 WordPress 4.6 容易受到未经身份验证的远程代码执行 （RCE） 攻击，更好的是，您可以在 <a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/41962">Exploit-DB</a> 上找到已经进行的漏洞利用。</p>
+<p>Vulnerable and Outdated Components - Exploit</p>
+<p>我们在知道该版本存在漏洞的情况下，下一步要做的就是去利用这个漏洞。 可以在exploit中寻找相关的漏洞信息。</p>
+<p>实例:</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132343773.png" srcset="/img/loading.gif" lazyload alt="image-20240313234355495"></p>
+<p>去exploit中搜索online book store </p>
+<p>然后可以找到<img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132344494.png" srcset="/img/loading.gif" lazyload alt="image-20240313234444214"></p>
+<p>下载下来</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403132348902.png" srcset="/img/loading.gif" lazyload alt="image-20240313234811766"></p>
+<ol start="7">
+<li>Identification and Authentication Failures</li>
+</ol>
 
                 
               </div>
@@ -978,7 +1070,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月9日</div>
+          <div>2024年3月13日</div>
         </div>
       
       
