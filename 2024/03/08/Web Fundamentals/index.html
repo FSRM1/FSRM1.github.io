@@ -123,8 +123,14 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403182142082.png">
 <meta property="og:image" content="https://i.imgur.com/bJ9WKY4.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403182201934.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201808117.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201815266.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201849455.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201859281.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212013267.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212106148.png">
 <meta property="article:published_time" content="2024-03-08T15:55:20.810Z">
-<meta property="article:modified_time" content="2024-03-18T14:30:43.289Z">
+<meta property="article:modified_time" content="2024-03-21T14:20:20.716Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -362,7 +368,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18k 字
+          20k 字
         
       </span>
     
@@ -373,7 +379,7 @@
         
         
         
-          149 分钟
+          163 分钟
         
       </span>
     
@@ -1149,6 +1155,61 @@
 <p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403182201934.png" srcset="/img/loading.gif" lazyload alt="image-20240318220157631"></p>
 <p>Where did that come from?</p>
 <p>主要是关于xss的相关内容。</p>
+<p>xss分为三类，分别是DOM型xss,反射型xss，存储型xss.</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201808117.png" srcset="/img/loading.gif" lazyload alt="image-20240320180845973"></p>
+<p>实例:</p>
+<p>DOM型的xss</p>
+<p>在搜索框那里可以进行DOM型的xss </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;iframe <span class="hljs-attribute">src</span>=<span class="hljs-string">&quot;javascript:alert(&#x27;xss&#x27;)&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201815266.png" srcset="/img/loading.gif" lazyload alt="image-20240320181546019"></p>
+<p>存储型xss</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201849455.png" srcset="/img/loading.gif" lazyload alt="image-20240320184941297"></p>
+<p>反射型xss:</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201859281.png" srcset="/img/loading.gif" lazyload alt="image-20240320185942012"></p>
+<p>注意一下这里包裹xss的是``</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">&lt;iframe src=<span class="hljs-string">&quot;javascript:alert(`xss`)&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Upload-Vulnerabilities"><a href="#Upload-Vulnerabilities" class="headerlink" title="Upload Vulnerabilities"></a>Upload Vulnerabilities</h3><p>首先做一些前置工作，在/etc/hosts 下添加一些信息。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ip    overwrite<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> shell<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> java<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> annex<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> magic<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> jewel<span class="hljs-selector-class">.uploadvulns</span><span class="hljs-selector-class">.thm</span> demo<span class="hljs-selector-class">.uploadvulns</span>.thm<br></code></pre></td></tr></table></figure>
+
+<p>这个房间主要是介绍一些文件上传的利用点。</p>
+<p>Overwriting Existing Files(覆盖文件)</p>
+<p>当我们成功上传上去一个文件时，其文件名会被更改,以防止文件覆盖。文件名有时可能是随机的，或者是当前上传的时间和日期添加到文件末尾，或者是当上传一个相同文件名时，直接返回错误。</p>
+<p>实例:</p>
+<p>我们查看网页源代码，知道图片名字是mountains.jpg，然后我们再去上传一个同名字的图片，就会造成一个文件覆盖。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212013267.png" srcset="/img/loading.gif" lazyload alt="image-20240321201326902"></p>
+<p>Remote Code Execution(远程代码执行)</p>
+<p>就是往服务端上传一个一句话木马,或者是反弹shell的命令.</p>
+<p>实例:</p>
+<p>首先通过dirsearch扫目录，可以看到上传路径。</p>
+<p>然后上传进去一个一句话木马就行了。</p>
+<p>Filtering</p>
+<p>上面都是没过滤的，下面这个讲的是一些过滤方法。</p>
+<p>大体的分为两大类:</p>
+<p>1.客户端的一个过滤，这里的话是在用户浏览器的一个过滤，相对来说是很好绕过的，禁用js即可。</p>
+<p>2.另外一个是在服务端的一个过滤，这里的绕过就需要考虑很多了，我们是不知道服务端所执行的代码，所以我们需要进行不断的尝试绕过。</p>
+<p>下面来具体介绍一下过滤的方法:</p>
+<p>1.设置白名单(即只允许我们定义的文件上传)和黑名单(不允许我们定义的文件上传)。MS Windows 仍然使用它们来识别文件类型</p>
+<p>2.文件类型筛选。检查MIME的值是否符合图片类型的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212106148.png" srcset="/img/loading.gif" lazyload alt="image-20240321210633022"></p>
+<p>还有就是不同的图片，前八个字节是固定的，通常uinx通过这个来检查文件是否符合条件。</p>
+<p>例如:png图片的前八个字节是 89 50 4E 47 0D 0A 1A 0A</p>
+<p>3.文件大小限制，就是限制上传文件的大小，防止上传大的文件造成服务器资源匮乏。</p>
+<p>4.对文件名的过滤，检查文件名是否重复以及是否存在一些不合法的字符。</p>
+<p>5.文件内容的过滤。</p>
+<p>反向shell文件:<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php">https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php</a></p>
+<p>实例:</p>
+<p>这个实例thm给了四种，我只知道其中的三种，最后一种挺有意思的。</p>
+<ol>
+<li><em>在浏览器中关闭 Javascript</em> - 如果网站不需要 Javascript 来提供基本功能，这将起作用。如果完全关闭 Javascript 会阻止网站运行，那么其他方法之一会更可取;否则，这可能是完全绕过客户端筛选器的有效方法。</li>
+<li><em>拦截并修改传入页面。</em> 使用 Burpsuite，我们可以拦截传入的网页并在 Javascript 过滤器有机会运行之前将其剥离。</li>
+<li><em>拦截并修改文件上传。</em>如果前面的方法在加载网页<em>之前</em>起作用，则此方法允许网页正常加载，但在文件已通过（并被筛选器接受）后拦截文件上传。同样，我们将介绍在任务过程中使用此方法的过程。</li>
+<li><em>将文件直接发送到上传点。</em>为什么要使用带有过滤器的网页，当您可以使用诸如 ？将数据直接发布到包含用于处理文件上传的代码的页面是完全绕过客户端筛选器的另一种有效方法。</li>
+</ol>
+<p>利用curl语句进行上传。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-X</span> POST <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;submit:&lt;value&gt;&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;&lt;file-parameter&gt;:@&lt;path-to-file&gt;&quot;</span> &lt;site&gt;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -1213,7 +1274,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月18日</div>
+          <div>2024年3月21日</div>
         </div>
       
       
