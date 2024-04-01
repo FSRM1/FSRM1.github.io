@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>DC-2</title>
+    <link href="/2024/04/01/DC-2/"/>
+    <url>/2024/04/01/DC-2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="DC-2"><a href="#DC-2" class="headerlink" title="DC-2"></a>DC-2</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png" alt="image-20240328231730586"></p><p>利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容</p><p>然后用dirsearch扫后台，可以扫出来相关的路径</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282057978.png" alt="image-20240328205748795"></p><h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>去访问index.php 然后就可以看到flag1</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282239933.png" alt="image-20240328223939777"></p><p>根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波</p><p>它是一个字典生成工具</p><p>参考:<a href="https://developer.aliyun.com/article/1089966">https://developer.aliyun.com/article/1089966</a></p><p>然后这里的话我们生成一个密码文件</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282325249.png" alt="image-20240328232528171"></p><p>现在密码字典有了 就差一个用户名的</p><p>然后搜了一下wpscan这个工具的用法和一些简单介绍</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282339323.png" alt="image-20240328233928260"></p><p>参考链接:</p><p><a href="https://blog.csdn.net/guo15890025019/article/details/118548932">https://blog.csdn.net/guo15890025019/article/details/118548932</a></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282349700.png" alt="image-20240328234958565"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282350418.png" alt="image-20240328235012283"></p><p>最终可以得到3个账户  然后结合前面的字典 去爆破用户名和密码即可</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403291014625.png" alt="image-20240329101357455"></p><h2 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h2><p>记得每个用户都去登录看看 不要死磕一个用户(Orz)</p><p>登录tom用户的话没找到啥内容 然后试了一下文件上传 也不得行</p><p>登录jerry用户 可以找到flag2的信息</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011106014.png" alt="image-20240401110606904"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011107040.png" alt="image-20240401110703945"></p><p>让我们找另一条思路？</p><p>注意上面的ssh服务 可以先试试这两个账号的ssh登录</p><h2 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h2><p>使用tom登录之后 可以看到flag3.txt</p><p>但是cat等命令被禁止了 我们可以使用less来查看</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011116199.png" alt="image-20240401111648120"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011117327.png" alt="image-20240401111705230"></p><p>再试试Jerry进行登录</p><p>登录不上去？？？？</p><p>根据上面flag3 猜测是在tom用户下 切换到jerry用户 但是在当前的环境中没有su这个命令</p><p>先查看一下当前环境能用的命令有多少</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">compgen -c</span><br></code></pre></td></tr></table></figure><p>可以列出在bash环境中所有可用的命令</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011140685.png" alt="image-20240401114037624"></p><p>export可以修改环境变量 </p><p>直接修改的话 PATH是只读的 </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011149574.png" alt="image-20240401114918524"></p><p>查了一下需要绕过rbash</p><p>参考链接:<a href="https://xz.aliyun.com/t/7642?time__1311=n4+xnD0G0=G=eAK0QbDsA3OrYGCQb=DRnDGqrwD&amp;alichlgref=https://www.google.com/">https://xz.aliyun.com/t/7642?time__1311=n4%2BxnD0G0%3DG%3DeAK0QbDsA3OrYGCQb%3DDRnDGqrwD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F</a></p><p>可以利用vi来进行逃逸rbash</p><p>我们在flag3.txt中利用vi进行逃逸</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011349141.png" alt="image-20240401134945018"></p><p>然后回车</p><p>再输入 :shell 即可</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011350121.png" alt="image-20240401135017072"></p><p>但此时虽然能cd了 但是cat那些命令仍然不能使用</p><p>可以利用export设置环境变量</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011351267.png" alt="image-20240401135152215"></p><p>然后此时我们就可以转到jerry用户了</p><h2 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h2><p>su转到jerry用户之后就可以查看flag4了</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011354263.png" alt="image-20240401135434153"></p><h2 id="flag5"><a href="#flag5" class="headerlink" title="flag5"></a>flag5</h2><p>最后一个了 应该是要提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011402790.png" alt="image-20240401140218749"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011408656.png" alt="image-20240401140846535"></p><p>去搜一下git提权</p><p>参考链接:</p><p><a href="https://blog.csdn.net/qq_38612882/article/details/122772867">https://blog.csdn.net/qq_38612882/article/details/122772867</a></p><p>提权过程：</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">sudo git help config<br>!<span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure><p>最后提权成功</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011414045.png" alt="image-20240401141428005"></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>flag1 就是扫一下目录的事情</p><p>flag2是利用cewl生成登录密码字典 然后结合wpscan就可以把登录名和密码爆破出来 注意每个都要试试 </p><p>flag3: nmap扫描端口会有一个ssh服务 可以去登录 </p><p>flag4:绕过rbash的限制 </p><p>flag5: git提权</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>DC-1</title>
     <link href="/2024/03/27/DC-1/"/>
     <url>/2024/03/27/DC-1/</url>

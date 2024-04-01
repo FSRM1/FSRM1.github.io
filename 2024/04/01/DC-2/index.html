@@ -16,41 +16,44 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DC-1靶机前置准备：下载地址：https:&#x2F;&#x2F;download.vulnhub.com&#x2F;dc&#x2F;DC-1.zip 安装过程： 下载下来后解压缩，在VMware中打开  然后导入就行了，如果失败重试就行，接下来把CD-1靶机的网络适配器改成NAT模式，这里的话kali也改成nat模式，确保两者在同一网段下  打靶过程1.信息收集首先使用nmap扫描端口信息。  利用wappalyzer可以查看版本信">
+    <meta name="description" content="DC-2信息收集 利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容 然后用dirsearch扫后台，可以扫出来相关的路径  flag1去访问index.php 然后就可以看到flag1  根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波 它是一个字典生成工具 参考:https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1089">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DC-1">
-<meta property="og:url" content="http://example.com/2024/03/27/DC-1/index.html">
+<meta property="og:title" content="DC-2">
+<meta property="og:url" content="http://example.com/2024/04/01/DC-2/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="DC-1靶机前置准备：下载地址：https:&#x2F;&#x2F;download.vulnhub.com&#x2F;dc&#x2F;DC-1.zip 安装过程： 下载下来后解压缩，在VMware中打开  然后导入就行了，如果失败重试就行，接下来把CD-1靶机的网络适配器改成NAT模式，这里的话kali也改成nat模式，确保两者在同一网段下  打靶过程1.信息收集首先使用nmap扫描端口信息。  利用wappalyzer可以查看版本信">
+<meta property="og:description" content="DC-2信息收集 利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容 然后用dirsearch扫后台，可以扫出来相关的路径  flag1去访问index.php 然后就可以看到flag1  根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波 它是一个字典生成工具 参考:https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1089">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271741086.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271741160.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271347436.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271349139.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271351808.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271359063.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271402007.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271403258.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271409272.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271620653.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271631627.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271654037.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271656789.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271700064.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271713760.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271718896.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271720612.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271727286.png">
-<meta property="article:published_time" content="2024-03-27T09:38:05.727Z">
-<meta property="article:modified_time" content="2024-03-27T09:41:26.921Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282057978.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282239933.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282325249.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282339323.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282349700.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282350418.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403291014625.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011106014.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011107040.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011116199.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011117327.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011140685.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011149574.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011349141.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011350121.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011351267.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011354263.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011402790.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011408656.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011414045.png">
+<meta property="article:published_time" content="2024-04-01T06:23:52.030Z">
+<meta property="article:modified_time" content="2024-04-01T06:24:12.254Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271741086.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png">
   
   
   
-  <title>DC-1 - FSRM</title>
+  <title>DC-2 - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -257,7 +260,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DC-1"></span>
+            <span id="subtitle" data-typed-text="DC-2"></span>
           
         </div>
 
@@ -268,8 +271,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-27 17:38" pubdate>
-          2024年3月27日 下午
+        <time datetime="2024-04-01 14:23" pubdate>
+          2024年4月1日 下午
         </time>
       </span>
     
@@ -280,7 +283,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.2k 字
         
       </span>
     
@@ -291,7 +294,7 @@
         
         
         
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -336,68 +339,83 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">DC-1</h1>
+            <h1 id="seo-header">DC-2</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="DC-1靶机"><a href="#DC-1靶机" class="headerlink" title="DC-1靶机"></a>DC-1靶机</h1><h2 id="前置准备："><a href="#前置准备：" class="headerlink" title="前置准备："></a>前置准备：</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://download.vulnhub.com/dc/DC-1.zip">https://download.vulnhub.com/dc/DC-1.zip</a></p>
-<p>安装过程：</p>
-<p>下载下来后解压缩，在VMware中打开</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271741086.png" srcset="/img/loading.gif" lazyload alt="image-20240327174123994"></p>
-<p>然后导入就行了，如果失败重试就行，接下来把CD-1靶机的网络适配器改成NAT模式，这里的话kali也改成nat模式，确保两者在同一网段下</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271741160.png" srcset="/img/loading.gif" lazyload alt="image-20240327174108089"></p>
-<h1 id="打靶过程"><a href="#打靶过程" class="headerlink" title="打靶过程"></a>打靶过程</h1><h2 id="1-信息收集"><a href="#1-信息收集" class="headerlink" title="1.信息收集"></a>1.信息收集</h2><p>首先使用nmap扫描端口信息。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271347436.png" srcset="/img/loading.gif" lazyload alt="image-20240327134724284"></p>
-<p>利用wappalyzer可以查看版本信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271349139.png" srcset="/img/loading.gif" lazyload alt="image-20240327134902094"></p>
-<p>可以看到是一个CMS php版本是5.4.45 我们去msf中搜索一下这个版本的漏洞信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271351808.png" srcset="/img/loading.gif" lazyload alt="image-20240327135119564"></p>
-<p>可以看到日期信息 我们使用最新的试试看</p>
-<h2 id="2-漏洞利用"><a href="#2-漏洞利用" class="headerlink" title="2.漏洞利用"></a>2.漏洞利用</h2><h3 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h3><p>然后设置一下信息 就可以run了 </p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271359063.png" srcset="/img/loading.gif" lazyload alt="image-20240327135917943"></p>
-<p>可以看到已经可以执行命令了。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271402007.png" srcset="/img/loading.gif" lazyload alt="image-20240327140257966"></p>
-<p>利用python实现一下交互shell</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">python -c <span class="hljs-string">&#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="DC-2"><a href="#DC-2" class="headerlink" title="DC-2"></a>DC-2</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png" srcset="/img/loading.gif" lazyload alt="image-20240328231730586"></p>
+<p>利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容</p>
+<p>然后用dirsearch扫后台，可以扫出来相关的路径</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282057978.png" srcset="/img/loading.gif" lazyload alt="image-20240328205748795"></p>
+<h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>去访问index.php 然后就可以看到flag1</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282239933.png" srcset="/img/loading.gif" lazyload alt="image-20240328223939777"></p>
+<p>根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波</p>
+<p>它是一个字典生成工具</p>
+<p>参考:<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1089966">https://developer.aliyun.com/article/1089966</a></p>
+<p>然后这里的话我们生成一个密码文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282325249.png" srcset="/img/loading.gif" lazyload alt="image-20240328232528171"></p>
+<p>现在密码字典有了 就差一个用户名的</p>
+<p>然后搜了一下wpscan这个工具的用法和一些简单介绍</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282339323.png" srcset="/img/loading.gif" lazyload alt="image-20240328233928260"></p>
+<p>参考链接:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guo15890025019/article/details/118548932">https://blog.csdn.net/guo15890025019/article/details/118548932</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282349700.png" srcset="/img/loading.gif" lazyload alt="image-20240328234958565"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282350418.png" srcset="/img/loading.gif" lazyload alt="image-20240328235012283"></p>
+<p>最终可以得到3个账户  然后结合前面的字典 去爆破用户名和密码即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403291014625.png" srcset="/img/loading.gif" lazyload alt="image-20240329101357455"></p>
+<h2 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h2><p>记得每个用户都去登录看看 不要死磕一个用户(Orz)</p>
+<p>登录tom用户的话没找到啥内容 然后试了一下文件上传 也不得行</p>
+<p>登录jerry用户 可以找到flag2的信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011106014.png" srcset="/img/loading.gif" lazyload alt="image-20240401110606904"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011107040.png" srcset="/img/loading.gif" lazyload alt="image-20240401110703945"></p>
+<p>让我们找另一条思路？</p>
+<p>注意上面的ssh服务 可以先试试这两个账号的ssh登录</p>
+<h2 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h2><p>使用tom登录之后 可以看到flag3.txt</p>
+<p>但是cat等命令被禁止了 我们可以使用less来查看</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011116199.png" srcset="/img/loading.gif" lazyload alt="image-20240401111648120"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011117327.png" srcset="/img/loading.gif" lazyload alt="image-20240401111705230"></p>
+<p>再试试Jerry进行登录</p>
+<p>登录不上去？？？？</p>
+<p>根据上面flag3 猜测是在tom用户下 切换到jerry用户 但是在当前的环境中没有su这个命令</p>
+<p>先查看一下当前环境能用的命令有多少</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">compgen -c</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271403258.png" srcset="/img/loading.gif" lazyload alt="image-20240327140344185"></p>
-<p>这里可以找到flag1</p>
-<p>查看flag1.txt 提示让我们找到配置文件</p>
-<p>去网上搜一下Drupal的配置文件的位置信息。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271409272.png" srcset="/img/loading.gif" lazyload alt="image-20240327140926216"></p>
-<h3 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h3><p>然后可以看到配置文件的内容</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271620653.png" srcset="/img/loading.gif" lazyload alt="image-20240327162021558"></p>
-<p>可以看到数据库的配置信息，先连接一波</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271631627.png" srcset="/img/loading.gif" lazyload alt="image-20240327163120510"></p>
-<p>然后可以找到用户名和密码，但是密码是加密的，所以我们可以尝试对密码进行一个更改。</p>
-<p>在网上搜了一下发现是可以的，先生成一个新的密码，然后到数据库里面进行更新即可</p>
-<p>参考文章:<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/ask/sof/110990932">https://cloud.tencent.com/developer/ask/sof/110990932</a></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271654037.png" srcset="/img/loading.gif" lazyload alt="image-20240327165423977"></p>
-<p>然后再进行登录 admin admin</p>
-<h3 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h3><p>然后就可以找到flag3</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271656789.png" srcset="/img/loading.gif" lazyload alt="image-20240327165607699"></p>
-<h3 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h3><p>在/etc/passwd中可以查看到flag4</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271700064.png" srcset="/img/loading.gif" lazyload alt="image-20240327170006991"></p>
-<p>在信息收集的时候我们知道22端口是开放的，那么我们可以爆破flag4的密码 利用ssh去登录flag4用户</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271713760.png" srcset="/img/loading.gif" lazyload alt="image-20240327171331628"></p>
-<p>密码爆破出来了，去ssh登录即可</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">password:</span> orange<br></code></pre></td></tr></table></figure>
+<p>可以列出在bash环境中所有可用的命令</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011140685.png" srcset="/img/loading.gif" lazyload alt="image-20240401114037624"></p>
+<p>export可以修改环境变量 </p>
+<p>直接修改的话 PATH是只读的 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011149574.png" srcset="/img/loading.gif" lazyload alt="image-20240401114918524"></p>
+<p>查了一下需要绕过rbash</p>
+<p>参考链接:<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7642?time__1311=n4+xnD0G0=G=eAK0QbDsA3OrYGCQb=DRnDGqrwD&amp;alichlgref=https://www.google.com/">https://xz.aliyun.com/t/7642?time__1311=n4%2BxnD0G0%3DG%3DeAK0QbDsA3OrYGCQb%3DDRnDGqrwD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F</a></p>
+<p>可以利用vi来进行逃逸rbash</p>
+<p>我们在flag3.txt中利用vi进行逃逸</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011349141.png" srcset="/img/loading.gif" lazyload alt="image-20240401134945018"></p>
+<p>然后回车</p>
+<p>再输入 :shell 即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011350121.png" srcset="/img/loading.gif" lazyload alt="image-20240401135017072"></p>
+<p>但此时虽然能cd了 但是cat那些命令仍然不能使用</p>
+<p>可以利用export设置环境变量</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011351267.png" srcset="/img/loading.gif" lazyload alt="image-20240401135152215"></p>
+<p>然后此时我们就可以转到jerry用户了</p>
+<h2 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h2><p>su转到jerry用户之后就可以查看flag4了</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011354263.png" srcset="/img/loading.gif" lazyload alt="image-20240401135434153"></p>
+<h2 id="flag5"><a href="#flag5" class="headerlink" title="flag5"></a>flag5</h2><p>最后一个了 应该是要提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011402790.png" srcset="/img/loading.gif" lazyload alt="image-20240401140218749"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011408656.png" srcset="/img/loading.gif" lazyload alt="image-20240401140846535"></p>
+<p>去搜一下git提权</p>
+<p>参考链接:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38612882/article/details/122772867">https://blog.csdn.net/qq_38612882/article/details/122772867</a></p>
+<p>提权过程：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">sudo git help config<br>!<span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271718896.png" srcset="/img/loading.gif" lazyload alt="image-20240327171851703"></p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>先试试suid提权</p>
-<p>参考文章；</p>
-<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/12535?time__1311=mqmhD50KBKDK50Hq4+OrEG8Yt47K6xx&amp;alichlgref=https://www.google.com/#toc-6">https://xz.aliyun.com/t/12535?time__1311=mqmhD50KBKDK50Hq4%2BOrEG8Yt47K6xx&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-6</a></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271720612.png" srcset="/img/loading.gif" lazyload alt="image-20240327172034487"></p>
-<p>可以进行suid提权</p>
-<h5 id="flag5"><a href="#flag5" class="headerlink" title="flag5"></a>flag5</h5><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403271727286.png" srcset="/img/loading.gif" lazyload alt="image-20240327172738233"></p>
-<p>总结:</p>
-<p>总体思路不难，先信息收集端口开放情况和使用的是什么web服务 然后寻找漏洞点 由普通用户提权到root用户</p>
-<p>flag1是在rce之后在网站根目录里面的</p>
-<p>flag2是在配置文件里面的</p>
-<p>flag3是通过修改admin密码，在后台里面的</p>
-<p>flag4是通过爆破ssh密码 登录进去即可</p>
-<p>flag5就是suid提权即可</p>
+<p>最后提权成功</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011414045.png" srcset="/img/loading.gif" lazyload alt="image-20240401141428005"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>flag1 就是扫一下目录的事情</p>
+<p>flag2是利用cewl生成登录密码字典 然后结合wpscan就可以把登录名和密码爆破出来 注意每个都要试试 </p>
+<p>flag3: nmap扫描端口会有一个ssh服务 可以去登录 </p>
+<p>flag4:绕过rbash的限制 </p>
+<p>flag5: git提权</p>
 
                 
               </div>
@@ -443,8 +461,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DC-1</div>
-      <div>http://example.com/2024/03/27/DC-1/</div>
+      <div>DC-2</div>
+      <div>http://example.com/2024/04/01/DC-2/</div>
     </div>
     <div class="license-meta">
       
@@ -456,13 +474,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月27日</div>
+          <div>2024年4月1日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月27日</div>
+          <div>2024年4月1日</div>
         </div>
       
       
@@ -493,18 +511,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/01/DC-2/" title="DC-2">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DC-2</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/08/Web%20Fundamentals/" title="Web Fundamentals">
-                        <span class="hidden-mobile">Web Fundamentals</span>
+                      <a href="/2024/03/27/DC-1/" title="DC-1">
+                        <span class="hidden-mobile">DC-1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
