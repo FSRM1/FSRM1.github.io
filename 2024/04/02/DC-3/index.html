@@ -16,44 +16,41 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DC-2信息收集 利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容 然后用dirsearch扫后台，可以扫出来相关的路径  flag1去访问index.php 然后就可以看到flag1  根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波 它是一个字典生成工具 参考:https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1089">
+    <meta name="description" content="DC-3信息收集nmap扫描端口信息  开放了80端口 然后去访问，在index.php 可以看到提示信息，以及存在admin用户，可以尝试爆破一下密码 (最终是要获得root权限的)  无果，去扫一下后台  漏洞利用然后看了一下是个CMS 去找一下它的漏洞信息 找到了一个SQL注入类型的 &#x3D;&gt;https:&#x2F;&#x2F;blog.csdn.net&#x2F;smli_ng&#x2F;article&#x2F;details&#x2F;115">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DC-2">
-<meta property="og:url" content="http://example.com/2024/04/01/DC-2/index.html">
+<meta property="og:title" content="DC-3">
+<meta property="og:url" content="http://example.com/2024/04/02/DC-3/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="DC-2信息收集 利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容 然后用dirsearch扫后台，可以扫出来相关的路径  flag1去访问index.php 然后就可以看到flag1  根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波 它是一个字典生成工具 参考:https:&#x2F;&#x2F;developer.aliyun.com&#x2F;article&#x2F;1089">
+<meta property="og:description" content="DC-3信息收集nmap扫描端口信息  开放了80端口 然后去访问，在index.php 可以看到提示信息，以及存在admin用户，可以尝试爆破一下密码 (最终是要获得root权限的)  无果，去扫一下后台  漏洞利用然后看了一下是个CMS 去找一下它的漏洞信息 找到了一个SQL注入类型的 &#x3D;&gt;https:&#x2F;&#x2F;blog.csdn.net&#x2F;smli_ng&#x2F;article&#x2F;details&#x2F;115">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282057978.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282239933.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282325249.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282339323.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282349700.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282350418.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403291014625.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011106014.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011107040.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011116199.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011117327.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011140685.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011149574.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011349141.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011350121.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011351267.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011354263.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011402790.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011408656.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011414045.png">
-<meta property="article:published_time" content="2024-04-01T06:23:52.030Z">
-<meta property="article:modified_time" content="2024-04-06T08:57:16.925Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052207803.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052212871.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052309233.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052318368.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052343848.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052345750.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061413063.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061416999.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061533432.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061534212.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061615965.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061619679.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061639454.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061640801.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061644633.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061647648.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061649637.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061651932.png">
+<meta property="article:published_time" content="2024-04-02T05:41:51.181Z">
+<meta property="article:modified_time" content="2024-04-06T08:57:12.374Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052207803.png">
   
   
   
-  <title>DC-2 - FSRM</title>
+  <title>DC-3 - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -260,7 +257,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DC-2"></span>
+            <span id="subtitle" data-typed-text="DC-3"></span>
           
         </div>
 
@@ -271,8 +268,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-01 14:23" pubdate>
-          2024年4月1日 下午
+        <time datetime="2024-04-02 13:41" pubdate>
+          2024年4月2日 下午
         </time>
       </span>
     
@@ -283,7 +280,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          808 字
         
       </span>
     
@@ -294,7 +291,7 @@
         
         
         
-          11 分钟
+          7 分钟
         
       </span>
     
@@ -339,83 +336,62 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">DC-2</h1>
+            <h1 id="seo-header">DC-3</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="DC-2"><a href="#DC-2" class="headerlink" title="DC-2"></a>DC-2</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282317754.png" srcset="/img/loading.gif" lazyload alt="image-20240328231730586"></p>
-<p>利用nmap进行扫描，可以看到开放了80和7744端口，但去访问没啥内容</p>
-<p>然后用dirsearch扫后台，可以扫出来相关的路径</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282057978.png" srcset="/img/loading.gif" lazyload alt="image-20240328205748795"></p>
-<h2 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h2><p>去访问index.php 然后就可以看到flag1</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282239933.png" srcset="/img/loading.gif" lazyload alt="image-20240328223939777"></p>
-<p>根据flag1的提示 貌似是需要爆破密码 然后它给了一个cewl 去搜索一波</p>
-<p>它是一个字典生成工具</p>
-<p>参考:<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1089966">https://developer.aliyun.com/article/1089966</a></p>
-<p>然后这里的话我们生成一个密码文件</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282325249.png" srcset="/img/loading.gif" lazyload alt="image-20240328232528171"></p>
-<p>现在密码字典有了 就差一个用户名的</p>
-<p>然后搜了一下wpscan这个工具的用法和一些简单介绍</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282339323.png" srcset="/img/loading.gif" lazyload alt="image-20240328233928260"></p>
-<p>参考链接:</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guo15890025019/article/details/118548932">https://blog.csdn.net/guo15890025019/article/details/118548932</a></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282349700.png" srcset="/img/loading.gif" lazyload alt="image-20240328234958565"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403282350418.png" srcset="/img/loading.gif" lazyload alt="image-20240328235012283"></p>
-<p>最终可以得到3个账户  然后结合前面的字典 去爆破用户名和密码即可</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202403291014625.png" srcset="/img/loading.gif" lazyload alt="image-20240329101357455"></p>
-<h2 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h2><p>记得每个用户都去登录看看 不要死磕一个用户(Orz)</p>
-<p>登录tom用户的话没找到啥内容 然后试了一下文件上传 也不得行</p>
-<p>登录jerry用户 可以找到flag2的信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011106014.png" srcset="/img/loading.gif" lazyload alt="image-20240401110606904"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011107040.png" srcset="/img/loading.gif" lazyload alt="image-20240401110703945"></p>
-<p>让我们找另一条思路？</p>
-<p>注意上面的ssh服务 可以先试试这两个账号的ssh登录</p>
-<h2 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h2><p>使用tom登录之后 可以看到flag3.txt</p>
-<p>但是cat等命令被禁止了 我们可以使用less来查看</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011116199.png" srcset="/img/loading.gif" lazyload alt="image-20240401111648120"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011117327.png" srcset="/img/loading.gif" lazyload alt="image-20240401111705230"></p>
-<p>再试试Jerry进行登录</p>
-<p>登录不上去？？？？</p>
-<p>根据上面flag3 猜测是在tom用户下 切换到jerry用户 但是在当前的环境中没有su这个命令</p>
-<p>先查看一下当前环境能用的命令有多少</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">compgen -c</span><br></code></pre></td></tr></table></figure>
+                <h1 id="DC-3"><a href="#DC-3" class="headerlink" title="DC-3"></a>DC-3</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描端口信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052207803.png" srcset="/img/loading.gif" lazyload alt="image-20240405220728137"></p>
+<p>开放了80端口</p>
+<p>然后去访问，在index.php 可以看到提示信息，以及存在admin用户，可以尝试爆破一下密码 (最终是要获得root权限的)</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052212871.png" srcset="/img/loading.gif" lazyload alt="image-20240405221239805"></p>
+<p>无果，去扫一下后台</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052309233.png" srcset="/img/loading.gif" lazyload alt="image-20240405230935914"></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>然后看了一下是个CMS 去找一下它的漏洞信息</p>
+<p>找到了一个SQL注入类型的 =&gt;<a target="_blank" rel="noopener" href="https://blog.csdn.net/smli_ng/article/details/115799954">https://blog.csdn.net/smli_ng/article/details/115799954</a></p>
+<p>sqlmap跑起来</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052318368.png" srcset="/img/loading.gif" lazyload alt="image-20240405231859209"></p>
+<p>可以跑出来hh</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052343848.png" srcset="/img/loading.gif" lazyload alt="image-20240405234308671"></p>
+<p>最后密码利用john进行解密即可</p>
+<p>把要解密的代码放在一个文件里面 然后john解密即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052345750.png" srcset="/img/loading.gif" lazyload alt="image-20240405234538635"></p>
+<p>得到了密码可以登录后台(注意是在/administraator目录下)</p>
+<p>进入了后台之后，寻找可以利用的点</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061413063.png" srcset="/img/loading.gif" lazyload alt="image-20240406141342877"></p>
+<p>可以看到一些php代码 我们可以进行修改代码</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061416999.png" srcset="/img/loading.gif" lazyload alt="image-20240406141633946"></p>
+<p>然后可以进行一个反弹shell</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061533432.png" srcset="/img/loading.gif" lazyload alt="image-20240406153354345"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061534212.png" srcset="/img/loading.gif" lazyload alt="image-20240406153440076"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>我们到现在算是有了普通用户的权限，下一步就是要进行提权</p>
+<p>查询一下当前系统的发行版本</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/i</span>ssue<br></code></pre></td></tr></table></figure>
 
-<p>可以列出在bash环境中所有可用的命令</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011140685.png" srcset="/img/loading.gif" lazyload alt="image-20240401114037624"></p>
-<p>export可以修改环境变量 </p>
-<p>直接修改的话 PATH是只读的 </p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011149574.png" srcset="/img/loading.gif" lazyload alt="image-20240401114918524"></p>
-<p>查了一下需要绕过rbash</p>
-<p>参考链接:<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7642?time__1311=n4+xnD0G0=G=eAK0QbDsA3OrYGCQb=DRnDGqrwD&amp;alichlgref=https://www.google.com/">https://xz.aliyun.com/t/7642?time__1311=n4%2BxnD0G0%3DG%3DeAK0QbDsA3OrYGCQb%3DDRnDGqrwD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F</a></p>
-<p>可以利用vi来进行逃逸rbash</p>
-<p>我们在flag3.txt中利用vi进行逃逸</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011349141.png" srcset="/img/loading.gif" lazyload alt="image-20240401134945018"></p>
-<p>然后回车</p>
-<p>再输入 :shell 即可</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011350121.png" srcset="/img/loading.gif" lazyload alt="image-20240401135017072"></p>
-<p>但此时虽然能cd了 但是cat那些命令仍然不能使用</p>
-<p>可以利用export设置环境变量</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011351267.png" srcset="/img/loading.gif" lazyload alt="image-20240401135152215"></p>
-<p>然后此时我们就可以转到jerry用户了</p>
-<h2 id="flag4"><a href="#flag4" class="headerlink" title="flag4"></a>flag4</h2><p>su转到jerry用户之后就可以查看flag4了</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011354263.png" srcset="/img/loading.gif" lazyload alt="image-20240401135434153"></p>
-<h2 id="flag5"><a href="#flag5" class="headerlink" title="flag5"></a>flag5</h2><p>最后一个了 应该是要提权</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011402790.png" srcset="/img/loading.gif" lazyload alt="image-20240401140218749"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011408656.png" srcset="/img/loading.gif" lazyload alt="image-20240401140846535"></p>
-<p>去搜一下git提权</p>
-<p>参考链接:</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38612882/article/details/122772867">https://blog.csdn.net/qq_38612882/article/details/122772867</a></p>
-<p>提权过程：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">sudo git help config<br>!<span class="hljs-regexp">/bin/</span>bash<br></code></pre></td></tr></table></figure>
-
-<p>最后提权成功</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404011414045.png" srcset="/img/loading.gif" lazyload alt="image-20240401141428005"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>flag1 就是扫一下目录的事情</p>
-<p>flag2是利用cewl生成登录密码字典 然后结合wpscan就可以把登录名和密码爆破出来 注意每个都要试试 </p>
-<p>flag3: nmap扫描端口会有一个ssh服务 可以去登录 </p>
-<p>flag4:绕过rbash的限制 </p>
-<p>flag5: git提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061615965.png" srcset="/img/loading.gif" lazyload alt="image-20240406161551902"></p>
+<p>16.04的，查了一下是有提权漏洞的。(内核提权)</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061619679.png" srcset="/img/loading.gif" lazyload alt="image-20240406161954441"></p>
+<p>然后就是去搜索一下searchsploit的具体用法</p>
+<p>然后我们使用39772的 是一个特权升级漏洞</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061639454.png" srcset="/img/loading.gif" lazyload alt="image-20240406163944326"></p>
+<p>给出了具体的位置信息 去看看有什么内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061640801.png" srcset="/img/loading.gif" lazyload alt="image-20240406164059639"></p>
+<p>可以看见下载地址和具体用法</p>
+<p>下面试具体的步骤:</p>
+<ol>
+<li>在dc-3靶机中通过wget下载这个zip文件 然后利用unzip进行解压</li>
+</ol>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061644633.png" srcset="/img/loading.gif" lazyload alt="image-20240406164447545"></p>
+<p>2.然后再解压exploit.tar 这个文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061647648.png" srcset="/img/loading.gif" lazyload alt="image-20240406164727558"></p>
+<p>进去这个目录</p>
+<p>3.根据上面的要求来运行具体文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061649637.png" srcset="/img/loading.gif" lazyload alt="image-20240406164933578"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061651932.png" srcset="/img/loading.gif" lazyload alt="image-20240406165139817"></p>
+<p>最终也是提权成功</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先根据提示的信息，先要获得shell,然后进行提权,我们通过cms版本信息找到漏洞利用，然后通过sql注入找到后台admin登录密码，利用john对密码进行一个解密</p>
+<p>登录进去之后就是找可以利用的点，然后找到了可以运行php代码的地方，利用bash -c进行一个反弹shell。到这里就是提权了，find提权无果，查询内核版本，发现版本较低，利用searchsploit搜索内核漏洞信息，找到了信息之后就是去利用，最终提权成功。</p>
 
                 
               </div>
@@ -461,8 +437,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DC-2</div>
-      <div>http://example.com/2024/04/01/DC-2/</div>
+      <div>DC-3</div>
+      <div>http://example.com/2024/04/02/DC-3/</div>
     </div>
     <div class="license-meta">
       
@@ -474,7 +450,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月1日</div>
+          <div>2024年4月2日</div>
         </div>
       
       
@@ -511,18 +487,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/02/DC-3/" title="DC-3">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DC-3</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/27/DC-1/" title="DC-1">
-                        <span class="hidden-mobile">DC-1</span>
+                      <a href="/2024/04/01/DC-2/" title="DC-2">
+                        <span class="hidden-mobile">DC-2</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

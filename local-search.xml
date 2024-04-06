@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>DC-3</title>
+    <link href="/2024/04/02/DC-3/"/>
+    <url>/2024/04/02/DC-3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="DC-3"><a href="#DC-3" class="headerlink" title="DC-3"></a>DC-3</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描端口信息</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052207803.png" alt="image-20240405220728137"></p><p>开放了80端口</p><p>然后去访问，在index.php 可以看到提示信息，以及存在admin用户，可以尝试爆破一下密码 (最终是要获得root权限的)</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052212871.png" alt="image-20240405221239805"></p><p>无果，去扫一下后台</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052309233.png" alt="image-20240405230935914"></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>然后看了一下是个CMS 去找一下它的漏洞信息</p><p>找到了一个SQL注入类型的 =&gt;<a href="https://blog.csdn.net/smli_ng/article/details/115799954">https://blog.csdn.net/smli_ng/article/details/115799954</a></p><p>sqlmap跑起来</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052318368.png" alt="image-20240405231859209"></p><p>可以跑出来hh</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052343848.png" alt="image-20240405234308671"></p><p>最后密码利用john进行解密即可</p><p>把要解密的代码放在一个文件里面 然后john解密即可</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404052345750.png" alt="image-20240405234538635"></p><p>得到了密码可以登录后台(注意是在/administraator目录下)</p><p>进入了后台之后，寻找可以利用的点</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061413063.png" alt="image-20240406141342877"></p><p>可以看到一些php代码 我们可以进行修改代码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061416999.png" alt="image-20240406141633946"></p><p>然后可以进行一个反弹shell</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061533432.png" alt="image-20240406153354345"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061534212.png" alt="image-20240406153440076"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>我们到现在算是有了普通用户的权限，下一步就是要进行提权</p><p>查询一下当前系统的发行版本</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/i</span>ssue<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061615965.png" alt="image-20240406161551902"></p><p>16.04的，查了一下是有提权漏洞的。(内核提权)</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061619679.png" alt="image-20240406161954441"></p><p>然后就是去搜索一下searchsploit的具体用法</p><p>然后我们使用39772的 是一个特权升级漏洞</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061639454.png" alt="image-20240406163944326"></p><p>给出了具体的位置信息 去看看有什么内容</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061640801.png" alt="image-20240406164059639"></p><p>可以看见下载地址和具体用法</p><p>下面试具体的步骤:</p><ol><li>在dc-3靶机中通过wget下载这个zip文件 然后利用unzip进行解压</li></ol><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061644633.png" alt="image-20240406164447545"></p><p>2.然后再解压exploit.tar 这个文件</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061647648.png" alt="image-20240406164727558"></p><p>进去这个目录</p><p>3.根据上面的要求来运行具体文件</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061649637.png" alt="image-20240406164933578"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404061651932.png" alt="image-20240406165139817"></p><p>最终也是提权成功</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先根据提示的信息，先要获得shell,然后进行提权,我们通过cms版本信息找到漏洞利用，然后通过sql注入找到后台admin登录密码，利用john对密码进行一个解密</p><p>登录进去之后就是找可以利用的点，然后找到了可以运行php代码的地方，利用bash -c进行一个反弹shell。到这里就是提权了，find提权无果，查询内核版本，发现版本较低，利用searchsploit搜索内核漏洞信息，找到了信息之后就是去利用，最终提权成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>DC-2</title>
     <link href="/2024/04/01/DC-2/"/>
     <url>/2024/04/01/DC-2/</url>
