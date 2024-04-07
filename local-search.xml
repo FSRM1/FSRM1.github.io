@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>DC-4</title>
+    <link href="/2024/04/07/DC-4/"/>
+    <url>/2024/04/07/DC-4/</url>
+    
+    <content type="html"><![CDATA[<h1 id="DC-4"><a href="#DC-4" class="headerlink" title="DC-4"></a>DC-4</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫一波 </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071224033.png" alt="image-20240407122408898"></p><p>22和80端口开启</p><p>先去访问80端口，是一个登录界面，尝试爆破，未果 (还是字典不行啊)</p><p>去扫后台也没扫到什么东西</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071242879.png" alt="image-20240407124252827"></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>最后发现还得爆破，利用hydra</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071332201.png" alt="image-20240407133202073"></p><p>注意要添加 :S=logout 这个意思就是成功登录后，Hydra将尝试执行登出操作。</p><p>进去之后有三个按钮</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071345377.png" alt="image-20240407134541324"></p><p>抓个包看看</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071346647.png" alt="image-20240407134634452"></p><p>反弹个shell</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071347148.png" alt="image-20240407134757111"></p><p>现在还是普通用户的状态，下一步就是要提权了。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071349408.png" alt="image-20240407134940299"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>注意前面开启了ssh服务，所以查看一下/etc/passwd</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071441212.png" alt="image-20240407144142941"></p><p>有两个可疑用户 但是爆破不出来密码 去home目录看看情况 貌似是三个用户</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071443805.png" alt="image-20240407144333713"></p><p>只有jim目录下有东西，其他目录下都没有</p><p>然后在jim下面找到了密码字典</p><p><img src="../../../AppData/Roaming/Typora/typora-user-images/image-20240407144744703.png" alt="image-20240407144744703"></p><p>利用这个字典再去爆破ssh</p><p>把这个字典放在了1.txt里面</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071458231.png" alt="image-20240407145807124"></p><p>可以得到密码信息</p><p>然后ssh登录jim用户</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071513010.png" alt="image-20240407151322928"></p><p>有一封邮件</p><p>查看一下可以得到charles的密码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071519040.png" alt="image-20240407151905829"></p><p>分别尝试在jim和charles用户下进行提权，测试过后只有charles可以</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071522605.png" alt="image-20240407152259495"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071523306.png" alt="image-20240407152317236"></p><p>利用teehee进行提权</p><p>参考链接:</p><p><a href="https://www.cnblogs.com/zlgxzswjy/p/16118468.html">https://www.cnblogs.com/zlgxzswjy/p/16118468.html</a></p><p>它是一个小众的linux编译器，提权思路就是向/etc/passwd中添加一条uid为0的用户 最后再切换到uid为0的用户即可</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;fsrm::0:0:::/bin/bash&quot;</span> | sudo teehee -a <span class="hljs-regexp">/etc/</span>passwd<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071527854.png" alt="image-20240407152749805"></p><p>最后到www-data用户下su 一下fsrm</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071535553.png" alt="image-20240407153543501"></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先爆破密码(字典很重要) 然后抓包修改命令 反弹shell。记得多观察，在home目录下发现三个用户，找到爆破密码字典 hydra爆破登录，注意观察信息，在邮箱中找到另外一个用户的密码。ssh登录上去，分别对两个用户进行提权，发现jim不可以，然后就是teehee提权即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Jr Penetration Tester</title>
+    <link href="/2024/04/06/Jr%20Penetration%20Tester/"/>
+    <url>/2024/04/06/Jr%20Penetration%20Tester/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Jr-Penetration-Tester"><a href="#Jr-Penetration-Tester" class="headerlink" title="Jr Penetration Tester"></a>Jr Penetration Tester</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>tryhackme学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>DC-3</title>
     <link href="/2024/04/02/DC-3/"/>
     <url>/2024/04/02/DC-3/</url>
