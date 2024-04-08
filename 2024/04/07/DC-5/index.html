@@ -16,40 +16,37 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DC-4信息收集nmap扫一波   22和80端口开启 先去访问80端口，是一个登录界面，尝试爆破，未果 (还是字典不行啊) 去扫后台也没扫到什么东西  漏洞利用最后发现还得爆破，利用hydra  注意要添加 :S&#x3D;logout 这个意思就是成功登录后，Hydra将尝试执行登出操作。 进去之后有三个按钮  抓个包看看  反弹个shell  现在还是普通用户的状态，下一步就是要提权了。  提权注意前">
+    <meta name="description" content="DC-5信息收集nmap扫描端口信息  开启了80和111端口 1111端口是RPC（Remote Procedure Call，远程过程调用）服务的默认端口。 RPC是一种分布式应用程序框架，可用于在不同的计算机之间传输数据。  漏洞利用先去各个界面看了一下，发现并没有什么实际的内容  想在这进行xss来着，但是不太行。 然后扫了一下后台。  没找到漏洞点。但有一点就是很奇怪  每次刷新的时候这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DC-4">
-<meta property="og:url" content="http://example.com/2024/04/07/DC-4/index.html">
+<meta property="og:title" content="FSRM">
+<meta property="og:url" content="http://example.com/2024/04/07/DC-5/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="DC-4信息收集nmap扫一波   22和80端口开启 先去访问80端口，是一个登录界面，尝试爆破，未果 (还是字典不行啊) 去扫后台也没扫到什么东西  漏洞利用最后发现还得爆破，利用hydra  注意要添加 :S&#x3D;logout 这个意思就是成功登录后，Hydra将尝试执行登出操作。 进去之后有三个按钮  抓个包看看  反弹个shell  现在还是普通用户的状态，下一步就是要提权了。  提权注意前">
+<meta property="og:description" content="DC-5信息收集nmap扫描端口信息  开启了80和111端口 1111端口是RPC（Remote Procedure Call，远程过程调用）服务的默认端口。 RPC是一种分布式应用程序框架，可用于在不同的计算机之间传输数据。  漏洞利用先去各个界面看了一下，发现并没有什么实际的内容  想在这进行xss来着，但是不太行。 然后扫了一下后台。  没找到漏洞点。但有一点就是很奇怪  每次刷新的时候这">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071224033.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071242879.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071332201.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071345377.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071346647.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071347148.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071349408.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071441212.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071443805.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071544362.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071458231.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071513010.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071519040.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071522605.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071523306.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071527854.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071535553.png">
-<meta property="article:published_time" content="2024-04-07T02:55:41.044Z">
-<meta property="article:modified_time" content="2024-04-07T07:44:52.953Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071858246.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081443603.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081444555.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081445349.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081447346.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081513999.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514744.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514220.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081543529.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081548003.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081612690.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735559.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735631.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081739640.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081811053.png">
+<meta property="article:published_time" content="2024-04-07T10:50:40.604Z">
+<meta property="article:modified_time" content="2024-04-08T11:20:48.103Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071224033.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071858246.png">
   
   
   
-  <title>DC-4 - FSRM</title>
+  <title>FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -256,7 +253,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DC-4"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -267,8 +264,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-07 10:55" pubdate>
-          2024年4月7日 上午
+        <time datetime="2024-04-07 18:50" pubdate>
+          2024年4月7日 晚上
         </time>
       </span>
     
@@ -279,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          735 字
+          608 字
         
       </span>
     
@@ -290,7 +287,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -335,57 +332,56 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">DC-4</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="DC-4"><a href="#DC-4" class="headerlink" title="DC-4"></a>DC-4</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫一波 </p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071224033.png" srcset="/img/loading.gif" lazyload alt="image-20240407122408898"></p>
-<p>22和80端口开启</p>
-<p>先去访问80端口，是一个登录界面，尝试爆破，未果 (还是字典不行啊)</p>
-<p>去扫后台也没扫到什么东西</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071242879.png" srcset="/img/loading.gif" lazyload alt="image-20240407124252827"></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>最后发现还得爆破，利用hydra</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071332201.png" srcset="/img/loading.gif" lazyload alt="image-20240407133202073"></p>
-<p>注意要添加 :S=logout 这个意思就是成功登录后，Hydra将尝试执行登出操作。</p>
-<p>进去之后有三个按钮</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071345377.png" srcset="/img/loading.gif" lazyload alt="image-20240407134541324"></p>
-<p>抓个包看看</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071346647.png" srcset="/img/loading.gif" lazyload alt="image-20240407134634452"></p>
-<p>反弹个shell</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071347148.png" srcset="/img/loading.gif" lazyload alt="image-20240407134757111"></p>
-<p>现在还是普通用户的状态，下一步就是要提权了。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071349408.png" srcset="/img/loading.gif" lazyload alt="image-20240407134940299"></p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>注意前面开启了ssh服务，所以查看一下/etc/passwd</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071441212.png" srcset="/img/loading.gif" lazyload alt="image-20240407144142941"></p>
-<p>有两个可疑用户 但是爆破不出来密码 去home目录看看情况 貌似是三个用户</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071443805.png" srcset="/img/loading.gif" lazyload alt="image-20240407144333713"></p>
-<p>只有jim目录下有东西，其他目录下都没有</p>
-<p>然后在jim下面找到了密码字典</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071544362.png" srcset="/img/loading.gif" lazyload alt="image-20240407154450265"></p>
-<p>利用这个字典再去爆破ssh</p>
-<p>把这个字典放在了1.txt里面</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071458231.png" srcset="/img/loading.gif" lazyload alt="image-20240407145807124"></p>
-<p>可以得到密码信息</p>
-<p>然后ssh登录jim用户</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071513010.png" srcset="/img/loading.gif" lazyload alt="image-20240407151322928"></p>
-<p>有一封邮件</p>
-<p>查看一下可以得到charles的密码</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071519040.png" srcset="/img/loading.gif" lazyload alt="image-20240407151905829"></p>
-<p>分别尝试在jim和charles用户下进行提权，测试过后只有charles可以</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071522605.png" srcset="/img/loading.gif" lazyload alt="image-20240407152259495"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071523306.png" srcset="/img/loading.gif" lazyload alt="image-20240407152317236"></p>
-<p>利用teehee进行提权</p>
-<p>参考链接:</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zlgxzswjy/p/16118468.html">https://www.cnblogs.com/zlgxzswjy/p/16118468.html</a></p>
-<p>它是一个小众的linux编译器，提权思路就是向/etc/passwd中添加一条uid为0的用户 最后再切换到uid为0的用户即可</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;fsrm::0:0:::/bin/bash&quot;</span> | sudo teehee -a <span class="hljs-regexp">/etc/</span>passwd<br></code></pre></td></tr></table></figure>
+                <h1 id="DC-5"><a href="#DC-5" class="headerlink" title="DC-5"></a>DC-5</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描端口信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071858246.png" srcset="/img/loading.gif" lazyload alt="image-20240407185828079"></p>
+<p>开启了80和111端口</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-number">111</span>端口是RPC（<span class="hljs-comment">Remote Procedure Call，远程过程调用）服务的默认端口。 RPC是一种分布式应用程序框架，可用于在不同的计算机之间传输数据。</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071527854.png" srcset="/img/loading.gif" lazyload alt="image-20240407152749805"></p>
-<p>最后到www-data用户下su 一下fsrm</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071535553.png" srcset="/img/loading.gif" lazyload alt="image-20240407153543501"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先爆破密码(字典很重要) 然后抓包修改命令 反弹shell。记得多观察，在home目录下发现三个用户，找到爆破密码字典 hydra爆破登录，注意观察信息，在邮箱中找到另外一个用户的密码。ssh登录上去，分别对两个用户进行提权，发现jim不可以，然后就是teehee提权即可。</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>先去各个界面看了一下，发现并没有什么实际的内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081443603.png" srcset="/img/loading.gif" lazyload alt="image-20240408144311373"></p>
+<p>想在这进行xss来着，但是不太行。</p>
+<p>然后扫了一下后台。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081444555.png" srcset="/img/loading.gif" lazyload alt="image-20240408144412443"></p>
+<p>没找到漏洞点。但有一点就是很奇怪</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081445349.png" srcset="/img/loading.gif" lazyload alt="image-20240408144520216"></p>
+<p>每次刷新的时候这个地方会变动。</p>
+<p>这个变动的点其实就是上面的footer.php的内容，这里是把这个文件的内容给包含了。</p>
+<p>尝试一下文件包含漏洞。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081447346.png" srcset="/img/loading.gif" lazyload alt="image-20240408144739201"></p>
+<p>发现是存在的。</p>
+<p>然后是nginx服务器，可以试试日志文件包含。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081513999.png" srcset="/img/loading.gif" lazyload alt="image-20240408151300889"></p>
+<p>发现是可以的。</p>
+<p>然后先写一个木马到日志文件中，然后再去访问这个日志</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514744.png" srcset="/img/loading.gif" lazyload alt="image-20240408151419627"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514220.png" srcset="/img/loading.gif" lazyload alt="image-20240408151436022"></p>
+<p>连接蚁剑，可以连接</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081543529.png" srcset="/img/loading.gif" lazyload alt="image-20240408154305449"></p>
+<p>把一句话木马换成反弹shell的命令，进行反弹shell。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081548003.png" srcset="/img/loading.gif" lazyload alt="image-20240408154844872"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>下一步就是进行提权了</p>
+<p>我们进行sudo -l 命令时发现没有sudo这个命令的环境</p>
+<p>然后我们找一下具有suid的命令有哪些</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081612690.png" srcset="/img/loading.gif" lazyload alt="image-20240408161239550"></p>
+<p>这两个可以一试</p>
+<p>exim4需要去查看一下版本信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735559.png" srcset="/img/loading.gif" lazyload alt="image-20240408173503461"></p>
+<p>去searchsploit查一下漏洞信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735631.png" srcset="/img/loading.gif" lazyload alt="image-20240408173555467"></p>
+<p>没找到对应的版本漏洞</p>
+<p>那就去看一下另一个</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081739640.png" srcset="/img/loading.gif" lazyload alt="image-20240408173901503"></p>
+<p>版本刚好可以对上</p>
+<p>只有在/tmp目录下才可以wget文件</p>
+<p>然后我们把sh文件上传进去之后，给它一个777的权限，运行sh文件即可。</p>
+<p>不要蚁剑上传，要不然会因为windows和linux的换行符不一样而报错 用wget上传到/tmp目录下</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081811053.png" srcset="/img/loading.gif" lazyload alt="image-20240408181128866"></p>
+<p>但是我给这个sh文件777的权限之后，再次运行会报错</p>
 
                 
               </div>
@@ -394,34 +390,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/vulnhub/" class="print-no-link">#vulnhub</a>
-      
-    </div>
   
 </div>
 
@@ -431,8 +399,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DC-4</div>
-      <div>http://example.com/2024/04/07/DC-4/</div>
+      <div></div>
+      <div>http://example.com/2024/04/07/DC-5/</div>
     </div>
     <div class="license-meta">
       
@@ -450,7 +418,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月7日</div>
+          <div>2024年4月8日</div>
         </div>
       
       
@@ -481,18 +449,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/07/DC-5/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/06/Jr%20Penetration%20Tester/" title="Jr Penetration Tester">
-                        <span class="hidden-mobile">Jr Penetration Tester</span>
+                      <a href="/2024/04/07/DC-4/" title="DC-4">
+                        <span class="hidden-mobile">DC-4</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
