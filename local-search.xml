@@ -5,12 +5,37 @@
   
   <entry>
     <title></title>
+    <link href="/2024/04/09/DC-6/"/>
+    <url>/2024/04/09/DC-6/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>DC-5</title>
     <link href="/2024/04/07/DC-5/"/>
     <url>/2024/04/07/DC-5/</url>
     
     <content type="html"><![CDATA[<h1 id="DC-5"><a href="#DC-5" class="headerlink" title="DC-5"></a>DC-5</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描端口信息</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404071858246.png" alt="image-20240407185828079"></p><p>开启了80和111端口</p><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-number">111</span>端口是RPC（<span class="hljs-comment">Remote Procedure Call，远程过程调用）服务的默认端口。 RPC是一种分布式应用程序框架，可用于在不同的计算机之间传输数据。</span><br></code></pre></td></tr></table></figure><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>先去各个界面看了一下，发现并没有什么实际的内容</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081443603.png" alt="image-20240408144311373"></p><p>想在这进行xss来着，但是不太行。</p><p>然后扫了一下后台。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081444555.png" alt="image-20240408144412443"></p><p>没找到漏洞点。但有一点就是很奇怪</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081445349.png" alt="image-20240408144520216"></p><p>每次刷新的时候这个地方会变动。</p><p>这个变动的点其实就是上面的footer.php的内容，这里是把这个文件的内容给包含了。</p><p>尝试一下文件包含漏洞。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081447346.png" alt="image-20240408144739201"></p><p>发现是存在的。</p><p>然后是nginx服务器，可以试试日志文件包含。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081513999.png" alt="image-20240408151300889"></p><p>发现是可以的。</p><p>然后先写一个木马到日志文件中，然后再去访问这个日志</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514744.png" alt="image-20240408151419627"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081514220.png" alt="image-20240408151436022"></p><p>连接蚁剑，可以连接</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081543529.png" alt="image-20240408154305449"></p><p>把一句话木马换成反弹shell的命令，进行反弹shell。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081548003.png" alt="image-20240408154844872"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>下一步就是进行提权了</p><p>我们进行sudo -l 命令时发现没有sudo这个命令的环境</p><p>然后我们找一下具有suid的命令有哪些</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081612690.png" alt="image-20240408161239550"></p><p>这两个可以一试</p><p>exim4需要去查看一下版本信息</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735559.png" alt="image-20240408173503461"></p><p>去searchsploit查一下漏洞信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081735631.png" alt="image-20240408173555467"></p><p>没找到对应的版本漏洞</p><p>那就去看一下另一个</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081739640.png" alt="image-20240408173901503"></p><p>版本刚好可以对上</p><p>只有在/tmp目录下才可以wget文件</p><p>然后我们把sh文件上传进去之后，给它一个777的权限，运行sh文件即可。</p><p>不要蚁剑上传，要不然会因为windows和linux的换行符不一样而报错 用wget上传到/tmp目录下</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404081811053.png" alt="image-20240408181128866"></p><p>但是我给这个sh文件777的权限之后，再次运行会报错</p>]]></content>
     
     
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
     
   </entry>
   
