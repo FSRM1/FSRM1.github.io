@@ -16,21 +16,44 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="FSRMのBlog">
+    <meta name="description" content="DC-6信息收集nmap扫描一波  可以看到开放了22和80端口 这里的话跟dc-2情况一样，需要去修改&#x2F;etc&#x2F;hosts文件 修改DNS配置信息  然后windows下修改是在 1&quot;C:\Windows\System32\drivers\etc\hosts&quot;  这个目录下的hosts文件 它是一个wordpress的cms 版本是5.1.1  利用wpscan可以把用户名给">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FSRM">
+<meta property="og:title" content="DC-6">
 <meta property="og:url" content="http://example.com/2024/04/09/DC-6/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="FSRMのBlog">
+<meta property="og:description" content="DC-6信息收集nmap扫描一波  可以看到开放了22和80端口 这里的话跟dc-2情况一样，需要去修改&#x2F;etc&#x2F;hosts文件 修改DNS配置信息  然后windows下修改是在 1&quot;C:\Windows\System32\drivers\etc\hosts&quot;  这个目录下的hosts文件 它是一个wordpress的cms 版本是5.1.1  利用wpscan可以把用户名给">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404100950784.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404100957338.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101004888.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101022844.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101028263.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101037818.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101057246.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101059184.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101106827.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101222402.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101223825.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101227647.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101231758.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101235901.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101235661.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101237592.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101252136.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101253138.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101253476.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101258838.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101306567.png">
 <meta property="article:published_time" content="2024-04-09T04:33:04.007Z">
-<meta property="article:modified_time" content="2024-04-09T04:33:04.007Z">
+<meta property="article:modified_time" content="2024-04-10T05:06:04.138Z">
 <meta property="article:author" content="FSRM">
+<meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404100950784.png">
   
   
   
-  <title>FSRM</title>
+  <title>DC-6 - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -237,7 +260,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="DC-6"></span>
           
         </div>
 
@@ -260,7 +283,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          647 字
         
       </span>
     
@@ -271,7 +294,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -316,12 +339,68 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">DC-6</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="DC-6"><a href="#DC-6" class="headerlink" title="DC-6"></a>DC-6</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描一波</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404100950784.png" srcset="/img/loading.gif" lazyload alt="image-20240410095025563"></p>
+<p>可以看到开放了22和80端口</p>
+<p>这里的话跟dc-2情况一样，需要去修改/etc/hosts文件 修改DNS配置信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404100957338.png" srcset="/img/loading.gif" lazyload alt="image-20240410095718233"></p>
+<p>然后windows下修改是在</p>
+<figure class="highlight wren"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs wren"><span class="hljs-string">&quot;C:\Windows\System32\drivers<span class="hljs-char escape_">\e</span>tc\hosts&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个目录下的hosts文件</p>
+<p>它是一个wordpress的cms 版本是5.1.1</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101004888.png" srcset="/img/loading.gif" lazyload alt="image-20240410100413825"></p>
+<p>利用wpscan可以把用户名给爆破出来</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101022844.png" srcset="/img/loading.gif" lazyload alt="image-20240410102237638"></p>
+<p>利用cewl生成密码字典 然后再利用wpscan进行爆破</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101028263.png" srcset="/img/loading.gif" lazyload alt="image-20240410102805011"></p>
+<p>但并没有找到相应的账号密码</p>
+<p>那就换一个字典再次试试看 这次利用的是kali自带的密码字典 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101037818.png" srcset="/img/loading.gif" lazyload alt="image-20240410103752731"></p>
+<p>但是这个跑起来太大了 后来上网看了一下 发现官网上给了线索 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101057246.png" srcset="/img/loading.gif" lazyload alt="image-20240410105721206"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101059184.png" srcset="/img/loading.gif" lazyload alt="image-20240410105929126"></p>
+<p>比起之前那个几千万的少了很多</p>
+<p>最后得到一个账户密码</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101106827.png" srcset="/img/loading.gif" lazyload alt="image-20240410110646754"></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>经过一番寻找 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101222402.png" srcset="/img/loading.gif" lazyload alt="image-20240410122247317"></p>
+<p>找到了地方，可以执行系统命令</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101223825.png" srcset="/img/loading.gif" lazyload alt="image-20240410122322772"></p>
+<p>进行一个反弹shell</p>
+<p>有长度限制，抓包修改即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101227647.png" srcset="/img/loading.gif" lazyload alt="image-20240410122726582"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>进入home目录看一下 ，有四个用户</p>
+<p>先查看mark用户的信息 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101231758.png" srcset="/img/loading.gif" lazyload alt="image-20240410123154614"></p>
+<p>这个信息把graham的密码给暴漏了，去进行ssh远程登录</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101235901.png" srcset="/img/loading.gif" lazyload alt="image-20240410123535702"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101235661.png" srcset="/img/loading.gif" lazyload alt="image-20240410123558565"></p>
+<p>可以看到提权的有关信息</p>
+<p>查看sh文件内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101237592.png" srcset="/img/loading.gif" lazyload alt="image-20240410123735550"></p>
+<p>我们可以再这个sh文件中写一个反弹shell的命令 然后以jens身份运行</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101252136.png" srcset="/img/loading.gif" lazyload alt="image-20240410125214029"></p>
+<p>反弹shell成功</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101253138.png" srcset="/img/loading.gif" lazyload alt="image-20240410125318070"></p>
+<p>成功切换到jens用户</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101253476.png" srcset="/img/loading.gif" lazyload alt="image-20240410125342363"></p>
+<p>利用nmap提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101258838.png" srcset="/img/loading.gif" lazyload alt="image-20240410125834737"></p>
+<p>nmap是7.4版本的</p>
+<p>老版本提权用不了，这里用新版本的nmap提取</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;os.execute(&quot;/bin/sh&quot;)&#x27;</span> &gt; /tmp/TF<br>sudo nmap --script=/tmp/TF<br></code></pre></td></tr></table></figure>
+
+<p>老版本的提权:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">nmap --interactive <br>！sh<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101306567.png" srcset="/img/loading.gif" lazyload alt="image-20240410130601438"></p>
+
                 
               </div>
             
@@ -329,6 +408,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vulnhub/" class="print-no-link">#vulnhub</a>
+      
+    </div>
   
 </div>
 
@@ -338,7 +445,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>DC-6</div>
       <div>http://example.com/2024/04/09/DC-6/</div>
     </div>
     <div class="license-meta">
@@ -354,6 +461,11 @@
           <div>2024年4月9日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月10日</div>
+        </div>
       
       
         <div class="license-meta-item">
