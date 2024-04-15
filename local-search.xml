@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>DC-7</title>
+    <link href="/2024/04/10/DC-7/"/>
+    <url>/2024/04/10/DC-7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="DC-7"><a href="#DC-7" class="headerlink" title="DC-7"></a>DC-7</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404101340212.png" alt="image-20240410134043971"></p><p>开放了22和80端口</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404131911372.png" alt="image-20240413191115189"></p><p>去访问，提示的信息是进行爆破的话可能会失败，要跳出框框思考</p><p>考察的是信息收集的能力</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404131927251.png" alt="image-20240413192741204"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404131927914.png" alt="image-20240413192750874"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404131928959.png" alt="image-20240413192802811"></p><p>ssh远程登录进去</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404131928073.png" alt="image-20240413192857903"></p><p>登录成功</p><p>去mbox看一下内容</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132051841.png" alt="image-20240413205101639"></p><p>多次提到这个路径，去查看一下</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132051956.png" alt="image-20240413205158847"></p><p>可以使用drush来更改admin的密码</p><p>在网站根目录下进行修改密码</p><p>修改命令参考:<a href="https://zhuanlan.zhihu.com/p/60880048">https://zhuanlan.zhihu.com/p/60880048</a></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132105520.png" alt="image-20240413210555443"></p><p>进行登录</p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132113230.png" alt="image-20240413211303114"></p><p>在这个地方我们去drupal官网下载php的模块，然后上传上去</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132135732.png" alt="image-20240413213503600"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132136111.png" alt="image-20240413213627025"></p><p>接着我们创建一个文章，在里面写入php代码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132137109.png" alt="image-20240413213731040"></p><p>进行反弹shell</p><h2 id="权限提升"><a href="#权限提升" class="headerlink" title="权限提升"></a>权限提升</h2><p>backups.sh文件有root权限</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404132221942.png" alt="image-20240413222148879"></p><p>是一个计划任务</p><p>现在是www-data用户，在这个文件里面写入一个反弹shell的</p><p>注意利用&gt;&gt;</p><p>最后再运行这个sh文件 等待反弹shell即可</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>DC-6</title>
     <link href="/2024/04/09/DC-6/"/>
     <url>/2024/04/09/DC-6/</url>
