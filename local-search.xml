@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title></title>
+    <title>DC-8</title>
     <link href="/2024/04/18/DC-8/"/>
     <url>/2024/04/18/DC-8/</url>
     
     <content type="html"><![CDATA[<h1 id="DC-8"><a href="#DC-8" class="headerlink" title="DC-8"></a>DC-8</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>nmap扫描一波</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404182015635.png" alt="image-20240418201540496"></p><p>可以看到开放了22和80端口</p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261913801.png" alt="image-20240426191323619"></p><p>在这个地方可以试试sql注入，手工发现是存在的。利用sqlmap进行跑。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261914612.png" alt="image-20240426191428509"></p><p>发现账户密码，这个密码我们利用john进行解密。</p><p>admin这个账号没有跑出来，但是john这个账号可以得到密码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261923843.png" alt="image-20240426192320716"></p><p>进行登录后台</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404261931375.png" alt="image-20240426193136297"></p><p>然后经过一番寻找，找到了一个可以写php代码的地方。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262013226.png" alt="image-20240426201343155"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014051.png" alt="image-20240426201359908"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262014879.png" alt="image-20240426201415705"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262015372.png" alt="image-20240426201525253"></p><p>这个地方随便填一下，然后去提交，即可执行代码。</p><p>进行一个反弹shell</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262018594.png" alt="image-20240426201831511"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>先来试试看suid提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262022359.png" alt="image-20240426202237290"></p><p>有一个exim4 先来查看一下版本信息</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262024710.png" alt="image-20240426202452562"></p><p>4.89版本的</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262028385.png" alt="image-20240426202801103"></p><p>可以查询到</p><p>将其放在/var/www/html目录下 然后在/tmp目录下，利用wget下载下来。对这个sh文件进行777的权限。最后./xxx.sh -m netcat 运行即可</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262043229.png" alt="image-20240426204331172"></p>]]></content>
     
     
+    <categories>
+      
+      <category>靶机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vulnhub</tag>
+      
+    </tags>
     
   </entry>
   
