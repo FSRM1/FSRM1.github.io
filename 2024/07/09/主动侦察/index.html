@@ -16,25 +16,25 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+    <meta name="description" content="Active Reconnaissance主动侦察 重要的一点就是要被授权！ web浏览器上的一些工具1.FoxyProxy （代理工具） 2.Wappalyzer （收集网站的相关信息） 3.User-Agent Switcher and Manager (伪造User-Agent)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pentesting Fundamentals，Principles of Security概念">
-<meta property="og:url" content="http://example.com/2024/04/06/Jr%20Penetration%20Tester/index.html">
+<meta property="og:title" content="Active Reconnaissance">
+<meta property="og:url" content="http://example.com/2024/07/09/%E4%B8%BB%E5%8A%A8%E4%BE%A6%E5%AF%9F/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+<meta property="og:description" content="Active Reconnaissance主动侦察 重要的一点就是要被授权！ web浏览器上的一些工具1.FoxyProxy （代理工具） 2.Wappalyzer （收集网站的相关信息） 3.User-Agent Switcher and Manager (伪造User-Agent)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png">
-<meta property="article:published_time" content="2024-04-06T09:18:51.942Z">
-<meta property="article:modified_time" content="2024-07-09T01:53:44.553Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407080959982.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407081026818.png">
+<meta property="article:published_time" content="2024-07-09T01:50:52.256Z">
+<meta property="article:modified_time" content="2024-07-09T01:51:40.052Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407080959982.png">
   
   
   
-  <title>Pentesting Fundamentals，Principles of Security概念 - FSRM</title>
+  <title>Active Reconnaissance - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -241,7 +241,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Pentesting Fundamentals，Principles of Security概念"></span>
+            <span id="subtitle" data-typed-text="Active Reconnaissance"></span>
           
         </div>
 
@@ -252,8 +252,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-06 17:18" pubdate>
-          2024年4月6日 下午
+        <time datetime="2024-07-09 09:50" pubdate>
+          2024年7月9日 上午
         </time>
       </span>
     
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          268 字
+          1.1k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          3 分钟
+          10 分钟
         
       </span>
     
@@ -320,20 +320,71 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Pentesting Fundamentals，Principles of Security概念</h1>
+            <h1 id="seo-header">Active Reconnaissance</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Pentesting-Fundamentals"><a href="#Pentesting-Fundamentals" class="headerlink" title="Pentesting Fundamentals"></a>Pentesting Fundamentals</h2><p>主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png" srcset="/img/loading.gif" lazyload alt="image-20240417210322923"></p>
-<p>以及介绍了一些黑盒，灰盒，白盒测试等。</p>
-<p>黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。</p>
-<p>灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。</p>
-<p>白盒测试:测试人员了解内部工作逻辑，信息更多，着手点更多。</p>
-<h2 id="Principles-of-Security"><a href="#Principles-of-Security" class="headerlink" title="Principles of Security"></a>Principles of Security</h2><p>这里主要介绍了一些安全原则</p>
-<p>完整性，保密性，可用性</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png" srcset="/img/loading.gif" lazyload alt="image-20240426220636310"></p>
+                <h1 id="Active-Reconnaissance"><a href="#Active-Reconnaissance" class="headerlink" title="Active Reconnaissance"></a>Active Reconnaissance</h1><p>主动侦察</p>
+<p>重要的一点就是要被授权！</p>
+<h3 id="web浏览器上的一些工具"><a href="#web浏览器上的一些工具" class="headerlink" title="web浏览器上的一些工具"></a>web浏览器上的一些工具</h3><p>1.FoxyProxy （代理工具）</p>
+<p>2.Wappalyzer （收集网站的相关信息）</p>
+<p>3.User-Agent Switcher and Manager (伪造User-Agent)                                                                                                            </p>
+<h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>简单来说就是检查目标系统是否在线</p>
+<p>更严谨的话来说就是：ping 是一个向远程系统发送 ICMP Echo 数据包的命令。如果远程系统在线，并且 ping 数据包被正确路由且未被任何防火墙阻止，则远程系统应发回 ICMP Echo Reply。同样，如果 ping 回复被正确路由且未被任何防火墙阻止，则 ping 回复应到达第一个系统。</p>
+<p>在linux中ping -c 10 ip 表示只发送10个数据包 在windows中就是ping -n 10 ip</p>
+<p>ping不同有下面几种情况：</p>
+<ul>
+<li>目标计算机没有响应；可能仍在启动或关闭，或者操作系统已崩溃。</li>
+<li>它已从网络拔出，或者路径上有故障的网络设备。</li>
+<li>防火墙配置为阻止此类数据包。防火墙可能是系统本身上运行的软件或单独的网络设备。请注意，MS Windows 防火墙默认阻止 ping。</li>
+<li>您的系统已断开与网络的连接。</li>
+</ul>
+<h3 id="traceroute-追踪路由"><a href="#traceroute-追踪路由" class="headerlink" title="traceroute(追踪路由)"></a>traceroute(追踪路由)</h3><p>traceroute 命令<em>会跟踪数据包从您的系统到另一台主机所采用的路由</em>。traceroute 的目的是找到数据包从您的系统到目标主机所经过的路由器或跳数的 IP 地址。此命令还会显示两个系统之间的路由器数量。它很有用，因为它指示了您的系统和目标主机之间的跳数（路由器）。但是，请注意，数据包所采用的路由可能会发生变化，因为许多路由器使用适应网络变化的动态路由协议。</p>
+<p>在linux中通常使用traceroute 在windows中通常使用tracert</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407080959982.png" srcset="/img/loading.gif" lazyload alt="image-20240708095938778"></p>
+<p>ttl为生存时间 每经过一个路由器 ttl值减少1 当ttl值为0的时候 路由器会向发送者发出时间超时的信息。</p>
+<h3 id="telnet-远程登录"><a href="#telnet-远程登录" class="headerlink" title="telnet(远程登录)"></a>telnet(远程登录)</h3><p>使用的默认端口是23</p>
+<p>telnet发送的数据都是以明文的形式发送，容易被获取 代替的是ssh</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407081026818.png" srcset="/img/loading.gif" lazyload alt="image-20240708102624751"></p>
+<h3 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h3><p>Netcat 或简单地说<code>nc</code>有不同的应用程序对渗透测试人员来说非常有价值。Netcat 支持 TCP 和UDP协议。它可以作为连接到侦听端口的客户端；或者，它可以充当侦听您选择的端口的服务器。因此，它是一个方便的工具，您可以将其用作 TCP 或UDP上的简单客户端或服务器。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>聆听模式</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定端口号</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>仅限数字；无法通过DNS解析主机名</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>详细输出（可选，但有助于发现任何错误）</td>
+</tr>
+<tr>
+<td>-vv</td>
+<td>非常详细（可选）</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>客户端断开连接后继续监听</td>
+</tr>
+</tbody></table>
+<ul>
+<li>该选项<code>-p</code>应该出现在您想要监听的端口号之前。</li>
+<li>该选项<code>-n</code>将避免DNS查找和警告。</li>
+<li>小于 1024 的端口号需要 root 权限才能监听。</li>
+</ul>
 
                 
               </div>
@@ -379,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Pentesting Fundamentals，Principles of Security概念</div>
-      <div>http://example.com/2024/04/06/Jr Penetration Tester/</div>
+      <div>Active Reconnaissance</div>
+      <div>http://example.com/2024/07/09/主动侦察/</div>
     </div>
     <div class="license-meta">
       
@@ -392,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月6日</div>
+          <div>2024年7月9日</div>
         </div>
       
       
@@ -429,9 +480,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/07/DC-4/" title="DC-4">
+                      <a href="/2024/07/09/%E8%A2%AB%E5%8A%A8%E4%BE%A6%E5%AF%9F/" title="Passive Reconnaissance">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DC-4</span>
+                        <span class="hidden-mobile">Passive Reconnaissance</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -439,8 +490,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/02/DC-3/" title="DC-3">
-                        <span class="hidden-mobile">DC-3</span>
+                      <a href="/2024/07/09/nmap%E5%AE%9E%E6%97%B6%E4%B8%BB%E6%9C%BA%E7%9A%84%E5%8F%91%E7%8E%B0/" title="Nmap Live Host Discovery">
+                        <span class="hidden-mobile">Nmap Live Host Discovery</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

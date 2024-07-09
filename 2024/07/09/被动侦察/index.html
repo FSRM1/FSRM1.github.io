@@ -16,25 +16,27 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+    <meta name="description" content="Passive Reconnaissance被动侦察，了解whois,nslookup,dig等工具的使用 whois，查询whois服务器，nslookup和dig是查询dns服务器 被动侦察简单来说就是不去主动接触要攻击的目标，而是通过与其相关的一些资源去调查它。 主动侦察则目标性更明确一点，需要对目标进行主动接触，利用社会工程学，连接到目标的服务器上等(前提是需要授权！) whosi（域名管">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pentesting Fundamentals，Principles of Security概念">
-<meta property="og:url" content="http://example.com/2024/04/06/Jr%20Penetration%20Tester/index.html">
+<meta property="og:title" content="Passive Reconnaissance">
+<meta property="og:url" content="http://example.com/2024/07/09/%E8%A2%AB%E5%8A%A8%E4%BE%A6%E5%AF%9F/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+<meta property="og:description" content="Passive Reconnaissance被动侦察，了解whois,nslookup,dig等工具的使用 whois，查询whois服务器，nslookup和dig是查询dns服务器 被动侦察简单来说就是不去主动接触要攻击的目标，而是通过与其相关的一些资源去调查它。 主动侦察则目标性更明确一点，需要对目标进行主动接触，利用社会工程学，连接到目标的服务器上等(前提是需要授权！) whosi（域名管">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png">
-<meta property="article:published_time" content="2024-04-06T09:18:51.942Z">
-<meta property="article:modified_time" content="2024-07-09T01:53:44.553Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021807602.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021841505.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021843197.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021912669.png">
+<meta property="article:published_time" content="2024-07-09T01:51:57.234Z">
+<meta property="article:modified_time" content="2024-07-09T01:52:33.326Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021807602.png">
   
   
   
-  <title>Pentesting Fundamentals，Principles of Security概念 - FSRM</title>
+  <title>Passive Reconnaissance - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -241,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Pentesting Fundamentals，Principles of Security概念"></span>
+            <span id="subtitle" data-typed-text="Passive Reconnaissance"></span>
           
         </div>
 
@@ -252,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-06 17:18" pubdate>
-          2024年4月6日 下午
+        <time datetime="2024-07-09 09:51" pubdate>
+          2024年7月9日 上午
         </time>
       </span>
     
@@ -264,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          268 字
+          428 字
         
       </span>
     
@@ -275,7 +277,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -320,20 +322,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Pentesting Fundamentals，Principles of Security概念</h1>
+            <h1 id="seo-header">Passive Reconnaissance</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Pentesting-Fundamentals"><a href="#Pentesting-Fundamentals" class="headerlink" title="Pentesting Fundamentals"></a>Pentesting Fundamentals</h2><p>主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png" srcset="/img/loading.gif" lazyload alt="image-20240417210322923"></p>
-<p>以及介绍了一些黑盒，灰盒，白盒测试等。</p>
-<p>黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。</p>
-<p>灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。</p>
-<p>白盒测试:测试人员了解内部工作逻辑，信息更多，着手点更多。</p>
-<h2 id="Principles-of-Security"><a href="#Principles-of-Security" class="headerlink" title="Principles of Security"></a>Principles of Security</h2><p>这里主要介绍了一些安全原则</p>
-<p>完整性，保密性，可用性</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png" srcset="/img/loading.gif" lazyload alt="image-20240426220636310"></p>
+                <h1 id="Passive-Reconnaissance"><a href="#Passive-Reconnaissance" class="headerlink" title="Passive Reconnaissance"></a>Passive Reconnaissance</h1><p>被动侦察，了解whois,nslookup,dig等工具的使用</p>
+<p>whois，查询whois服务器，nslookup和dig是查询dns服务器</p>
+<p>被动侦察简单来说就是不去主动接触要攻击的目标，而是通过与其相关的一些资源去调查它。</p>
+<p>主动侦察则目标性更明确一点，需要对目标进行主动接触，利用社会工程学，连接到目标的服务器上等(前提是需要授权！)</p>
+<h3 id="whosi（域名管理员）"><a href="#whosi（域名管理员）" class="headerlink" title="whosi（域名管理员）"></a>whosi（域名管理员）</h3><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021807602.png" srcset="/img/loading.gif" lazyload alt="image-20240602180747484"></p>
+<h3 id="nslookup和dig"><a href="#nslookup和dig" class="headerlink" title="nslookup和dig"></a>nslookup和dig</h3><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021841505.png" srcset="/img/loading.gif" lazyload alt="image-20240602184122380"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021843197.png" srcset="/img/loading.gif" lazyload alt="image-20240602184307137"></p>
+<p>type可以进行更换，然后不同的type代表不同的意思。具体的意义参考上图</p>
+<p>公共域名服务器:</p>
+<p>1.1.1.1 8.8.8.8 114.114.114.114 1.0.0.1 8.8.4.4 9.9.9.9 等</p>
+<h3 id="DNSDumpster"><a href="#DNSDumpster" class="headerlink" title="DNSDumpster"></a>DNSDumpster</h3><p><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">DNSDumpster.com - dns recon and research, find and lookup dns records</a></p>
+<p>实际上就是一个在线查询子域的一个网站</p>
+<h3 id="Shodan-io"><a href="#Shodan-io" class="headerlink" title="Shodan.io"></a>Shodan.io</h3><p><a target="_blank" rel="noopener" href="https://www.shodan.io/">Shodan Search Engine</a></p>
+<p>类似于fofa </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202406021912669.png" srcset="/img/loading.gif" lazyload alt="image-20240602191215461"></p>
 
                 
               </div>
@@ -379,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Pentesting Fundamentals，Principles of Security概念</div>
-      <div>http://example.com/2024/04/06/Jr Penetration Tester/</div>
+      <div>Passive Reconnaissance</div>
+      <div>http://example.com/2024/07/09/被动侦察/</div>
     </div>
     <div class="license-meta">
       
@@ -392,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月6日</div>
+          <div>2024年7月9日</div>
         </div>
       
       
@@ -429,18 +437,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/07/DC-4/" title="DC-4">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DC-4</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/02/DC-3/" title="DC-3">
-                        <span class="hidden-mobile">DC-3</span>
+                      <a href="/2024/07/09/%E4%B8%BB%E5%8A%A8%E4%BE%A6%E5%AF%9F/" title="Active Reconnaissance">
+                        <span class="hidden-mobile">Active Reconnaissance</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

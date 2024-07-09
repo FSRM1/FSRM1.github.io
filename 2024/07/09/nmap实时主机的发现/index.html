@@ -16,25 +16,26 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+    <meta name="description" content="Nmap Live Host Discovery (nmap实时主机的发现) ARP扫描：此扫描使用ARP请求来发现活动主机 ICMP 扫描：此扫描使用 ICMP 请求来识别活动主机 TCP&#x2F; UDP ping 扫描：此扫描将数据包发送到 TCP 端口和UDP端口以确定活动主机。   当在同一网段内的时候 ，可以使用arp-scan来进行扫描，但如果目标主机不再同一网段内，就不能使用arp-sca">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pentesting Fundamentals，Principles of Security概念">
-<meta property="og:url" content="http://example.com/2024/04/06/Jr%20Penetration%20Tester/index.html">
+<meta property="og:title" content="Nmap Live Host Discovery">
+<meta property="og:url" content="http://example.com/2024/07/09/nmap%E5%AE%9E%E6%97%B6%E4%B8%BB%E6%9C%BA%E7%9A%84%E5%8F%91%E7%8E%B0/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。">
+<meta property="og:description" content="Nmap Live Host Discovery (nmap实时主机的发现) ARP扫描：此扫描使用ARP请求来发现活动主机 ICMP 扫描：此扫描使用 ICMP 请求来识别活动主机 TCP&#x2F; UDP ping 扫描：此扫描将数据包发送到 TCP 端口和UDP端口以确定活动主机。   当在同一网段内的时候 ，可以使用arp-scan来进行扫描，但如果目标主机不再同一网段内，就不能使用arp-sca">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png">
-<meta property="article:published_time" content="2024-04-06T09:18:51.942Z">
-<meta property="article:modified_time" content="2024-07-09T01:53:44.553Z">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407081651586.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/745e0412b319d324352c7b29863b74f4.png">
+<meta property="article:published_time" content="2024-07-09T01:48:56.363Z">
+<meta property="article:modified_time" content="2024-07-09T01:50:22.162Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png">
+<meta name="twitter:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png">
   
   
   
-  <title>Pentesting Fundamentals，Principles of Security概念 - FSRM</title>
+  <title>Nmap Live Host Discovery - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -241,7 +242,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Pentesting Fundamentals，Principles of Security概念"></span>
+            <span id="subtitle" data-typed-text="Nmap Live Host Discovery"></span>
           
         </div>
 
@@ -252,8 +253,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-06 17:18" pubdate>
-          2024年4月6日 下午
+        <time datetime="2024-07-09 09:48" pubdate>
+          2024年7月9日 上午
         </time>
       </span>
     
@@ -264,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          268 字
+          2.1k 字
         
       </span>
     
@@ -275,7 +276,7 @@
         
         
         
-          3 分钟
+          18 分钟
         
       </span>
     
@@ -320,20 +321,115 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Pentesting Fundamentals，Principles of Security概念</h1>
+            <h1 id="seo-header">Nmap Live Host Discovery</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Pentesting-Fundamentals"><a href="#Pentesting-Fundamentals" class="headerlink" title="Pentesting Fundamentals"></a>Pentesting Fundamentals</h2><p>主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404172103132.png" srcset="/img/loading.gif" lazyload alt="image-20240417210322923"></p>
-<p>以及介绍了一些黑盒，灰盒，白盒测试等。</p>
-<p>黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。</p>
-<p>灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。</p>
-<p>白盒测试:测试人员了解内部工作逻辑，信息更多，着手点更多。</p>
-<h2 id="Principles-of-Security"><a href="#Principles-of-Security" class="headerlink" title="Principles of Security"></a>Principles of Security</h2><p>这里主要介绍了一些安全原则</p>
-<p>完整性，保密性，可用性</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202404262206614.png" srcset="/img/loading.gif" lazyload alt="image-20240426220636310"></p>
+                <h1 id="Nmap-Live-Host-Discovery-nmap实时主机的发现"><a href="#Nmap-Live-Host-Discovery-nmap实时主机的发现" class="headerlink" title="Nmap Live Host Discovery (nmap实时主机的发现)"></a>Nmap Live Host Discovery (nmap实时主机的发现)</h1><ol>
+<li>ARP扫描：此扫描使用ARP请求来发现活动主机</li>
+<li>ICMP 扫描：此扫描使用 ICMP 请求来识别活动主机</li>
+<li>TCP/ UDP ping 扫描：此扫描将数据包发送到 TCP 端口和UDP端口以确定活动主机。</li>
+</ol>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png" srcset="/img/loading.gif" lazyload alt="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/f1b4ede255e008646e425038d709c9b6.png"></p>
+<p>当在同一网段内的时候 ，可以使用arp-scan来进行扫描，但如果目标主机不再同一网段内，就不能使用arp-scan进行扫描 因为arp是在数据链路层，不能够跨网段。</p>
+<ul>
+<li>列表：<code>MACHINE_IP scanme.nmap.org example.com</code>将扫描 3 个 IP 地址。</li>
+<li>范围：<code>10.11.12.15-20</code>将扫描 6 个 IP 地址：<code>10.11.12.15</code>、、 <code>10.11.12.16</code>……和<code>10.11.12.20</code>。</li>
+<li>子网：<code>MACHINE_IP/30</code>将扫描 4 个 IP 地址。</li>
+</ul>
+<p>您还可以提供一个文件作为目标列表的输入<code>nmap -iL list_of_hosts.txt</code>。</p>
+<p>如果您想要检查Nmap将扫描的主机列表，可以使用<code>nmap -sL TARGETS</code>。此选项将为您提供 Nmap 将扫描的主机的详细列表，而无需扫描它们；但是，Nmap 将尝试对所有目标进行反向DNS解析以获取其名称。名称可能会向渗透测试人员透露各种信息。（如果您不想让 Nmap 访问DNS服务器，可以添加<code>-n</code>。）</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407081651586.png" srcset="/img/loading.gif" lazyload alt="image-20240708165132302"></p>
+<p>下面是tcp/ip七层参考模型</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/745e0412b319d324352c7b29863b74f4.png" srcset="/img/loading.gif" lazyload alt="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/745e0412b319d324352c7b29863b74f4.png"></p>
+<p>从下到上是 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层。</p>
+<p>1.数据链路层的ARP</p>
+<p>2.网络层的ICMP</p>
+<p>3.传输层的TCP 传输层的UDP</p>
+<p>ARP有一个目的：向网络段上的广播地址发送一个帧，并要求具有特定 IP 地址的计算机通过提供其 MAC（硬件）地址来响应。</p>
+<p>ICMP 有<a target="_blank" rel="noopener" href="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml">很多种类型</a>。ICMP ping 使用类型 8（Echo）和类型 0（Echo Reply）。</p>
+<p>如果要 ping 同一子网上的系统，则ARP查询应先于 ICMP Echo。</p>
+<p>尽管 TCP 和UDP属于传输层，但出于网络扫描目的，扫描器可以向常用 TCP 或UDP端口发送特制数据包，以检查目标是否会响应。此方法非常有效，尤其是在 ICMP Echo 被阻止的情况下。</p>
+<h4 id="1-nmap使用arp进行主机发现"><a href="#1-nmap使用arp进行主机发现" class="headerlink" title="1.nmap使用arp进行主机发现"></a>1.nmap使用arp进行主机发现</h4><p>nmap -sn ip 是仅扫描存活主机，而不扫描端口。</p>
+<p>nmap -PR -sn ip 是利用arp扫描仅存活主机</p>
+<p>有一个工具arp-scan 是专门利用arp协议去扫描本网段的主机 arp-scan -l</p>
+<p>如果有多个接口，利用arp-scan进行扫描时 可以利用命令 arp-scan -I eth0 -l 向接口eth0 发送arp查询</p>
+<h4 id="2-nmap使用ICMP进行主机发现"><a href="#2-nmap使用ICMP进行主机发现" class="headerlink" title="2.nmap使用ICMP进行主机发现"></a>2.nmap使用ICMP进行主机发现</h4><p>有些防火墙会阻止icmp包的回显请求 比如：新版本的 MS Windows  </p>
+<p>nmap -PE -sn ip 利用icmp进行存活主机的探索</p>
+<p>由于 ICMP 回显请求往往会被阻止，因此您可能还会考虑使用 ICMP 时间戳或 ICMP 地址掩码请求来判断系统是否在线。Nmap使用时间戳请求（ICMP 类型 13）并检查它是否会收到时间戳回复（ICMP 类型 14）。添加该<code>-PP</code>选项会告诉Nmap使用 ICMP 时间戳请求。</p>
+<p>nmap -PP -sn ip</p>
+<p>类似地，Nmap使用地址掩码查询（ICMP 类型 17）并检查是否收到地址掩码回复（ICMP 类型 18）。可以使用选项启用此扫描<code>-PM</code>。</p>
+<p>nmap -PM -sn ip </p>
+<h4 id="3-nmap使用tcp-udp进行主机发现"><a href="#3-nmap使用tcp-udp进行主机发现" class="headerlink" title="3.nmap使用tcp/udp进行主机发现"></a>3.nmap使用tcp/udp进行主机发现</h4><p>TCP同步和确认ping</p>
+<p>nmap -PS -sn ip   nmap SYN ping</p>
+<p>nmap -PA -sn ip  (必须在特权模式下进行)  nmap ACK ping</p>
+<p>-PS端口号</p>
+<p>-PA端口号</p>
+<p>UDP ping</p>
+<p>一个UDP数据包发送到一个开放的UDP端口，并没有触发任何响应。但是，向任何关闭的UDP端口发送UDP数据包可以触发响应，间接表明目标在线。</p>
+<p>namp -PU -sn ip</p>
+<p>-PU端口号</p>
+<p>masscan也是一个扫描主机的一个工具 速度更快 主要用于大规模网络扫描</p>
+<p>Nmap 的默认行为是使用反向DNS在线主机。由于主机名可以揭示很多信息，因此这可能是一个有用的步骤。但是，如果您不想发送此类DNS查询，则可以<code>-n</code>跳过此步骤。</p>
+<p>默认情况下，Nmap将查找在线主机；但是，您可以使用该选项<code>-R</code>查询DNS服务器，即使是离线主机也是如此。如果您想使用特定的DNS服务器，可以添加该 <code>--dns-servers DNS_SERVER</code> 选项。</p>
+<table>
+<thead>
+<tr>
+<th>扫描类型</th>
+<th>示例命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARP扫描</td>
+<td><code>sudo nmap -PR -sn MACHINE_IP/24</code></td>
+</tr>
+<tr>
+<td>ICMP 回显扫描</td>
+<td><code>sudo nmap -PE -sn MACHINE_IP/24</code></td>
+</tr>
+<tr>
+<td>ICMP 时间戳扫描</td>
+<td><code>sudo nmap -PP -sn MACHINE_IP/24</code></td>
+</tr>
+<tr>
+<td>ICMP 地址掩码扫描</td>
+<td><code>sudo nmap -PM -sn MACHINE_IP/24</code></td>
+</tr>
+<tr>
+<td>TCP SYN Ping 扫描</td>
+<td><code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code></td>
+</tr>
+<tr>
+<td>TCP ACK Ping 扫描</td>
+<td><code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code></td>
+</tr>
+<tr>
+<td>UDP Ping 扫描</td>
+<td><code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code></td>
+</tr>
+</tbody></table>
+<p><code>-sn</code>如果您只对主机发现感兴趣，而不对端口扫描感兴趣， 请记得添加。省略<code>-sn</code>将使Nmap默认对活动主机进行端口扫描。</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n</code></td>
+<td>无需DNS查找</td>
+</tr>
+<tr>
+<td><code>-R</code></td>
+<td>反向DNS查找所有主机</td>
+</tr>
+<tr>
+<td><code>-sn</code></td>
+<td>仅主机发现</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -379,8 +475,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Pentesting Fundamentals，Principles of Security概念</div>
-      <div>http://example.com/2024/04/06/Jr Penetration Tester/</div>
+      <div>Nmap Live Host Discovery</div>
+      <div>http://example.com/2024/07/09/nmap实时主机的发现/</div>
     </div>
     <div class="license-meta">
       
@@ -392,7 +488,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月6日</div>
+          <div>2024年7月9日</div>
         </div>
       
       
@@ -429,9 +525,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/04/07/DC-4/" title="DC-4">
+                      <a href="/2024/07/09/%E4%B8%BB%E5%8A%A8%E4%BE%A6%E5%AF%9F/" title="Active Reconnaissance">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DC-4</span>
+                        <span class="hidden-mobile">Active Reconnaissance</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -439,8 +535,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/02/DC-3/" title="DC-3">
-                        <span class="hidden-mobile">DC-3</span>
+                      <a href="/2024/07/09/Nmap%20%E5%9F%BA%E6%9C%AC%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" title="Nmap 基本端口扫描">
+                        <span class="hidden-mobile">Nmap 基本端口扫描</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
