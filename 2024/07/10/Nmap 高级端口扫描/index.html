@@ -26,8 +26,14 @@
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/23540a5fcd27454892a73ac051d29664.png">
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/04b178a9cf7048c21256988b8b2343e3.png">
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/224e01a913a1ce7b0fb2b9290ff5e1c8.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/d76c5020f14ac0d66e7ff3812bb0bec3.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/45b982d501fd26deb2b381059b16f80c.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/754fc455556a424ca83f512665beaf7d.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a93e181f0effe000554a8b307448bbb2.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/8e28bf940936ddbc2367b193ea3550b8.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/2b0de492e2154a30760852e07cebae0e.png">
 <meta property="article:published_time" content="2024-07-10T01:42:57.036Z">
-<meta property="article:modified_time" content="2024-07-10T02:00:11.488Z">
+<meta property="article:modified_time" content="2024-07-12T10:10:08.017Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -265,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          421 字
+          2.8k 字
         
       </span>
     
@@ -276,7 +282,7 @@
         
         
         
-          4 分钟
+          24 分钟
         
       </span>
     
@@ -339,6 +345,57 @@
 <h3 id="Xmas-Scan"><a href="#Xmas-Scan" class="headerlink" title="Xmas Scan"></a>Xmas Scan</h3><p>Xmas Scan: -sX</p>
 <p>带有FIN、PSH 和 URG 标志的tcp数据包。</p>
 <p>跟上面的情况一样，如果收到了RST数据返回，说明端口关闭。</p>
+<p>这三种扫描类型最有效的一种情况是扫描<strong>无状态（非状态）防火墙</strong>后面的目标。无状态防火墙将检查传入数据包是否设置了 <strong>SYN 标志</strong>以检测连接尝试。使用与 SYN 数据包<strong>不匹配</strong>的标志组合可以欺骗防火墙并到达其后面的系统。但是，<strong>有状态防火墙</strong>实际上会阻止所有此类精心设计的数据包并使这种扫描变得毫无用处。</p>
+<h2 id="TCP-Maimon-扫描"><a href="#TCP-Maimon-扫描" class="headerlink" title="TCP Maimon 扫描"></a>TCP Maimon 扫描</h2><p>TCP Maimon 扫描: -sM</p>
+<p>tcp数据包设置了FIN和ACK。目标系统会发送RST来作为响应，无论TCP端口是否打开，大多数目标系统都会以 RST 数据包进行响应。在这种情况下，我们将无法发现打开的端口。此扫描不适用于现代网络中遇到的大多数目标。</p>
+<h2 id="TCP-ACK-Window-and-Custom-Scan"><a href="#TCP-ACK-Window-and-Custom-Scan" class="headerlink" title="TCP ACK, Window, and Custom Scan"></a>TCP ACK, Window, and Custom Scan</h2><h3 id="TCP-ACK扫描"><a href="#TCP-ACK扫描" class="headerlink" title="TCP ACK扫描"></a>TCP ACK扫描</h3><p>向目标服务器发送一个带有ACK标志的TCP数据包。</p>
+<p>TCP ACK扫描：-sA</p>
+<p>无论端口状态如何，目标都会使用 RST 响应 ACK。此扫描不会告诉我们目标端口是否打开。</p>
+<p>在目标服务器安装防火墙之前，没什么太大的用处，显示不了端口的信息。但在目标服务器安装防火墙之后，用处就大大提高了，发送带有ACK标志的数据包，没有返回结果的，就是被防火墙给阻挡了，但返回RST数据包的，就是防火墙没有阻挡的。这种类型的扫描更适合发现防火墙规则集和配置。</p>
+<h3 id="TCP-Window扫描"><a href="#TCP-Window扫描" class="headerlink" title="TCP Window扫描"></a>TCP Window扫描</h3><p>TCP Window扫描：-sW</p>
+<p>TCP窗口扫描与 ACK 扫描几乎相同；但是，它会检查返回的 RST 数据包的TCP窗口字段。</p>
+<h3 id="TCP-Custom扫描"><a href="#TCP-Custom扫描" class="headerlink" title="TCP Custom扫描"></a>TCP Custom扫描</h3><p>这个是自定义标志位的tcp数据包，但需要了解不同端口的行为方式，以便正确解释不同场景中的结果。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/d76c5020f14ac0d66e7ff3812bb0bec3.png" srcset="/img/loading.gif" lazyload alt="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/d76c5020f14ac0d66e7ff3812bb0bec3.png"></p>
+<p>尝试使用设置了重置标志的自定义 TCP 扫描</p>
+<p><code>*nmap --scanflags RST ip*</code></p>
+<p><strong>最后，必须注意的是，ACK 扫描和窗口扫描在帮助我们规划防火墙规则方面非常有效。但是，必须记住，仅仅因为防火墙没有阻止特定端口，并不一定意味着服务正在侦听该端口。例如，可能需要更新防火墙规则以反映最近的服务更改。因此，ACK 和窗口扫描暴露的是防火墙规则，而不是服务。</strong></p>
+<h2 id="欺骗和诱饵"><a href="#欺骗和诱饵" class="headerlink" title="欺骗和诱饵"></a>欺骗和诱饵</h2><p>在某些网络中我们会使用伪造的ip和mac地址来扫描目标服务器。这种扫描仅在可以保证捕获响应的情况下才有用。</p>
+<p><code>nmap -S 伪造ip 源ip</code> </p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/45b982d501fd26deb2b381059b16f80c.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>简单来说使用欺骗ip进行扫描分为三步：</p>
+<p>1.伪造ip，向目标服务器发送数据请求。</p>
+<p>2.目标服务器向伪造的ip发送响应。</p>
+<p>3.攻击者从中进行捕获，找出开放的端口。</p>
+<p><code>nmap -e NET_INTERFACE -Pn -S SPOOFED_IP MACHINE_IP</code></p>
+<p>-e指定网络接口 -P禁止使用ping</p>
+<p>如果攻击者系统无法监控网络响应，则此扫描将毫无用处。</p>
+<p>当我们和目标服务器处于同一子网中时，可以伪造mac地址。</p>
+<p><code>nmap --spoof-mac SPOOFED_MAC MACHINE_IP</code></p>
+<p>欺骗仅在满足特定条件的极少数情况下有效，因此攻击者会使用诱饵来增加被识别的难度。</p>
+<p>原理：让扫描看起来来自多个ip，让真实的ip丢失在其中。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/754fc455556a424ca83f512665beaf7d.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><code>nmap -D ip1,ip2,ME MACHINE_IP</code> 将使 MACHINE_IP 的扫描显示为来自IP1,ip2 然后<code>ME</code>表示真实的IP地址应出现在第三顺序中</p>
+<p><code>nmap -D IP1,IP2,RND,RND,ME MACHINE_IP</code>  第三个和第四个ip是随机的 然后第五个代表真实的ip地址。</p>
+<h2 id="碎片数据包"><a href="#碎片数据包" class="headerlink" title="碎片数据包"></a>碎片数据包</h2><p>把数据包分为几个小部分，对降低IDS和防火墙检测有一些帮助。</p>
+<p>-f将数据包分为8个字节或者更少的字节，-ff将数据包分为16个字节。–mtu可以更改数据包分几个字节的大小，但应该是8的倍数。</p>
+<h2 id="Idle-Zombie-Scan-空闲-僵尸扫描"><a href="#Idle-Zombie-Scan-空闲-僵尸扫描" class="headerlink" title="Idle/Zombie Scan(空闲/僵尸扫描)"></a>Idle/Zombie Scan(空闲/僵尸扫描)</h2><p>伪造源ip是有一定限制条件的，如果不能进行流量监控的话，就不能进行源ip的伪造。此时，利用空闲/僵尸扫描可以进行一个升级。</p>
+<p>空闲/僵尸扫描就是找一个极少使用的空闲系统(我们可以联通)，通过ip id的数量差值来判断端口是否开放。</p>
+<p><code>nmap -sI 空闲主机ip 目标主机ip</code></p>
+<p>步骤：<br>1.首先向空闲/僵尸主机发送一个SYN/ACK的数据包，空闲主机会向攻击者回复一个IP ID。</p>
+<p>2.攻击者再向目标主机发送一个SYN/ACK的数据包，该数据包应该被伪装成来自空闲/僵尸主机的ip。</p>
+<p>3.再向空闲主机发送一个SYN/ACK的数据包，空闲主机会再次发送一个IP ID,将第一个IP ID和第三个IP ID进行一个对比，如果差值为2的话端口就开放，就一个的话端口就关闭。</p>
+<p>下面用tryhackeme的图来解释一下：</p>
+<p>攻击者系统正在探测一台空闲的机器，一台多功能打印机。通过发送 SYN/ACK，它会用一个包含其新增加的 IP ID 的 RST 数据包进行响应。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a93e181f0effe000554a8b307448bbb2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>攻击者将向下一步想要检查目标机器的TCP端口发送 SYN 数据包。但是，此数据包将使用空闲主机（僵尸）IP 地址作为源。将出现三种情况。在第一种情况下，如下图所示， TCP端口已关闭；因此，目标机器使用 RST 数据包响应空闲主机。空闲主机不响应；因此其 IP ID 不会增加。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/8e28bf940936ddbc2367b193ea3550b8.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第二种情况，如下所示，TCP端口是开放的，因此目标机器向空闲主机（僵尸主机）响应 SYN/ACK。空闲主机用 RST 数据包响应这个意外数据包，从而增加其 IP ID。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/2b0de492e2154a30760852e07cebae0e.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第三种情况是，目标机器由于防火墙规则而完全没有响应。这种没有响应的情况与关闭端口的情况一样，闲置的主机不会增加 IP ID。</p>
+<p>最后一步，攻击者向空闲主机发送另一个 SYN/ACK。空闲主机用 RST 数据包响应，再次将 IP ID 加一。攻击者需要将第一步收到的 RST 数据包的 IP ID 与第三步收到的 RST 数据包的 IP ID 进行比较。如果差值为 1，则表示目标计算机上的端口已关闭或被过滤。但是，如果差值为 2，则表示目标上的端口已打开。</p>
+<p>如果我们选择的并不是空闲主机，返回回来的IP ID是无用的。</p>
+<p><code>nmap -sS --reason ip</code> 可让我们明确了解 Nmap 为何认为系统已启动或某个特定端口已打开。</p>
+<p>为了获取更详细的输出，-使用-v/-vv  或者使用-d</p>
 
                 
               </div>
@@ -403,7 +460,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月10日</div>
+          <div>2024年7月12日</div>
         </div>
       
       
