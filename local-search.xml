@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Nmap端口扫描</title>
+    <link href="/2024/07/12/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"/>
+    <url>/2024/07/12/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Nmap端口扫描"><a href="#Nmap端口扫描" class="headerlink" title="Nmap端口扫描"></a>Nmap端口扫描</h1><h2 id="服务检测"><a href="#服务检测" class="headerlink" title="服务检测"></a>服务检测</h2><p><code>nmap -sV ip</code> 检测运行端口和版本信息。</p><p><code>--version-intensity LEVEL</code>级别范围在 0（最轻）和 9（最完整）之间来控制强度。<code>-sV --version-light</code>强度为 2，而 <code>-sV --version-all</code>强度为 9。</p><h2 id="操作系统检测和跟踪路由"><a href="#操作系统检测和跟踪路由" class="headerlink" title="操作系统检测和跟踪路由"></a>操作系统检测和跟踪路由</h2><p>操作系统的检测：</p><p><code>nmap -O ip</code>  检测操纵系统的版本信息。有的时候会不准确，需要谨慎对待。</p><p>追踪路由：</p><p><code>nmap --traceroute ip</code></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407121855012.png" alt="image-20240712185456798"></p><h2 id="Nmap-脚本引擎（NSE）"><a href="#Nmap-脚本引擎（NSE）" class="headerlink" title="Nmap 脚本引擎（NSE）"></a>Nmap 脚本引擎（NSE）</h2><p>Nmap使用 Lua 语言提供对脚本的支持。作为Nmap的一部分，Nmap 脚本引擎 (NSE) 是一个 Lua 解释器，允许Nmap执行用 Lua 语言编写的Nmap脚本。</p><table><thead><tr><th>脚本类别</th><th>描述</th></tr></thead><tbody><tr><td><code>auth</code></td><td>认证相关脚本</td></tr><tr><td><code>broadcast</code></td><td>通过发送广播消息发现主机</td></tr><tr><td><code>brute</code></td><td>对登录进行暴力密码审计</td></tr><tr><td><code>default</code></td><td>默认脚本，与<code>-sC</code>类似</td></tr><tr><td><code>discovery</code></td><td>检索可访问的信息，例如数据库表和DNS名称</td></tr><tr><td><code>dos</code></td><td>检测易受拒绝服务 ( DoS )攻击的服务器</td></tr><tr><td><code>exploit</code></td><td>尝试利用各种易受攻击的服务</td></tr><tr><td><code>external</code></td><td>使用第三方服务检查，例如 Geoplugin 和 Virustotal</td></tr><tr><td><code>fuzzer</code></td><td>发起模糊测试攻击</td></tr><tr><td><code>intrusive</code></td><td>侵入性脚本，例如暴力攻击和漏洞利用</td></tr><tr><td><code>malware</code></td><td>扫描后门</td></tr><tr><td><code>safe</code></td><td>不会使目标崩溃的安全脚本</td></tr><tr><td><code>version</code></td><td>检索服务版本</td></tr><tr><td><code>vuln</code></td><td>检查漏洞或利用易受攻击的服务</td></tr></tbody></table><p>–script “SCRIPT-NAME”  指定脚本名字 </p><p>例如：–script “safe”</p><h2 id="保存输出"><a href="#保存输出" class="headerlink" title="保存输出"></a>保存输出</h2><p>分为三类：</p><h3 id="1-Normal"><a href="#1-Normal" class="headerlink" title="1.Normal"></a>1.Normal</h3><p><code>-oN filename</code></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122054557.png" alt="image-20240712205431353"></p><h3 id="2-Grepable-grepable"><a href="#2-Grepable-grepable" class="headerlink" title="2.Grepable (grepable)"></a>2.Grepable (<code>grep</code>able)</h3><p><code>-oG filename</code></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100450.png" alt="image-20240712210010271"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100673.png" alt="image-20240712210036526"></p><h3 id="3-XML"><a href="#3-XML" class="headerlink" title="3.XML"></a>3.XML</h3><p><code>-oX filename</code></p><p>结合所有的：<br><code>-oA filename -oN -oG -oX</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Jr Penetration Tester</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Nmap 高级端口扫描</title>
     <link href="/2024/07/10/Nmap%20%E9%AB%98%E7%BA%A7%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"/>
     <url>/2024/07/10/Nmap%20%E9%AB%98%E7%BA%A7%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</url>
