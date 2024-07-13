@@ -16,27 +16,32 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Nmap端口扫描服务检测nmap -sV ip 检测运行端口和版本信息。 --version-intensity LEVEL级别范围在 0（最轻）和 9（最完整）之间来控制强度。-sV --version-light强度为 2，而 -sV --version-all强度为 9。 操作系统检测和跟踪路由操作系统的检测： nmap -O ip  检测操纵系统的版本信息。有的时候会不准确，需要谨慎对待。">
+    <meta name="description" content="协议和服务器主要介绍了一些常用的协议。 HTTP(超文本传输协议)是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。 下面是thm的一个图像解释： http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。  FTP(文件传输协议)ftp主要用于不同系统不同计算机之间进行文件的传">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nmap端口扫描">
-<meta property="og:url" content="http://example.com/2024/07/12/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/index.html">
+<meta property="og:title" content="协议和服务器">
+<meta property="og:url" content="http://example.com/2024/07/13/%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Nmap端口扫描服务检测nmap -sV ip 检测运行端口和版本信息。 --version-intensity LEVEL级别范围在 0（最轻）和 9（最完整）之间来控制强度。-sV --version-light强度为 2，而 -sV --version-all强度为 9。 操作系统检测和跟踪路由操作系统的检测： nmap -O ip  检测操纵系统的版本信息。有的时候会不准确，需要谨慎对待。">
+<meta property="og:description" content="协议和服务器主要介绍了一些常用的协议。 HTTP(超文本传输协议)是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。 下面是thm的一个图像解释： http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。  FTP(文件传输协议)ftp主要用于不同系统不同计算机之间进行文件的传">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407121855012.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122054557.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100450.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100673.png">
-<meta property="article:published_time" content="2024-07-12T10:11:28.021Z">
-<meta property="article:modified_time" content="2024-07-12T13:14:58.986Z">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131011443.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131028189.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131049171.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/ed910ad418376edc846846fc2a0dd3f6.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131133906.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/822a449fd569c16c875a13ca2487b714.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131123511.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png">
+<meta property="article:published_time" content="2024-07-13T01:39:35.887Z">
+<meta property="article:modified_time" content="2024-07-13T03:51:02.284Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407121855012.png">
+<meta name="twitter:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png">
   
   
   
-  <title>Nmap端口扫描 - FSRM</title>
+  <title>协议和服务器 - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -243,7 +248,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Nmap端口扫描"></span>
+            <span id="subtitle" data-typed-text="协议和服务器"></span>
           
         </div>
 
@@ -254,8 +259,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-12 18:11" pubdate>
-          2024年7月12日 晚上
+        <time datetime="2024-07-13 09:39" pubdate>
+          2024年7月13日 上午
         </time>
       </span>
     
@@ -266,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          720 字
+          1.5k 字
         
       </span>
     
@@ -277,7 +282,7 @@
         
         
         
-          7 分钟
+          13 分钟
         
       </span>
     
@@ -322,93 +327,111 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Nmap端口扫描</h1>
+            <h1 id="seo-header">协议和服务器</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Nmap端口扫描"><a href="#Nmap端口扫描" class="headerlink" title="Nmap端口扫描"></a>Nmap端口扫描</h1><h2 id="服务检测"><a href="#服务检测" class="headerlink" title="服务检测"></a>服务检测</h2><p><code>nmap -sV ip</code> 检测运行端口和版本信息。</p>
-<p><code>--version-intensity LEVEL</code>级别范围在 0（最轻）和 9（最完整）之间来控制强度。<code>-sV --version-light</code>强度为 2，而 <code>-sV --version-all</code>强度为 9。</p>
-<h2 id="操作系统检测和跟踪路由"><a href="#操作系统检测和跟踪路由" class="headerlink" title="操作系统检测和跟踪路由"></a>操作系统检测和跟踪路由</h2><p>操作系统的检测：</p>
-<p><code>nmap -O ip</code>  检测操纵系统的版本信息。有的时候会不准确，需要谨慎对待。</p>
-<p>追踪路由：</p>
-<p><code>nmap --traceroute ip</code></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407121855012.png" srcset="/img/loading.gif" lazyload alt="image-20240712185456798"></p>
-<h2 id="Nmap-脚本引擎（NSE）"><a href="#Nmap-脚本引擎（NSE）" class="headerlink" title="Nmap 脚本引擎（NSE）"></a>Nmap 脚本引擎（NSE）</h2><p>Nmap使用 Lua 语言提供对脚本的支持。作为Nmap的一部分，Nmap 脚本引擎 (NSE) 是一个 Lua 解释器，允许Nmap执行用 Lua 语言编写的Nmap脚本。</p>
+                <h1 id="协议和服务器"><a href="#协议和服务器" class="headerlink" title="协议和服务器"></a>协议和服务器</h1><p>主要介绍了一些常用的协议。</p>
+<h2 id="HTTP-超文本传输协议"><a href="#HTTP-超文本传输协议" class="headerlink" title="HTTP(超文本传输协议)"></a>HTTP(超文本传输协议)</h2><p>是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。</p>
+<p>下面是thm的一个图像解释：<br><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131011443.png" srcset="/img/loading.gif" lazyload alt="image-20240713101118210"></p>
+<h2 id="FTP-文件传输协议"><a href="#FTP-文件传输协议" class="headerlink" title="FTP(文件传输协议)"></a>FTP(文件传输协议)</h2><p>ftp主要用于不同系统不同计算机之间进行文件的传输。ftp默认监听<strong>21端口</strong>，使用明文进行数据的传输，我们同样可以使用telnet来代替ftp客户端 和ftp服务端进行一个数据的通信。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131028189.png" srcset="/img/loading.gif" lazyload alt="image-20240713102854955"></p>
+<p>SYST是查看目标的系统类型。</p>
+<p>FTP的PASV有两种模式：</p>
+<ul>
+<li>主动：在主动模式下，数据通过源自FTP服务器端口 20 的单独通道发送。</li>
+<li>被动：在被动模式下，数据通过来自FTP客户端端口号 1023 以上的单独通道发送。</li>
+</ul>
+<p>TYPE A是将文件传输模式转成ASCII。TYPE I是将文件传输模式转成二进制。</p>
+<p>我们不能使用简单的客户端（例如telnet）来传输文件，因为ftp会为文件传输创建单独的连接。</p>
+<p>FTP服务器软件的示例包括：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://security.appspot.com/vsftpd.html">vsftpd</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.proftpd.org/">FTPD软件</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.uftpserver.com/">FTP服务器</a></li>
+</ul>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131049171.png" srcset="/img/loading.gif" lazyload alt="image-20240713104903106"></p>
+<p>get filename下载文件</p>
+<h2 id="POP3-邮局协议3"><a href="#POP3-邮局协议3" class="headerlink" title="POP3(邮局协议3)"></a>POP3(邮局协议3)</h2><p>邮局协议版本 3 (POP3) 是一种用于从邮件投递代理 ( MDA ) 服务器下载电子邮件消息的协议，如下图所示。邮件客户端连接到POP3服务器，进行身份验证，下载新电子邮件消息，然后（可选）删除它们。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/ed910ad418376edc846846fc2a0dd3f6.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>默认监听端口是<strong>110</strong></p>
+<p>pop3需要进行身份的验证。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131133906.png" srcset="/img/loading.gif" lazyload alt="image-20240713113341847"></p>
+<p>使用STAT我们得到响应 <code>+OK nn mm</code> nn代表收件箱中的电子邮件数量 mm代表收件箱的大小（以八字节为单位）。</p>
+<p><code>LIST</code>提供了服务器上的新消息列表，并<code>RETR 1</code>检索列表中的第一条消息。</p>
+<h2 id="SMTP-简单邮件传输协议"><a href="#SMTP-简单邮件传输协议" class="headerlink" title="SMTP(简单邮件传输协议)"></a>SMTP(简单邮件传输协议)</h2><p>通过互联网传递电子邮件需要以下组件：</p>
+<ol>
+<li>邮件提交代理 (MSA)</li>
+<li>邮件传输代理（MTA）</li>
+<li>邮件投递代理 ( MDA )</li>
+<li>邮件用户代理 ( MUA )</li>
+</ol>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/822a449fd569c16c875a13ca2487b714.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>流程用thm通俗的话语来解释一下：</p>
+<ol>
+<li>您（MUA）想要发送邮件。</li>
+<li>在您当地的邮局 ( MTA ) 接受邮件之前，邮局员工 (MSA) 会检查邮件是否存在任何问题。</li>
+<li>当地邮局检查邮件目的地并将其发送到正确国家的邮局（MTA ）。</li>
+<li>邮局（MTA）将邮件投递到收件人邮箱（MDA）。</li>
+<li>收件人（MUA）会定期检查邮箱是否有新邮件。他们会注意到新邮件，并接收它。</li>
+</ol>
+<p>简单传输协议SMTP用于和MTA服务器进行一个通信，SMTP使用的是明文，可以使用telnet客户端连接到SMTP服务器端，并充当发送消息的电子邮件客户端(MUA)。</p>
+<p>SMTP监听25端口。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131123511.png" srcset="/img/loading.gif" lazyload alt="image-20240713112351327"></p>
+<h2 id="IMAP-互联网消息访问协议"><a href="#IMAP-互联网消息访问协议" class="headerlink" title="IMAP(互联网消息访问协议)"></a>IMAP(互联网消息访问协议)</h2><p>使用的默认监听端口是<strong>143</strong></p>
+<p>imap比pop3更复杂一些，它可以让电子邮件在多个设备（和邮件客户端）之间保持同步。简单来讲就是，你在手机上已经读过了这个邮件，那么在电脑上这个邮件将不会显示未读。</p>
+<p>imap同样需要进行身份的一个验证。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png" srcset="/img/loading.gif" lazyload alt="image-20240713114643588"></p>
+<p>imap要求每个命令前面都要有一个随机字符，所以fsrm fsrm1 fsrm3 是我们自己设置的。<code>list &quot;&quot; &quot;*&quot;</code>是列出邮件文件夹。 <code>EXAMINE INBOX</code>是查看邮件箱中是否有新的邮件。</p>
 <table>
 <thead>
 <tr>
-<th>脚本类别</th>
-<th>描述</th>
+<th>Protocol</th>
+<th>TCP Port</th>
+<th>Application(s)</th>
+<th>Data Security</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>auth</code></td>
-<td>认证相关脚本</td>
+<td>FTP</td>
+<td>21</td>
+<td>File Transfer</td>
+<td>Cleartext（明文）</td>
 </tr>
 <tr>
-<td><code>broadcast</code></td>
-<td>通过发送广播消息发现主机</td>
+<td>HTTP</td>
+<td>80</td>
+<td>Worldwide Web</td>
+<td>Cleartext</td>
 </tr>
 <tr>
-<td><code>brute</code></td>
-<td>对登录进行暴力密码审计</td>
+<td>IMAP</td>
+<td>143</td>
+<td>Email (MDA)</td>
+<td>Cleartext</td>
 </tr>
 <tr>
-<td><code>default</code></td>
-<td>默认脚本，与<code>-sC</code>类似</td>
+<td>POP3</td>
+<td>110</td>
+<td>Email (MDA)</td>
+<td>Cleartext</td>
 </tr>
 <tr>
-<td><code>discovery</code></td>
-<td>检索可访问的信息，例如数据库表和DNS名称</td>
+<td>SMTP</td>
+<td>25</td>
+<td>Email (MTA)</td>
+<td>Cleartext</td>
 </tr>
 <tr>
-<td><code>dos</code></td>
-<td>检测易受拒绝服务 ( DoS )攻击的服务器</td>
-</tr>
-<tr>
-<td><code>exploit</code></td>
-<td>尝试利用各种易受攻击的服务</td>
-</tr>
-<tr>
-<td><code>external</code></td>
-<td>使用第三方服务检查，例如 Geoplugin 和 Virustotal</td>
-</tr>
-<tr>
-<td><code>fuzzer</code></td>
-<td>发起模糊测试攻击</td>
-</tr>
-<tr>
-<td><code>intrusive</code></td>
-<td>侵入性脚本，例如暴力攻击和漏洞利用</td>
-</tr>
-<tr>
-<td><code>malware</code></td>
-<td>扫描后门</td>
-</tr>
-<tr>
-<td><code>safe</code></td>
-<td>不会使目标崩溃的安全脚本</td>
-</tr>
-<tr>
-<td><code>version</code></td>
-<td>检索服务版本</td>
-</tr>
-<tr>
-<td><code>vuln</code></td>
-<td>检查漏洞或利用易受攻击的服务</td>
+<td>Telnet</td>
+<td>23</td>
+<td>Remote Access</td>
+<td>Cleartext</td>
 </tr>
 </tbody></table>
-<p>–script “SCRIPT-NAME”  指定脚本名字 </p>
-<p>例如：–script “safe”</p>
-<h2 id="保存输出"><a href="#保存输出" class="headerlink" title="保存输出"></a>保存输出</h2><p>分为三类：</p>
-<h3 id="1-Normal"><a href="#1-Normal" class="headerlink" title="1.Normal"></a>1.Normal</h3><p><code>-oN filename</code></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122054557.png" srcset="/img/loading.gif" lazyload alt="image-20240712205431353"></p>
-<h3 id="2-Grepable-grepable"><a href="#2-Grepable-grepable" class="headerlink" title="2.Grepable (grepable)"></a>2.Grepable (<code>grep</code>able)</h3><p><code>-oG filename</code></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100450.png" srcset="/img/loading.gif" lazyload alt="image-20240712210010271"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407122100673.png" srcset="/img/loading.gif" lazyload alt="image-20240712210036526"></p>
-<h3 id="3-XML"><a href="#3-XML" class="headerlink" title="3.XML"></a>3.XML</h3><p><code>-oX filename</code></p>
-<p>结合所有的：<br><code>-oA filename -oN -oG -oX</code></p>
 
                 
               </div>
@@ -454,8 +477,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Nmap端口扫描</div>
-      <div>http://example.com/2024/07/12/Nmap端口扫描/</div>
+      <div>协议和服务器</div>
+      <div>http://example.com/2024/07/13/协议和服务器/</div>
     </div>
     <div class="license-meta">
       
@@ -467,13 +490,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月12日</div>
+          <div>2024年7月13日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月12日</div>
+          <div>2024年7月13日</div>
         </div>
       
       
@@ -504,18 +527,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/13/%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="协议和服务器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">协议和服务器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/10/Nmap%20%E9%AB%98%E7%BA%A7%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" title="Nmap 高级端口扫描">
-                        <span class="hidden-mobile">Nmap 高级端口扫描</span>
+                      <a href="/2024/07/12/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" title="Nmap端口扫描">
+                        <span class="hidden-mobile">Nmap端口扫描</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
