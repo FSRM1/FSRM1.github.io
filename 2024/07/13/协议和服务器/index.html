@@ -32,8 +32,9 @@
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/822a449fd569c16c875a13ca2487b714.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131123511.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/c1ec79277c1f02beeb20f7dc81df2fd3.png">
 <meta property="article:published_time" content="2024-07-13T01:39:35.887Z">
-<meta property="article:modified_time" content="2024-07-13T03:51:02.284Z">
+<meta property="article:modified_time" content="2024-07-13T12:02:32.618Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,7 +272,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2k 字
         
       </span>
     
@@ -282,7 +283,7 @@
         
         
         
-          13 分钟
+          17 分钟
         
       </span>
     
@@ -432,7 +433,19 @@
 <td>Cleartext</td>
 </tr>
 </tbody></table>
-
+<h1 id="易遭受的攻击"><a href="#易遭受的攻击" class="headerlink" title="易遭受的攻击"></a>易遭受的攻击</h1><h2 id="1-嗅探攻击-网络数据包捕获"><a href="#1-嗅探攻击-网络数据包捕获" class="headerlink" title="1.嗅探攻击(网络数据包捕获)"></a>1.嗅探攻击(网络数据包捕获)</h2><p>当协议以明文的方式进行传输时，第三方可以对传输的数据进行一个分析，从而可以获取到一些敏感的信息。</p>
+<p>只要用户具有适当的权限（ Linux上的 root 权限和 MS Windows 上的管理员权限），就可以使用以太网 (802.3) 网卡进行嗅探攻击。有许多程序可用于捕获网络数据包。</p>
+<p>1.Wireshark是一个免费的开源图形用户界面 (GUI) 程序，适用于多种操作系统，包括Linux、macOS 和 MS Windows。</p>
+<p>2.Tcpdump是一个免费的开源命令行界面 ( CLI ) 程序，已被移植到许多操作系统上运行。</p>
+<p>3.Tshark是Wireshark 的CLI替代品。</p>
+<p>使用Tcpdump对数据进行获取：</p>
+<p>命令如下：<code>sudo Tcpdump port xxx -A</code> </p>
+<p>这里举一个例子，A用户使用pop3进行邮件的检查，此时的pop3监听端口是110，那么</p>
+<p><code>sudo Tcpdump port 110 -A</code>  </p>
+<p>-A是以ascii码的形式显示捕获的数据包。</p>
+<p>或者使用Wireshark进行流量分析。如下图所示：<br><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/c1ec79277c1f02beeb20f7dc81df2fd3.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>防御方法就是对传输的数据进行一个加密，不用明文进行传输。对于远程访问，telnet用ssh进行代替。</p>
+<h2 id="2-中间人攻击-MITM"><a href="#2-中间人攻击-MITM" class="headerlink" title="2.中间人攻击(MITM)"></a>2.中间人攻击(MITM)</h2><h2 id="3-密码攻击-身份验证攻击"><a href="#3-密码攻击-身份验证攻击" class="headerlink" title="3.密码攻击(身份验证攻击)"></a>3.密码攻击(身份验证攻击)</h2><h2 id="4-漏洞"><a href="#4-漏洞" class="headerlink" title="4.漏洞"></a>4.漏洞</h2>
                 
               </div>
             
