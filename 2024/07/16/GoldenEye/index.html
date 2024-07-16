@@ -16,34 +16,49 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="协议和服务器主要介绍了一些常用的协议。 HTTP(超文本传输协议)是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。 下面是thm的一个图像解释： http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。  FTP(文件传输协议)ftp主要用于不同系统不同计算机之间进行文件的传">
+    <meta name="description" content="GoldenEye信息收集：1.由于靶机和kali在同一网段中，可以使用arp-scan进行存活主机的扫描。  可以查询到目标ip的地址。 去访问一下：  有一个登录的路由，但不知道账号密码，可以对端口和目录先进行一个信息的收集。  可以看到开启了四个端口，其中一个http服务，和smtp(邮件传输协议) pop3(邮局协议)，都是以明文的形式进行传输，可能会跟账户密码有关联。   扫目录就扫到了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="协议和服务器">
-<meta property="og:url" content="http://example.com/2024/07/13/%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:title" content="GoldenEye">
+<meta property="og:url" content="http://example.com/2024/07/16/GoldenEye/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="协议和服务器主要介绍了一些常用的协议。 HTTP(超文本传输协议)是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。 下面是thm的一个图像解释： http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。  FTP(文件传输协议)ftp主要用于不同系统不同计算机之间进行文件的传">
+<meta property="og:description" content="GoldenEye信息收集：1.由于靶机和kali在同一网段中，可以使用arp-scan进行存活主机的扫描。  可以查询到目标ip的地址。 去访问一下：  有一个登录的路由，但不知道账号密码，可以对端口和目录先进行一个信息的收集。  可以看到开启了四个端口，其中一个http服务，和smtp(邮件传输协议) pop3(邮局协议)，都是以明文的形式进行传输，可能会跟账户密码有关联。   扫目录就扫到了">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131011443.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131028189.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131049171.png">
-<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/ed910ad418376edc846846fc2a0dd3f6.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131133906.png">
-<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/822a449fd569c16c875a13ca2487b714.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131123511.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png">
-<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/c1ec79277c1f02beeb20f7dc81df2fd3.png">
-<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/3cb0c4f9dde184bf8dcd6b3a45418a44.png">
-<meta property="article:published_time" content="2024-07-13T01:39:35.887Z">
-<meta property="article:modified_time" content="2024-07-13T13:32:03.742Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161523604.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161524135.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161531316.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161535894.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161540058.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161606962.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161655463.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161700951.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161706817.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161716184.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161717951.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161738349.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161742544.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161745639.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161749855.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161751104.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161753194.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161754214.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161932694.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161932978.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161934624.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161948413.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161952971.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162014416.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162024891.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162027528.png">
+<meta property="article:published_time" content="2024-07-16T07:15:30.231Z">
+<meta property="article:modified_time" content="2024-07-16T12:27:42.377Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="tryhackme">
+<meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161523604.png">
   
   
   
-  <title>协议和服务器 - FSRM</title>
+  <title>GoldenEye - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -250,7 +265,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="协议和服务器"></span>
+            <span id="subtitle" data-typed-text="GoldenEye"></span>
           
         </div>
 
@@ -261,8 +276,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-13 09:39" pubdate>
-          2024年7月13日 上午
+        <time datetime="2024-07-16 15:15" pubdate>
+          2024年7月16日 下午
         </time>
       </span>
     
@@ -273,7 +288,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          1.1k 字
         
       </span>
     
@@ -284,7 +299,7 @@
         
         
         
-          19 分钟
+          10 分钟
         
       </span>
     
@@ -329,132 +344,74 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">协议和服务器</h1>
+            <h1 id="seo-header">GoldenEye</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="协议和服务器"><a href="#协议和服务器" class="headerlink" title="协议和服务器"></a>协议和服务器</h1><p>主要介绍了一些常用的协议。</p>
-<h2 id="HTTP-超文本传输协议"><a href="#HTTP-超文本传输协议" class="headerlink" title="HTTP(超文本传输协议)"></a>HTTP(超文本传输协议)</h2><p>是用于传输网络的协议，网络浏览器连接到网络服务器并使用HTTP请求 HTML 页面和图像以及其他文件，提交表单并上传各种文件。</p>
-<p>下面是thm的一个图像解释：<br><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/a23a13cef49ae7fff87bfd94f6a175dc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>http以明文的形式发送数据，因此我们可以使用telnet来充当web浏览器，向web服务器发送数据。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131011443.png" srcset="/img/loading.gif" lazyload alt="image-20240713101118210"></p>
-<h2 id="FTP-文件传输协议"><a href="#FTP-文件传输协议" class="headerlink" title="FTP(文件传输协议)"></a>FTP(文件传输协议)</h2><p>ftp主要用于不同系统不同计算机之间进行文件的传输。ftp默认监听<strong>21端口</strong>，使用明文进行数据的传输，我们同样可以使用telnet来代替ftp客户端 和ftp服务端进行一个数据的通信。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131028189.png" srcset="/img/loading.gif" lazyload alt="image-20240713102854955"></p>
-<p>SYST是查看目标的系统类型。</p>
-<p>FTP的PASV有两种模式：</p>
-<ul>
-<li>主动：在主动模式下，数据通过源自FTP服务器端口 20 的单独通道发送。</li>
-<li>被动：在被动模式下，数据通过来自FTP客户端端口号 1023 以上的单独通道发送。</li>
-</ul>
-<p>TYPE A是将文件传输模式转成ASCII。TYPE I是将文件传输模式转成二进制。</p>
-<p>我们不能使用简单的客户端（例如telnet）来传输文件，因为ftp会为文件传输创建单独的连接。</p>
-<p>FTP服务器软件的示例包括：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://security.appspot.com/vsftpd.html">vsftpd</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.proftpd.org/">FTPD软件</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.uftpserver.com/">FTP服务器</a></li>
-</ul>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131049171.png" srcset="/img/loading.gif" lazyload alt="image-20240713104903106"></p>
-<p>get filename下载文件</p>
-<h2 id="POP3-邮局协议3"><a href="#POP3-邮局协议3" class="headerlink" title="POP3(邮局协议3)"></a>POP3(邮局协议3)</h2><p>邮局协议版本 3 (POP3) 是一种用于从邮件投递代理 ( MDA ) 服务器下载电子邮件消息的协议，如下图所示。邮件客户端连接到POP3服务器，进行身份验证，下载新电子邮件消息，然后（可选）删除它们。</p>
-<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/ed910ad418376edc846846fc2a0dd3f6.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>默认监听端口是<strong>110</strong></p>
-<p>pop3需要进行身份的验证。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131133906.png" srcset="/img/loading.gif" lazyload alt="image-20240713113341847"></p>
-<p>使用STAT我们得到响应 <code>+OK nn mm</code> nn代表收件箱中的电子邮件数量 mm代表收件箱的大小（以八字节为单位）。</p>
-<p><code>LIST</code>提供了服务器上的新消息列表，并<code>RETR 1</code>检索列表中的第一条消息。</p>
-<h2 id="SMTP-简单邮件传输协议"><a href="#SMTP-简单邮件传输协议" class="headerlink" title="SMTP(简单邮件传输协议)"></a>SMTP(简单邮件传输协议)</h2><p>通过互联网传递电子邮件需要以下组件：</p>
-<ol>
-<li>邮件提交代理 (MSA)</li>
-<li>邮件传输代理（MTA）</li>
-<li>邮件投递代理 ( MDA )</li>
-<li>邮件用户代理 ( MUA )</li>
-</ol>
-<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/822a449fd569c16c875a13ca2487b714.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>流程用thm通俗的话语来解释一下：</p>
-<ol>
-<li>您（MUA）想要发送邮件。</li>
-<li>在您当地的邮局 ( MTA ) 接受邮件之前，邮局员工 (MSA) 会检查邮件是否存在任何问题。</li>
-<li>当地邮局检查邮件目的地并将其发送到正确国家的邮局（MTA ）。</li>
-<li>邮局（MTA）将邮件投递到收件人邮箱（MDA）。</li>
-<li>收件人（MUA）会定期检查邮箱是否有新邮件。他们会注意到新邮件，并接收它。</li>
-</ol>
-<p>简单传输协议SMTP用于和MTA服务器进行一个通信，SMTP使用的是明文，可以使用telnet客户端连接到SMTP服务器端，并充当发送消息的电子邮件客户端(MUA)。</p>
-<p>SMTP监听25端口。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131123511.png" srcset="/img/loading.gif" lazyload alt="image-20240713112351327"></p>
-<h2 id="IMAP-互联网消息访问协议"><a href="#IMAP-互联网消息访问协议" class="headerlink" title="IMAP(互联网消息访问协议)"></a>IMAP(互联网消息访问协议)</h2><p>使用的默认监听端口是<strong>143</strong></p>
-<p>imap比pop3更复杂一些，它可以让电子邮件在多个设备（和邮件客户端）之间保持同步。简单来讲就是，你在手机上已经读过了这个邮件，那么在电脑上这个邮件将不会显示未读。</p>
-<p>imap同样需要进行身份的一个验证。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png" srcset="/img/loading.gif" lazyload alt="image-20240713114643588"></p>
-<p>imap要求每个命令前面都要有一个随机字符，所以fsrm fsrm1 fsrm3 是我们自己设置的。<code>list &quot;&quot; &quot;*&quot;</code>是列出邮件文件夹。 <code>EXAMINE INBOX</code>是查看邮件箱中是否有新的邮件。</p>
-<table>
-<thead>
-<tr>
-<th>Protocol</th>
-<th>TCP Port</th>
-<th>Application(s)</th>
-<th>Data Security</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>FTP</td>
-<td>21</td>
-<td>File Transfer</td>
-<td>Cleartext（明文）</td>
-</tr>
-<tr>
-<td>HTTP</td>
-<td>80</td>
-<td>Worldwide Web</td>
-<td>Cleartext</td>
-</tr>
-<tr>
-<td>IMAP</td>
-<td>143</td>
-<td>Email (MDA)</td>
-<td>Cleartext</td>
-</tr>
-<tr>
-<td>POP3</td>
-<td>110</td>
-<td>Email (MDA)</td>
-<td>Cleartext</td>
-</tr>
-<tr>
-<td>SMTP</td>
-<td>25</td>
-<td>Email (MTA)</td>
-<td>Cleartext</td>
-</tr>
-<tr>
-<td>Telnet</td>
-<td>23</td>
-<td>Remote Access</td>
-<td>Cleartext</td>
-</tr>
-</tbody></table>
-<h1 id="易遭受的攻击"><a href="#易遭受的攻击" class="headerlink" title="易遭受的攻击"></a>易遭受的攻击</h1><h2 id="1-嗅探攻击-网络数据包捕获"><a href="#1-嗅探攻击-网络数据包捕获" class="headerlink" title="1.嗅探攻击(网络数据包捕获)"></a>1.嗅探攻击(网络数据包捕获)</h2><p>当协议以明文的方式进行传输时，第三方可以对传输的数据进行一个分析，从而可以获取到一些敏感的信息。</p>
-<p>只要用户具有适当的权限（ Linux上的 root 权限和 MS Windows 上的管理员权限），就可以使用以太网 (802.3) 网卡进行嗅探攻击。有许多程序可用于捕获网络数据包。</p>
-<p>1.Wireshark是一个免费的开源图形用户界面 (GUI) 程序，适用于多种操作系统，包括Linux、macOS 和 MS Windows。</p>
-<p>2.Tcpdump是一个免费的开源命令行界面 ( CLI ) 程序，已被移植到许多操作系统上运行。</p>
-<p>3.Tshark是Wireshark 的CLI替代品。</p>
-<p>使用Tcpdump对数据进行获取：</p>
-<p>命令如下：<code>sudo Tcpdump port xxx -A</code> </p>
-<p>这里举一个例子，A用户使用pop3进行邮件的检查，此时的pop3监听端口是110，那么</p>
-<p><code>sudo Tcpdump port 110 -A</code>  </p>
-<p>-A是以ascii码的形式显示捕获的数据包。</p>
-<p>或者使用Wireshark进行流量分析。如下图所示：<br><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/c1ec79277c1f02beeb20f7dc81df2fd3.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>防御方法就是对传输的数据进行一个加密，不用明文进行传输。对于远程访问，telnet用ssh进行代替。</p>
-<h2 id="2-中间人攻击-MITM"><a href="#2-中间人攻击-MITM" class="headerlink" title="2.中间人攻击(MITM)"></a>2.中间人攻击(MITM)</h2><p>假设有A,B两个用户 中间人是C</p>
-<p>A用户向B用户发送信息，但这个信息被C给劫持了，C再告诉B修改后的信息，B做出反应。</p>
-<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/3cb0c4f9dde184bf8dcd6b3a45418a44.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>防御措施：</p>
-<p>1.使用适当的身份验证。</p>
-<p>2.对传输的信息进行一个加密或者签名。</p>
-<p>传输层安全性(TLS) 可防止这个攻击。</p>
-<p>许多工具可以帮助你实施此类攻击，例如<a target="_blank" rel="noopener" href="https://www.ettercap-project.org/">Ettercap</a>和<a target="_blank" rel="noopener" href="https://www.bettercap.org/">Bettercap</a></p>
-<h2 id="3-密码攻击-身份验证攻击"><a href="#3-密码攻击-身份验证攻击" class="headerlink" title="3.密码攻击(身份验证攻击)"></a>3.密码攻击(身份验证攻击)</h2><h2 id="4-漏洞"><a href="#4-漏洞" class="headerlink" title="4.漏洞"></a>4.漏洞</h2><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h2 id="传输层安全性-TLS"><a href="#传输层安全性-TLS" class="headerlink" title="传输层安全性 (TLS)"></a>传输层安全性 (TLS)</h2><p>可以防止密码嗅探和中间人攻击。</p>
+                <h1 id="GoldenEye"><a href="#GoldenEye" class="headerlink" title="GoldenEye"></a>GoldenEye</h1><h2 id="信息收集："><a href="#信息收集：" class="headerlink" title="信息收集："></a>信息收集：</h2><p>1.由于靶机和kali在同一网段中，可以使用arp-scan进行存活主机的扫描。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161523604.png" srcset="/img/loading.gif" lazyload alt="image-20240716152330426"></p>
+<p>可以查询到目标ip的地址。</p>
+<p>去访问一下：</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161524135.png" srcset="/img/loading.gif" lazyload alt="image-20240716152441074"></p>
+<p>有一个登录的路由，但不知道账号密码，可以对端口和目录先进行一个信息的收集。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161531316.png" srcset="/img/loading.gif" lazyload alt="image-20240716153117183"></p>
+<p>可以看到开启了四个端口，其中一个http服务，和smtp(邮件传输协议) pop3(邮局协议)，都是以明文的形式进行传输，可能会跟账户密码有关联。 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161535894.png" srcset="/img/loading.gif" lazyload alt="image-20240716153529798"></p>
+<p>扫目录就扫到了一个js文件，访问去看一下。查看网页源代码也能进行看到。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161540058.png" srcset="/img/loading.gif" lazyload alt="image-20240716154014964"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161606962.png" srcset="/img/loading.gif" lazyload alt="image-20240716160651853"></p>
+<p>可以得到两个用户名和一个密码 Boris Natalya 密码经过html解码之后是：InvincibleHack3r</p>
+<p>然后用telnet进行pop3的登录 但无果，登录后台也不行，那就是密码不对了，对密码进行爆破。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161655463.png" srcset="/img/loading.gif" lazyload alt="image-20240716165515399"></p>
+<p>Boris的密码是secret1! </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161700951.png" srcset="/img/loading.gif" lazyload alt="image-20240716170003801"></p>
+<p>Natalya的密码是bird</p>
+<p>然后爆破出来密码之后进行一个pop3的telnet连接。</p>
+<p>在Boris的电子邮箱中发现三个电子邮件，在NataLya的电子邮箱中发现2个电子邮件。</p>
+<p>在电子邮件中可以得知账户密码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161706817.png" srcset="/img/loading.gif" lazyload alt="image-20240716170601693"></p>
+<p>注意下面的信息，添加severnaya-station.com到host文件中，linux的就在/etc/hosts中添加一下对应的ip和网址即可。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161716184.png" srcset="/img/loading.gif" lazyload alt="image-20240716171656092"></p>
+<p>然后去访问<a target="_blank" rel="noopener" href="http://severnaya-station.com/gnocertdir">http://severnaya-station.com/gnocertdir</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161717951.png" srcset="/img/loading.gif" lazyload alt="image-20240716171732761"></p>
+<p>可以进行一个登录，用户名和密码试试之前邮箱得到的。登录成功。</p>
+<p>进入后台之后仍然对信息进行一个收集，看看是什么版本的，有没有敏感信息的泄露。</p>
+<p>可以找到一个邮件，用户名是Doak</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161738349.png" srcset="/img/loading.gif" lazyload alt="image-20240716173802270"></p>
+<p>对密码进行一下爆破。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161742544.png" srcset="/img/loading.gif" lazyload alt="image-20240716174246433"></p>
+<p>得到了密码，利用telnet进行登录。</p>
+<p>得到账户密码<img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161745639.png" srcset="/img/loading.gif" lazyload alt="image-20240716174501588"></p>
+<p>然后退出xenia的账号，用doak的账户进行一个登录。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161749855.png" srcset="/img/loading.gif" lazyload alt="image-20240716174948782"></p>
+<p>在这个地方有一个文件，下载下来，里面是一些信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161751104.png" srcset="/img/loading.gif" lazyload alt="image-20240716175136985"></p>
+<p>让我们去访问一张图片，路径给了，把它下载下来。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161753194.png" srcset="/img/loading.gif" lazyload alt="image-20240716175341119"></p>
+<p>在图片描述里面发现一个经过base64编码的信息，解码看看。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161754214.png" srcset="/img/loading.gif" lazyload alt="image-20240716175430127"></p>
+<p>应该是某个用户的密码。</p>
+<p>先把doak用户给退出，然后admin登录试试看，结果是可以的。</p>
+<h2 id="获取shell"><a href="#获取shell" class="headerlink" title="获取shell"></a>获取shell</h2><p>一种方法，可以利用msf搜索相关的漏洞利用，然后设置一些信息，最后run即可。</p>
+<p>另一种方法，就是利用python反弹一个shell。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161932694.png" srcset="/img/loading.gif" lazyload alt="image-20240716193201473"></p>
+<p>在上面那个地方进行一个反弹shell.  反弹shell命令： <a target="_blank" rel="noopener" href="https://www.revshells.com/">https://www.revshells.com/</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161932978.png" srcset="/img/loading.gif" lazyload alt="image-20240716193227924"></p>
+<p>最后去点这里</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161934624.png" srcset="/img/loading.gif" lazyload alt="image-20240716193434530"></p>
+<p>让反弹shell的命令执行成功。</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>根据前面打靶机的经验，既然是unubtu的系统，那就看看是否存在内核提权漏洞。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161948413.png" srcset="/img/loading.gif" lazyload alt="image-20240716194806343"></p>
+<p>去搜索一下</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407161952971.png" srcset="/img/loading.gif" lazyload alt="image-20240716195256797"></p>
+<p>存在这个内核漏洞，那就利用一下。</p>
+<p>在本地开一个http服务器， <code>python3 -m http.server 8080</code> </p>
+<p>把文件放到你开启服务的目录下面去，然后在靶机上面利用wget进行下载。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162014416.png" srcset="/img/loading.gif" lazyload alt="image-20240716201443300"></p>
+<p>但gcc这个环境并没有 可以把gcc改成cc</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162024891.png" srcset="/img/loading.gif" lazyload alt="image-20240716202448748"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407162027528.png" srcset="/img/loading.gif" lazyload alt="image-20240716202739328"></p>
 
                 
               </div>
@@ -473,7 +430,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
   
   
 
@@ -488,7 +445,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/tryhackme/" class="print-no-link">#tryhackme</a>
+        <a href="/tags/vulnhub/" class="print-no-link">#vulnhub</a>
       
     </div>
   
@@ -500,8 +457,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>协议和服务器</div>
-      <div>http://example.com/2024/07/13/协议和服务器/</div>
+      <div>GoldenEye</div>
+      <div>http://example.com/2024/07/16/GoldenEye/</div>
     </div>
     <div class="license-meta">
       
@@ -513,13 +470,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月13日</div>
+          <div>2024年7月16日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月13日</div>
+          <div>2024年7月16日</div>
         </div>
       
       
@@ -550,18 +507,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/16/GoldenEye/" title="GoldenEye">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GoldenEye</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/12/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" title="Nmap端口扫描">
-                        <span class="hidden-mobile">Nmap端口扫描</span>
+                      <a href="/2024/07/13/%E5%8D%8F%E8%AE%AE%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="协议和服务器">
+                        <span class="hidden-mobile">协议和服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
