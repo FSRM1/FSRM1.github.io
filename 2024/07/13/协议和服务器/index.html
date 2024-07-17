@@ -34,8 +34,9 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407131146786.png">
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/c1ec79277c1f02beeb20f7dc81df2fd3.png">
 <meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/3cb0c4f9dde184bf8dcd6b3a45418a44.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/9d265987c58331f6fd2f664837f85380.png">
 <meta property="article:published_time" content="2024-07-13T01:39:35.887Z">
-<meta property="article:modified_time" content="2024-07-13T13:32:03.742Z">
+<meta property="article:modified_time" content="2024-07-17T07:08:41.451Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +274,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.8k 字
         
       </span>
     
@@ -284,7 +285,7 @@
         
         
         
-          19 分钟
+          24 分钟
         
       </span>
     
@@ -401,37 +402,37 @@
 <td>FTP</td>
 <td>21</td>
 <td>File Transfer</td>
-<td>Cleartext（明文）</td>
+<td>明文（明文）</td>
 </tr>
 <tr>
 <td>HTTP</td>
 <td>80</td>
 <td>Worldwide Web</td>
-<td>Cleartext</td>
+<td>明文</td>
 </tr>
 <tr>
 <td>IMAP</td>
 <td>143</td>
 <td>Email (MDA)</td>
-<td>Cleartext</td>
+<td>明文</td>
 </tr>
 <tr>
 <td>POP3</td>
 <td>110</td>
 <td>Email (MDA)</td>
-<td>Cleartext</td>
+<td>明文</td>
 </tr>
 <tr>
 <td>SMTP</td>
 <td>25</td>
 <td>Email (MTA)</td>
-<td>Cleartext</td>
+<td>明文</td>
 </tr>
 <tr>
 <td>Telnet</td>
 <td>23</td>
 <td>Remote Access</td>
-<td>Cleartext</td>
+<td>明文</td>
 </tr>
 </tbody></table>
 <h1 id="易遭受的攻击"><a href="#易遭受的攻击" class="headerlink" title="易遭受的攻击"></a>易遭受的攻击</h1><h2 id="1-嗅探攻击-网络数据包捕获"><a href="#1-嗅探攻击-网络数据包捕获" class="headerlink" title="1.嗅探攻击(网络数据包捕获)"></a>1.嗅探攻击(网络数据包捕获)</h2><p>当协议以明文的方式进行传输时，第三方可以对传输的数据进行一个分析，从而可以获取到一些敏感的信息。</p>
@@ -454,7 +455,103 @@
 <p>2.对传输的信息进行一个加密或者签名。</p>
 <p>传输层安全性(TLS) 可防止这个攻击。</p>
 <p>许多工具可以帮助你实施此类攻击，例如<a target="_blank" rel="noopener" href="https://www.ettercap-project.org/">Ettercap</a>和<a target="_blank" rel="noopener" href="https://www.bettercap.org/">Bettercap</a></p>
-<h2 id="3-密码攻击-身份验证攻击"><a href="#3-密码攻击-身份验证攻击" class="headerlink" title="3.密码攻击(身份验证攻击)"></a>3.密码攻击(身份验证攻击)</h2><h2 id="4-漏洞"><a href="#4-漏洞" class="headerlink" title="4.漏洞"></a>4.漏洞</h2><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h2 id="传输层安全性-TLS"><a href="#传输层安全性-TLS" class="headerlink" title="传输层安全性 (TLS)"></a>传输层安全性 (TLS)</h2><p>可以防止密码嗅探和中间人攻击。</p>
+<h2 id="3-密码攻击-身份验证攻击"><a href="#3-密码攻击-身份验证攻击" class="headerlink" title="3.密码攻击(身份验证攻击)"></a>3.密码攻击(身份验证攻击)</h2><p>关于密码攻击大致有三类：</p>
+<p>1.进行猜测，有些人会将密码设置成宠物的名字或者出生日期等。</p>
+<p>2.字典攻击，拓展了密码猜测，将所有可能的结果放在一个字典中。</p>
+<p>3.暴力破解：这种攻击是最彻底、最耗时的攻击，攻击者会尝试所有可能的字符组合，并且这种攻击会快速增长。</p>
+<p><code>hydra</code>是一个不错的暴力破解工具，支持多种协议（pop3,http,ssh,ftp,smtp,imap等）</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs armasm">使用命令：<br><span class="hljs-symbol">hydra</span> -l username -P xxx.txt <span class="hljs-built_in">ip</span> service <span class="hljs-comment">//xxx.txt为密码字典  service为不同的服务</span><br>有些情况下，扫描出来的服务并不是默认端口，例如pop3服务扫描出来的端口信息是<span class="hljs-number">55007</span> hydra -l username -P xxx.txt -s PORT <span class="hljs-built_in">ip</span> service<br>-V 显示详细信息<br>-d 进行调试<br>-t n 设置线程 如果不设置的话默认是<span class="hljs-number">16</span> <br></code></pre></td></tr></table></figure>
+
+<h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h2 id="传输层安全性-TLS"><a href="#传输层安全性-TLS" class="headerlink" title="传输层安全性 (TLS)"></a>传输层安全性 (TLS)</h2><p>可以防止密码嗅探和中间人攻击。</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/9d265987c58331f6fd2f664837f85380.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="概括"><a href="#概括" class="headerlink" title="概括"></a>概括</h1><table>
+<thead>
+<tr>
+<th>Protocol</th>
+<th>TCP Port</th>
+<th>Application(s)</th>
+<th>Data Security</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP</td>
+<td>21</td>
+<td>File Transfer</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>FTPS</td>
+<td>990</td>
+<td>File Transfer</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>80</td>
+<td>Worldwide Web</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>443</td>
+<td>Worldwide Web</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td>143</td>
+<td>Email (MDA)</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>IMAPS</td>
+<td>993</td>
+<td>Email (MDA)</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>110</td>
+<td>Email (MDA)</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>POP3S</td>
+<td>995</td>
+<td>Email (MDA)</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td>22</td>
+<td>File Transfer</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>22</td>
+<td>Remote Access and File Transfer</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>25</td>
+<td>Email (MTA)</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>SMTPS</td>
+<td>465</td>
+<td>Email (MTA)</td>
+<td>密文</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>23</td>
+<td>Remote Access</td>
+<td>明文</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -519,7 +616,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月13日</div>
+          <div>2024年7月17日</div>
         </div>
       
       
