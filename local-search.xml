@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Net Sec Challenge</title>
+    <link href="/2024/07/17/Net%20Sec%20Challenge/"/>
+    <url>/2024/07/17/Net%20Sec%20Challenge/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Net-Sec-Challenge"><a href="#Net-Sec-Challenge" class="headerlink" title="Net Sec Challenge"></a>Net Sec Challenge</h1><p>使用nmap对1-10000的端口进行一个扫描</p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> -sV -<span class="hljs-built_in">p1</span>-<span class="hljs-number">10000</span> -T4 <span class="hljs-built_in">ip</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171536534.png" alt="image-20240717153652326"></p><p>可以看到ssh服务器标头隐藏的信息，以及在10000以内开放的端口的详细信息。</p><p>使用telnet对http进行一个远程连接</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171538759.png" alt="image-20240717153818631"></p><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/</span> <span class="hljs-meta">HTTP/1.1</span><br><br><span class="language-armasm"><span class="hljs-symbol">host:</span><span class="hljs-built_in">ip</span></span><br></code></pre></td></tr></table></figure><p>可以看到HTTP服务器标头中隐藏的信息。</p><p>通过扫描10000-15000的端口，可以看到一个端口为10021的ftp服务。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171605168.png" alt="image-20240717160514047"> </p><p>然后知道有两个用户名 eddie和quinn</p><p>通过hydra进行一个爆破</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625724.png" alt="image-20240717162515580"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625875.png" alt="image-20240717162530822"></p><p>可以得到账户密码。</p><p>然后去ftp登录一下，在quinn用户下发现flag</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171642901.png" alt="image-20240717164243817"></p><p>绕过IDS时，使用nmap -sN ip进行扫描</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171726464.png" alt="image-20240717172656357"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171727746.png" alt="image-20240717172707595"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Jr Penetration Tester</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>GoldenEye</title>
     <link href="/2024/07/16/GoldenEye/"/>
     <url>/2024/07/16/GoldenEye/</url>
