@@ -16,31 +16,27 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Net Sec Challenge使用nmap对1-10000的端口进行一个扫描 1nmap -sV -p1-10000 -T4 ip   可以看到ssh服务器标头隐藏的信息，以及在10000以内开放的端口的详细信息。 使用telnet对http进行一个远程连接  123GET &#x2F; HTTP&#x2F;1.1host:ip  可以看到HTTP服务器标头中隐藏的信息。 通过扫描10000-15000的端口，可">
+    <meta name="description" content="w1r3s信息收集加提权在同一子网中，利用arp-scan -l 进行存活主机的探测。 然后利用nmap进行端口的扫描。  这个靶机是一个unubtu的，然后用户名我们是知道的，去利用hydra爆破ftp和ssh的密码，最终可以得到ssh的密码。  其实到这一步距离提权就很快了，ssh的密码也是那台机器的密码。然后就去看一下如何提权。 先sudo -l看一下内容  是ALL的话，我们可以直接利用s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Net Sec Challenge">
-<meta property="og:url" content="http://example.com/2024/07/17/Net%20Sec%20Challenge/index.html">
+<meta property="og:title" content="w1r3s">
+<meta property="og:url" content="http://example.com/2024/07/18/w1r3s/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Net Sec Challenge使用nmap对1-10000的端口进行一个扫描 1nmap -sV -p1-10000 -T4 ip   可以看到ssh服务器标头隐藏的信息，以及在10000以内开放的端口的详细信息。 使用telnet对http进行一个远程连接  123GET &#x2F; HTTP&#x2F;1.1host:ip  可以看到HTTP服务器标头中隐藏的信息。 通过扫描10000-15000的端口，可">
+<meta property="og:description" content="w1r3s信息收集加提权在同一子网中，利用arp-scan -l 进行存活主机的探测。 然后利用nmap进行端口的扫描。  这个靶机是一个unubtu的，然后用户名我们是知道的，去利用hydra爆破ftp和ssh的密码，最终可以得到ssh的密码。  其实到这一步距离提权就很快了，ssh的密码也是那台机器的密码。然后就去看一下如何提权。 先sudo -l看一下内容  是ALL的话，我们可以直接利用s">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171536534.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171538759.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171605168.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625724.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625875.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171642901.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171726464.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171727746.png">
-<meta property="article:published_time" content="2024-07-17T07:11:04.900Z">
-<meta property="article:modified_time" content="2024-07-17T09:28:00.337Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407180951487.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181008796.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181058858.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181059342.png">
+<meta property="article:published_time" content="2024-07-18T01:42:26.837Z">
+<meta property="article:modified_time" content="2024-07-18T03:03:03.405Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="tryhackme">
+<meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171536534.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407180951487.png">
   
   
   
-  <title>Net Sec Challenge - FSRM</title>
+  <title>w1r3s - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -247,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Net Sec Challenge"></span>
+            <span id="subtitle" data-typed-text="w1r3s"></span>
           
         </div>
 
@@ -258,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-17 15:11" pubdate>
-          2024年7月17日 下午
+        <time datetime="2024-07-18 09:42" pubdate>
+          2024年7月18日 上午
         </time>
       </span>
     
@@ -270,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          293 字
+          199 字
         
       </span>
     
@@ -281,7 +277,7 @@
         
         
         
-          3 分钟
+          2 分钟
         
       </span>
     
@@ -326,33 +322,21 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Net Sec Challenge</h1>
+            <h1 id="seo-header">w1r3s</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Net-Sec-Challenge"><a href="#Net-Sec-Challenge" class="headerlink" title="Net Sec Challenge"></a>Net Sec Challenge</h1><p>使用nmap对1-10000的端口进行一个扫描</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">nmap</span> -sV -<span class="hljs-built_in">p1</span>-<span class="hljs-number">10000</span> -T4 <span class="hljs-built_in">ip</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171536534.png" srcset="/img/loading.gif" lazyload alt="image-20240717153652326"></p>
-<p>可以看到ssh服务器标头隐藏的信息，以及在10000以内开放的端口的详细信息。</p>
-<p>使用telnet对http进行一个远程连接</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171538759.png" srcset="/img/loading.gif" lazyload alt="image-20240717153818631"></p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/</span> <span class="hljs-meta">HTTP/1.1</span><br><br><span class="language-armasm"><span class="hljs-symbol">host:</span><span class="hljs-built_in">ip</span></span><br></code></pre></td></tr></table></figure>
-
-<p>可以看到HTTP服务器标头中隐藏的信息。</p>
-<p>通过扫描10000-15000的端口，可以看到一个端口为10021的ftp服务。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171605168.png" srcset="/img/loading.gif" lazyload alt="image-20240717160514047"> </p>
-<p>然后知道有两个用户名 eddie和quinn</p>
-<p>通过hydra进行一个爆破</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625724.png" srcset="/img/loading.gif" lazyload alt="image-20240717162515580"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171625875.png" srcset="/img/loading.gif" lazyload alt="image-20240717162530822"></p>
-<p>可以得到账户密码。</p>
-<p>然后去ftp登录一下，在quinn用户下发现flag</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171642901.png" srcset="/img/loading.gif" lazyload alt="image-20240717164243817"></p>
-<p>绕过IDS时，使用nmap -sN ip进行扫描</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171726464.png" srcset="/img/loading.gif" lazyload alt="image-20240717172656357"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407171727746.png" srcset="/img/loading.gif" lazyload alt="image-20240717172707595"></p>
+                <h1 id="w1r3s"><a href="#w1r3s" class="headerlink" title="w1r3s"></a>w1r3s</h1><h2 id="信息收集加提权"><a href="#信息收集加提权" class="headerlink" title="信息收集加提权"></a>信息收集加提权</h2><p>在同一子网中，利用arp-scan -l 进行存活主机的探测。</p>
+<p>然后利用nmap进行端口的扫描。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407180951487.png" srcset="/img/loading.gif" lazyload alt="image-20240718095053343"></p>
+<p>这个靶机是一个unubtu的，然后用户名我们是知道的，去利用hydra爆破ftp和ssh的密码，最终可以得到ssh的密码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181008796.png" srcset="/img/loading.gif" lazyload alt="image-20240718100851694"></p>
+<p>其实到这一步距离提权就很快了，ssh的密码也是那台机器的密码。然后就去看一下如何提权。</p>
+<p>先<code>sudo -l</code>看一下内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181058858.png" srcset="/img/loading.gif" lazyload alt="image-20240718105825780"></p>
+<p>是ALL的话，我们可以直接利用<code>sudo su</code>进行提权。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407181059342.png" srcset="/img/loading.gif" lazyload alt="image-20240718105913287"></p>
 
                 
               </div>
@@ -371,7 +355,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
   
   
 
@@ -386,7 +370,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/tryhackme/" class="print-no-link">#tryhackme</a>
+        <a href="/tags/vulnhub/" class="print-no-link">#vulnhub</a>
       
     </div>
   
@@ -398,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Net Sec Challenge</div>
-      <div>http://example.com/2024/07/17/Net Sec Challenge/</div>
+      <div>w1r3s</div>
+      <div>http://example.com/2024/07/18/w1r3s/</div>
     </div>
     <div class="license-meta">
       
@@ -411,13 +395,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月17日</div>
+          <div>2024年7月18日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年7月17日</div>
+          <div>2024年7月18日</div>
         </div>
       
       
@@ -448,18 +432,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/18/w1r3s/" title="w1r3s">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">w1r3s</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/16/GoldenEye/" title="GoldenEye">
-                        <span class="hidden-mobile">GoldenEye</span>
+                      <a href="/2024/07/17/Net%20Sec%20Challenge/" title="Net Sec Challenge">
+                        <span class="hidden-mobile">Net Sec Challenge</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
