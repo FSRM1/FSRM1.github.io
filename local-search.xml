@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>初识linux提权</title>
+    <link href="/2024/07/30/%E6%8F%90%E6%9D%83/"/>
+    <url>/2024/07/30/%E6%8F%90%E6%9D%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Linux提权"><a href="#Linux提权" class="headerlink" title="Linux提权"></a>Linux提权</h1><p>简单来讲，提权就是将一个低权限用户利用系统的漏洞，设计缺陷等提升到一个高权限用户的过程。</p><h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>就是进一步的进行信息收集。</p><h3 id="hostname"><a href="#hostname" class="headerlink" title="hostname"></a>hostname</h3><p>返回目标机器的主机名，在某些情况下，可以提供有关目标系统在公司网络中的角色的信息。</p><h3 id="uname-a"><a href="#uname-a" class="headerlink" title="uname -a"></a>uname -a</h3><p>打印系统信息，为我们提供有关系统使用的内核的更多详细信息。</p><h3 id="proc-version"><a href="#proc-version" class="headerlink" title="/proc/version"></a>/proc/version</h3><p>提供有关目标系统进程的信息，查看<code>/proc/version</code>可能会为您提供有关内核版本的信息和其他数据，例如是否安装了编译器（例如 GCC）。</p><h3 id="etc-issue"><a href="#etc-issue" class="headerlink" title="/etc/issue"></a>/etc/issue</h3><p>通过查看<code>/etc/issue</code>文件来识别系统。</p><h3 id="ps-Command"><a href="#ps-Command" class="headerlink" title="ps Command"></a>ps Command</h3><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407311955973.png" alt="image-20240731195547857"></p><p>PID是进程号 TTY是用户使用的终端类型 TIME是进程使用的CPU时间 CMD是正在运行的命令或可执行文件</p><p><code>ps -A</code> 查看所有正在运行的进程</p><p><code>ps axjf</code>：查看进程树</p><p><code>ps aux</code>: <code>aux</code> 选项将显示所有用户的进程（a）、显示启动进程的用户（u）以及显示未附加到终端的进程（x）。</p><h3 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h3><p>查看系统用户。</p><p><code>cat /etc/passwd | cut -d &quot;:&quot; -f 1</code> </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407312016606.png" alt="image-20240731201612405"></p><h3 id="ip-route"><a href="#ip-route" class="headerlink" title="ip route"></a>ip route</h3><p>查看网络路由</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202407312019805.png" alt="image-20240731201937765"></p><h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p><code>netstat -a</code>显示所有监听端口及已建立的连接。</p><p><code>netstat -au 或 netstat -at</code> 可用于分别列出UDP或TCP协议。</p><p><code>netstat -l</code>：列出处于“监听”模式的端口。</p><p><code>netstat -s</code> 按协议列出网络使用情况统计信息。</p><p><code>netstat -tp</code> 列出带有服务名称和PID信息的连接。</p><p><code>netstat -i</code>：显示接口统计信息。</p><p><code>netstat -ano</code> </p><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p><code>find . -name flag.txt</code> // 查找当前目录下的flag.txt的文件。</p><p><code>find /home -name flag.txt</code> // 查找home目录下的flag.txt文件。</p><p><code>find / -type d -name config</code> // 在/目录下查找名为config的目录</p><p><code>find / -type f -perm 0777</code> //查找具有 777 权限的文件（所有用户可读、可写、可执行的文件）</p><p><code>find / -perm a=x</code> //查找可执行文件。</p><p><code>find /home -user frank</code> //查找home目录下frank用户的所有文件。</p><p><code>find / -mtime 10</code> //查找过去10天内修改的文件</p><p><code>find / -atime 10</code> //查找过去10天内访问的文件</p><p><code>find / -cmin 10</code> //查找过去1h内更改过的文件</p><p><code>find / -amin 10</code> //查找过去1h内访问过的文件</p><p><code>find / -size 50M</code> //查找大小为50MB的文件</p><p>有的时候使用find命令会出现错误，这个时候使用<code>-type f 2&gt;dev/null</code> 将错误重定向到/dev/null中</p><p><code>find / -writable -type d 2&gt;dev/null</code></p><p><code>find / -perm -222 -type d 2&gt;dev/null</code></p><p><code>find / -perm -o w -type d 2&gt;dev/null</code></p><p>查找linux中所有可写的文件夹</p><p><code>find / -perm -u=s -type f 2&gt;dev/null</code> 查找具有SUID位的文件</p><h2 id="自动枚举工具"><a href="#自动枚举工具" class="headerlink" title="自动枚举工具"></a>自动枚举工具</h2><ul><li><strong>LinPeas</strong>：<a href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS">https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS</a></li><li><strong>LinEnum：</strong><a href="https://github.com/rebootuser/LinEnum">https://github.com/rebootuser/LinEnum</a></li><li><strong>LES（Linux漏洞利用建议器）：</strong><a href="https://github.com/mzet-/linux-exploit-suggester">https://github.com/mzet-/linux-exploit-suggester</a></li><li><strong>Linux智能枚举：</strong><a href="https://github.com/diego-treitos/linux-smart-enumeration">https://github.com/diego-treitos/linux-smart-enumeration</a></li><li><strong>Linux隐私检查器：</strong> <a href="https://github.com/linted/linuxprivchecker">https://github.com/linted/linuxprivchecker</a></li></ul><p>用于帮助枚举linux的系统信息，帮助发现潜在的权限提升漏洞。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Jr Penetration Tester</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>w1r3s</title>
     <link href="/2024/07/18/w1r3s/"/>
     <url>/2024/07/18/w1r3s/</url>
