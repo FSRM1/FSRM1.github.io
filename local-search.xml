@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Kenobi</title>
+    <link href="/2024/09/10/Kenobi/"/>
+    <url>/2024/09/10/Kenobi/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Kenobi"><a href="#Kenobi" class="headerlink" title="Kenobi"></a>Kenobi</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先对其端口信息进行一个扫描。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409101952886.png" alt="image-20240910195241621"></p><p>21 22 139 445 以及80端口开放。</p><p>其中samba服务是开启的。</p><p>nmap 有一个脚本是枚举samba共享的。</p><p><code>nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.25.79</code></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409102007890.png" alt="image-20240910200754712"></p><p>使用enum4linux 也能枚举samba服务。</p><p>比nmap那个更清晰。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409102027018.png" alt="image-20240910202710920"></p><p>我们使用smbclient连接到远程samba服务共享。</p><p>然后经过测试发现，anonymous和IPC$ 是无密码的，然后print$ 无密码的话是登录不进去的，同时只有anonmous 在ls下有文件。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409102043907.png" alt="image-20240910204322770"></p><p>递归下载文件。</p><p><code>smbget -R smb:// 10.10.25.79 /anonymous</code></p><p>我这个不知道为什么下载不了…</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409102105651.png" alt="image-20240910210509539"></p><h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><p>上面开启了21端口，我们试一下ftp登录。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112147376.png" alt="image-20240911214709282"></p><p>发现ProFTPD的版本信息，去搜索一下对应的漏洞信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112153764.png" alt="image-20240911215324642"></p><p>有4个可以利用的。</p><p>漏洞利用思路:</p><p>大体上就是利用漏洞将用户的ssh密钥文件移动到我们可以看见的挂载的地方，因为它是一个smb服务，创建一个共享目录，将可看见的挂载的地方挂载到共享目录去，然后我们就能在攻击机上面得到该ssh私钥文件，利用该文件进行ssh登录。 </p><p>下面是详细的过程：</p><p>mod_copy 模块实现了<strong>SITE CPFR</strong>和<strong>SITE CPTO</strong>命令，这些命令可用于将文件/目录从服务器上的一个位置复制到另一个位置。任何未经身份验证的客户端都可以利用这些命令将文件从 文件系统的任何部分复制到选定的目标。</p><p>我们知道 FTP 服务以 Kenobi 用户身份运行（从共享上的文件），并且为该用户生成了一个 ssh 密钥。 </p><p>我们现在将 使用 SITE CPFR 和 SITE CPTO 命令复制 Kenobi 的私钥。</p><p>我们知道 /var 目录是我们可以看见的挂载 因此，我们现在将 Kenobi 的私钥移至 /var/tmp 目录。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112229521.png" alt="image-20240911222936418"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112232773.png" alt="image-20240911223222649"></p><p>现在/mnt/fsrm/tmp目录下存放着ssh的私钥，我们可以利用这个登录Kenobi用户。</p><p>记得需要修改id_rsa的权限 修改为600</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112308207.png" alt="image-20240911230802144"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>然后下面就是尝试提权，sudo提权不太行，那就查看一下哪些具有suid位。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112310192.png" alt="image-20240911231003129"></p><p>这里利用的是/usr/bin/menu</p><p>先运行一下这个程序</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112318666.png" alt="image-20240911231825571"></p><p>选择1，这个功能就相当于curl,然后我们可以将/bin/sh 写入到curl中，并将curl设置成777权限，然后再将其添加到PATH中，当这个suid程序再次运行1时，就会触发这个curl。</p><p>通过：PATH 环境变量提权。</p><p>先来看一下$PATH里面有什么。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112327635.png" alt="image-20240911232746587"></p><p>有/tmp，可以将curl添加到/tmp中。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409112322813.png" alt="image-20240911232219724"></p><p>提权成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Offensive Pentesting</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>初识windows提权</title>
     <link href="/2024/08/05/windows%E6%8F%90%E6%9D%83/"/>
     <url>/2024/08/05/windows%E6%8F%90%E6%9D%83/</url>
