@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Steel Mountain</title>
+    <link href="/2024/09/21/Steel%20Mountain/"/>
+    <url>/2024/09/21/Steel%20Mountain/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Steel-Mountain"><a href="#Steel-Mountain" class="headerlink" title="Steel Mountain"></a>Steel Mountain</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>首先访问一下网站信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211453703.png" alt="image-20240921145336352"></p><p>这有一个最佳员工的图片，但我们并不知道名字，查看一下网页源代码。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211454459.png" alt="image-20240921145433982"></p><p>Bill HarPer就是他的名字。</p><p>nmap看一下开放的端口信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211540971.png" alt="image-20240921154017827"></p><h2 id="普通shell"><a href="#普通shell" class="headerlink" title="普通shell"></a>普通shell</h2><p>Rejetto <em>HTTP File Server</em> 2.3版本存在漏洞。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211546813.png" alt="image-20240921154629676"></p><p>找到一个可以利用的。</p><p>是一个CVE <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-6287">2014-6287</a></p><p>然后msf里面也有，上线msf就行。</p><p>就是设置好参数即可。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211616343.png" alt="image-20240921161627246"></p><p>现在获得的是普通用户的权限，下面就是进行提权。</p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>使用Powerup的powershell脚本。</p><p><a href="https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1">https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1</a></p><p>先使用upload上传上去。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211634874.png" alt="image-20240921163432739"></p><p>在meterpreter中进行powershell模式，需要先输入 load powershell加载这个模式，然后输入powershell_shell</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211637083.png" alt="image-20240921163702001"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211640386.png" alt="image-20240921164034230"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211642334.png" alt="image-20240921164245162"></p><p>这些都标记为true 很明显是利用未加引号的服务路径进行提权。</p><p>使用msfvenom生成一个exe文件。</p><p>然后开一个python服务，上传进去，把这个exe文件给代替一下，然后重启服务。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211722340.png" alt="image-20240921172258165"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211723386.png" alt="image-20240921172313274"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202409211723691.png" alt="image-20240921172323617"></p><p>可以看到提权成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Offensive Pentesting</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Kenobi</title>
     <link href="/2024/09/10/Kenobi/"/>
     <url>/2024/09/10/Kenobi/</url>
