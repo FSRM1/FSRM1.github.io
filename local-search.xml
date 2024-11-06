@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>gamezome</title>
+    <link href="/2024/11/04/Game%20Zone/"/>
+    <url>/2024/11/04/Game%20Zone/</url>
+    
+    <content type="html"><![CDATA[<h1 id="gamezome"><a href="#gamezome" class="headerlink" title="gamezome"></a>gamezome</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>利用-F扫了一下，发现22和80端口开放。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png"></p><p>去访问80端口，可以看到有一个登录框。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226984.png"></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>尝试爆破一下密码。</p><p>好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052339119.png" alt="image-20241105233931933"></p><p>存在的话，就尝试能否爆出账户和密码。</p><p>可以跑出来，但是就是太慢了。。。</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sqlmap -r <span class="hljs-string">&#x27;xxxx/txt&#x27;</span> <span class="hljs-attribute">--dbms</span>=mysql --dump<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061730635.png" alt="image-20241106173007385"></p><p>利用john去解一下这个。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">John pass.txt --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=Raw-SHA256<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061749145.png" alt="image-20241106174906022"></p><p>得到密码之后，ssh连接上去。</p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>ss -tuln看一下监听的信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061808651.png" alt="image-20241106180831588"></p><p>利用ssh将10000端口的服务映射到本地。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061854500.png" alt="image-20241106185417426"></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">10000</span>:localhost:<span class="hljs-number">10000</span> agent47@<span class="hljs-number">10.10.169.5</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062014657.png" alt="image-20241106201439520"></p><p>然后去访问localhost:10000</p><p>是一个登录界面，用上面的用户名和密码登录进去即可。</p><p>然后可以看到是一个cms，版本号可以知道，去查看一下是否存在可利用的漏洞。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062017934.png" alt="image-20241106201742824"></p><p>找到一个可以利用的。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059971.png" alt="image-20241106205927779"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059479.png" alt="image-20241106205939361"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Offensive Pentesting</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>HackPark</title>
     <link href="/2024/10/28/HackPark/"/>
     <url>/2024/10/28/HackPark/</url>
