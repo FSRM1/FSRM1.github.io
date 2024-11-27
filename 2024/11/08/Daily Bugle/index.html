@@ -16,34 +16,27 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="gamezome信息收集利用-F扫了一下，发现22和80端口开放。  去访问80端口，可以看到有一个登录框。  漏洞利用尝试爆破一下密码。 好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。  存在的话，就尝试能否爆出账户和密码。 可以跑出来，但是就是太慢了。。。 1sqlmap -r &amp;#x27;xxxx&#x2F;txt&amp;#x27; --dbms&#x3D;mysql --dump   利用jo">
+    <meta name="description" content="Daily Bugle扫了一下 22 80 3306端口开启 访问README.txt 可以得到版本号 是3.7.0 找到一个sql注入的洞  用sqlmap可以跑。但还是挺慢的。 但最后没跑出数据。  去找一下这个cve CVE-2017-8917 https:&#x2F;&#x2F;github.com&#x2F;stefanlucas&#x2F;Exploit-Joomla 1Found user [u&amp;#x27;811&amp;#x27">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gamezome">
-<meta property="og:url" content="http://example.com/2024/11/04/Game%20Zone/index.html">
+<meta property="og:title" content="FSRM">
+<meta property="og:url" content="http://example.com/2024/11/08/Daily%20Bugle/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="gamezome信息收集利用-F扫了一下，发现22和80端口开放。  去访问80端口，可以看到有一个登录框。  漏洞利用尝试爆破一下密码。 好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。  存在的话，就尝试能否爆出账户和密码。 可以跑出来，但是就是太慢了。。。 1sqlmap -r &amp;#x27;xxxx&#x2F;txt&amp;#x27; --dbms&#x3D;mysql --dump   利用jo">
+<meta property="og:description" content="Daily Bugle扫了一下 22 80 3306端口开启 访问README.txt 可以得到版本号 是3.7.0 找到一个sql注入的洞  用sqlmap可以跑。但还是挺慢的。 但最后没跑出数据。  去找一下这个cve CVE-2017-8917 https:&#x2F;&#x2F;github.com&#x2F;stefanlucas&#x2F;Exploit-Joomla 1Found user [u&amp;#x27;811&amp;#x27">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226984.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052339119.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061730635.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061749145.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061808651.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061854500.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062014657.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062017934.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059971.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059479.png">
-<meta property="article:published_time" content="2024-11-04T12:00:07.677Z">
-<meta property="article:modified_time" content="2024-11-06T13:00:39.147Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082215935.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411090017580.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102141269.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102301151.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102303404.png">
+<meta property="article:published_time" content="2024-11-08T12:38:49.497Z">
+<meta property="article:modified_time" content="2024-11-10T15:06:14.487Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082215935.png">
   
   
   
-  <title>gamezome - FSRM</title>
+  <title>FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -250,7 +243,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="gamezome"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -261,8 +254,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-04 20:00" pubdate>
-          2024年11月4日 晚上
+        <time datetime="2024-11-08 20:38" pubdate>
+          2024年11月8日 晚上
         </time>
       </span>
     
@@ -273,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          461 字
+          585 字
         
       </span>
     
@@ -284,7 +277,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -329,42 +322,35 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">gamezome</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="gamezome"><a href="#gamezome" class="headerlink" title="gamezome"></a>gamezome</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>利用-F扫了一下，发现22和80端口开放。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226140.png" srcset="/img/loading.gif" lazyload></p>
-<p>去访问80端口，可以看到有一个登录框。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052226984.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>尝试爆破一下密码。</p>
-<p>好像没啥结果，抓个包，用sqlmap跑一下看看，是否存在sql注入。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411052339119.png" srcset="/img/loading.gif" lazyload alt="image-20241105233931933"></p>
-<p>存在的话，就尝试能否爆出账户和密码。</p>
-<p>可以跑出来，但是就是太慢了。。。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sqlmap -r <span class="hljs-string">&#x27;xxxx/txt&#x27;</span> <span class="hljs-attribute">--dbms</span>=mysql --dump<br></code></pre></td></tr></table></figure>
+                <h1 id="Daily-Bugle"><a href="#Daily-Bugle" class="headerlink" title="Daily Bugle"></a>Daily Bugle</h1><p>扫了一下 22 80 3306端口开启</p>
+<p>访问README.txt 可以得到版本号 是3.7.0</p>
+<p>找到一个sql注入的洞</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082215935.png" srcset="/img/loading.gif" lazyload alt="image-20241108221530848"></p>
+<p>用sqlmap可以跑。但还是挺慢的。</p>
+<p>但最后没跑出数据。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411090017580.png" srcset="/img/loading.gif" lazyload alt="image-20241109001738334"></p>
+<p>去找一下这个cve CVE-2017-8917</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/stefanlucas/Exploit-Joomla">https://github.com/stefanlucas/Exploit-Joomla</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Found user [<span class="hljs-string">u&#x27;811&#x27;</span>, <span class="hljs-string">u&#x27;Super User&#x27;</span>, <span class="hljs-string">u&#x27;jonah&#x27;</span>, <span class="hljs-string">u&#x27;jonah@tryhackme.com&#x27;</span>, <span class="hljs-string">u&#x27;$2y$10$0veO/JSFh4389Lluc4Xya.dfy2MF.bZhz0jVMw.V.d3p12kBtZutm&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>]<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061730635.png" srcset="/img/loading.gif" lazyload alt="image-20241106173007385"></p>
-<p>利用john去解一下这个。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">John pass.txt --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=Raw-SHA256<br></code></pre></td></tr></table></figure>
+<p>john爆一下。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">john <span class="hljs-number">1</span>.hash --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=bcrypt<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061749145.png" srcset="/img/loading.gif" lazyload alt="image-20241106174906022"></p>
-<p>得到密码之后，ssh连接上去。</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>ss -tuln看一下监听的信息。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061808651.png" srcset="/img/loading.gif" lazyload alt="image-20241106180831588"></p>
-<p>利用ssh将10000端口的服务映射到本地。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411061854500.png" srcset="/img/loading.gif" lazyload alt="image-20241106185417426"></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">10000</span>:localhost:<span class="hljs-number">10000</span> agent47@<span class="hljs-number">10.10.169.5</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062014657.png" srcset="/img/loading.gif" lazyload alt="image-20241106201439520"></p>
-<p>然后去访问localhost:10000</p>
-<p>是一个登录界面，用上面的用户名和密码登录进去即可。</p>
-<p>然后可以看到是一个cms，版本号可以知道，去查看一下是否存在可利用的漏洞。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062017934.png" srcset="/img/loading.gif" lazyload alt="image-20241106201742824"></p>
-<p>找到一个可以利用的。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059971.png" srcset="/img/loading.gif" lazyload alt="image-20241106205927779"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411062059479.png" srcset="/img/loading.gif" lazyload alt="image-20241106205939361"></p>
+<p>然后登录后台。</p>
+<p>在下面这个地方可以修改代码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102141269.png" srcset="/img/loading.gif" lazyload alt="image-20241110214120170"></p>
+<p>然后去访问对应的路径即可，弹一个shell.</p>
+<p>弹过来的用户是apache 到网站根目录下的configuration.php里面找到数据库配置文件。</p>
+<p>然后可以找到数据库的密码。进数据库里面没其他用户的密码。</p>
+<p>这个密码也是jjameson的密码</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102301151.png" srcset="/img/loading.gif" lazyload alt="image-20241110230109925"></p>
+<p>sudo yum提权</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102303404.png" srcset="/img/loading.gif" lazyload alt="image-20241110230309339"></p>
 
                 
               </div>
@@ -373,34 +359,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/tryhackme/" class="print-no-link">#tryhackme</a>
-      
-    </div>
   
 </div>
 
@@ -410,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>gamezome</div>
-      <div>http://example.com/2024/11/04/Game Zone/</div>
+      <div></div>
+      <div>http://example.com/2024/11/08/Daily Bugle/</div>
     </div>
     <div class="license-meta">
       
@@ -423,13 +381,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月4日</div>
+          <div>2024年11月8日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年11月6日</div>
+          <div>2024年11月10日</div>
         </div>
       
       
@@ -460,18 +418,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/11/08/Skynet/" title="Skynet">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Skynet</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/03/Relevant/" title="Relevant">
-                        <span class="hidden-mobile">Relevant</span>
+                      <a href="/2024/11/08/Skynet/" title="Skynet">
+                        <span class="hidden-mobile">Skynet</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
