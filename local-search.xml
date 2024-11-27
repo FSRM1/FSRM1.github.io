@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title></title>
+    <title>Daily Bugle</title>
     <link href="/2024/11/08/Daily%20Bugle/"/>
     <url>/2024/11/08/Daily%20Bugle/</url>
     
-    <content type="html"><![CDATA[<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs subunit">title: Daily Bugle<br><span class="hljs-keyword">tags:</span><br>  - tryhackme<br>categories:<br>  - Offensive Pentesting<br></code></pre></td></tr></table></figure><h1 id="Daily-Bugle"><a href="#Daily-Bugle" class="headerlink" title="Daily Bugle"></a>Daily Bugle</h1><p>扫了一下 22 80 3306端口开启</p><p>访问README.txt 可以得到版本号 是3.7.0</p><p>找到一个sql注入的洞</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082215935.png" alt="image-20241108221530848"></p><p>用sqlmap可以跑。但还是挺慢的。</p><p>但最后没跑出数据。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411090017580.png" alt="image-20241109001738334"></p><p>去找一下这个cve CVE-2017-8917</p><p><a href="https://github.com/stefanlucas/Exploit-Joomla">https://github.com/stefanlucas/Exploit-Joomla</a></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Found user [<span class="hljs-string">u&#x27;811&#x27;</span>, <span class="hljs-string">u&#x27;Super User&#x27;</span>, <span class="hljs-string">u&#x27;jonah&#x27;</span>, <span class="hljs-string">u&#x27;jonah@tryhackme.com&#x27;</span>, <span class="hljs-string">u&#x27;$2y$10$0veO/JSFh4389Lluc4Xya.dfy2MF.bZhz0jVMw.V.d3p12kBtZutm&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>]<br></code></pre></td></tr></table></figure><p>john爆一下。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">john <span class="hljs-number">1</span>.hash --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=bcrypt<br></code></pre></td></tr></table></figure><p>然后登录后台。</p><p>在下面这个地方可以修改代码。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102141269.png" alt="image-20241110214120170"></p><p>然后去访问对应的路径即可，弹一个shell.</p><p>弹过来的用户是apache 到网站根目录下的configuration.php里面找到数据库配置文件。</p><p>然后可以找到数据库的密码。进数据库里面没其他用户的密码。</p><p>这个密码也是jjameson的密码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102301151.png" alt="image-20241110230109925"></p><p>sudo yum提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102303404.png" alt="image-20241110230309339"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="Daily-Bugle"><a href="#Daily-Bugle" class="headerlink" title="Daily Bugle"></a>Daily Bugle</h1><p>扫了一下 22 80 3306端口开启</p><p>访问README.txt 可以得到版本号 是3.7.0</p><p>找到一个sql注入的洞</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411082215935.png" alt="image-20241108221530848"></p><p>用sqlmap可以跑。但还是挺慢的。</p><p>但最后没跑出数据。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411090017580.png" alt="image-20241109001738334"></p><p>去找一下这个cve CVE-2017-8917</p><p><a href="https://github.com/stefanlucas/Exploit-Joomla">https://github.com/stefanlucas/Exploit-Joomla</a></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">Found user [<span class="hljs-string">u&#x27;811&#x27;</span>, <span class="hljs-string">u&#x27;Super User&#x27;</span>, <span class="hljs-string">u&#x27;jonah&#x27;</span>, <span class="hljs-string">u&#x27;jonah@tryhackme.com&#x27;</span>, <span class="hljs-string">u&#x27;$2y$10$0veO/JSFh4389Lluc4Xya.dfy2MF.bZhz0jVMw.V.d3p12kBtZutm&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>, <span class="hljs-string">u&#x27;&#x27;</span>]<br></code></pre></td></tr></table></figure><p>john爆一下。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">john <span class="hljs-number">1</span>.hash --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=bcrypt<br></code></pre></td></tr></table></figure><p>然后登录后台。</p><p>在下面这个地方可以修改代码。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102141269.png" alt="image-20241110214120170"></p><p>然后去访问对应的路径即可，弹一个shell.</p><p>弹过来的用户是apache 到网站根目录下的configuration.php里面找到数据库配置文件。</p><p>然后可以找到数据库的密码。进数据库里面没其他用户的密码。</p><p>这个密码也是jjameson的密码</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102301151.png" alt="image-20241110230109925"></p><p>sudo yum提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411102303404.png" alt="image-20241110230309339"></p>]]></content>
     
     
+    <categories>
+      
+      <category>Offensive Pentesting</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>tryhackme</tag>
+      
+    </tags>
     
   </entry>
   
