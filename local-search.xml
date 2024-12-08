@@ -8,7 +8,7 @@
     <link href="/2024/12/08/xss/"/>
     <url>/2024/12/08/xss/</url>
     
-    <content type="html"><![CDATA[<p><a href="javascript:alert('document.cookies')">Click Me</a></p><script>alert('document.cookies')</script>script>]]></content>
+    <content type="html"><![CDATA[<p><a href="javascript:alert(document.cookies)">Click Me</a></p><script>alert('document.cookies')</script>script>]]></content>
     
     
     
