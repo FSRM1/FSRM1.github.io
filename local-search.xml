@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2024/12/08/xss/"/>
+    <url>/2024/12/08/xss/</url>
+    
+    <content type="html"><![CDATA[<p><a href="javascript:alert('xss')">Click Me</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Internal</title>
     <link href="/2024/11/28/Internal/"/>
     <url>/2024/11/28/Internal/</url>
