@@ -279,31 +279,6 @@
   
   
   <entry>
-    <title>GreenHorn</title>
-    <link href="/2024/08/06/GreenHorn/"/>
-    <url>/2024/08/06/GreenHorn/</url>
-    
-    <content type="html"><![CDATA[<h1 id="GreenHorn"><a href="#GreenHorn" class="headerlink" title="GreenHorn"></a>GreenHorn</h1><p>进行端口的扫描：<br><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061639040.png" alt="image-20240806163948955"></p><p>22端口开放，然后我们去看一下80端口，发现访问不了，需要在/etc/hosts文件中进行相应的添加。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061639801.png" alt="image-20240806163909685"></p><p>然后去访问，寻找有用的信息。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061641607.png" alt="image-20240806164155499"></p><p>发现版本号，去exploit中查一下漏洞。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061646224.png" alt="image-20240806164602132"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061649043.png" alt="image-20240806164936983"></p><p>这里我们需要登录进去才行，然后我们去访问一下3000端口看一下信息。</p><p>扫一下目录，找到了源码，然后进行审计。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061709437.png" alt="image-20240806170947368"></p><p>密码就在pass.php里面<img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061715520.png" alt="image-20240806171517402"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202408061716814.png" alt="image-20240806171608732"></p><p>然后进行一个登录。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>第五季</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>hackthebox</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>初识windows提权</title>
     <link href="/2024/08/05/windows%E6%8F%90%E6%9D%83/"/>
     <url>/2024/08/05/windows%E6%8F%90%E6%9D%83/</url>
