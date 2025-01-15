@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="FSRM">
 <meta property="og:description" content="ctfshow渗透赛复现前置：我那时候只做到了第二章，第三章往后的都没做出来，主要是复现3到5章的内容,前两章的大概思路就是通过爆破，可以得到压缩包的密码，然后解一下RSA可以得到网址，账号密码的话，xxx.gxv 那个网站存在一个任意文件下载，通过wpscan api扫出来的 可以下载config.php得到初始的账号密码，然后登录进去，对jwt进行一个爆破，得到密钥，伪造身份，然后就是扫靶机的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2025/01/10/AppData/Roaming/Typora/typora-user-images/image-20250110185824168.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501152254307.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501101859805.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501101905857.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501101900499.png">
@@ -57,11 +57,11 @@
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501152102957.png">
 <meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501152225938.png">
 <meta property="article:published_time" content="2025-01-10T09:10:11.347Z">
-<meta property="article:modified_time" content="2025-01-15T14:49:41.158Z">
+<meta property="article:modified_time" content="2025-01-15T14:54:24.984Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="比赛复现">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2025/01/10/AppData/Roaming/Typora/typora-user-images/image-20250110185824168.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501152254307.png">
   
   
   
@@ -358,7 +358,7 @@
                 
                 <h1 id="ctfshow渗透赛复现"><a href="#ctfshow渗透赛复现" class="headerlink" title="ctfshow渗透赛复现"></a>ctfshow渗透赛复现</h1><h2 id="前置："><a href="#前置：" class="headerlink" title="前置："></a>前置：</h2><p>我那时候只做到了第二章，第三章往后的都没做出来，主要是复现3到5章的内容,前两章的大概思路就是通过爆破，可以得到压缩包的密码，然后解一下RSA可以得到网址，账号密码的话，xxx.gxv 那个网站存在一个任意文件下载，通过wpscan api扫出来的 可以下载config.php得到初始的账号密码，然后登录进去，对jwt进行一个爆破，得到密钥，伪造身份，然后就是扫靶机的后台，有一个json文件，里面存在一些可以利用的API 可以进行文件读取 然后就是利用那个ssrf探测内网，到这一步后面就卡着了。</p>
 <h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><h4 id="第三章："><a href="#第三章：" class="headerlink" title="第三章："></a>第三章：</h4><p>登录进去之后查找有用的信息</p>
-<p><img src="../AppData/Roaming/Typora/typora-user-images/image-20250110185824168.png" srcset="/img/loading.gif" lazyload alt="image-20250110185824168"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501152254307.png" srcset="/img/loading.gif" lazyload alt="image-20250115225423182"></p>
 <p>这个地方有一个内网的ip，但是这个ip并不是php服务器所在的那个ip.</p>
 <p>经过爆破，可以得到在172.2.205.5 这个ip地址上有一个 php的服务。</p>
 <p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501101859805.png" srcset="/img/loading.gif" lazyload alt="image-20250110185958669"></p>
