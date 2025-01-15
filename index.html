@@ -267,6 +267,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/" target="_self">
+          ctfshow渗透赛复现
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/" target="_self">
+        <div>
+          ctfshow渗透赛复现前置：我那时候只做到了第二章，第三章往后的都没做出来，主要是复现3到5章的内容,前两章的大概思路就是通过爆破，可以得到压缩包的密码，然后解一下RSA可以得到网址，账号密码的话，xxx.gxv 那个网站存在一个任意文件下载，通过wpscan api扫出来的 可以下载config.php得到初始的账号密码，然后登录进去，对jwt进行一个爆破，得到密钥，伪造身份，然后就是扫靶机的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-10 17:10" pubdate>
+              2025-01-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%97%E9%80%8F%E6%AF%94%E8%B5%9B/" class="category-chain-item">渗透比赛</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/">#比赛复现</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/01/02/Empire%20LupinOne/" target="_self">
           Empire_LupinOne
         </a>
@@ -810,72 +871,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/09/10/Kenobi/" target="_self">
-          Kenobi
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/10/Kenobi/" target="_self">
-        <div>
-          Kenobi信息收集首先对其端口信息进行一个扫描。  21 22 139 445 以及80端口开放。 其中samba服务是开启的。 nmap 有一个脚本是枚举samba共享的。 nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.25.79  使用enum4linux 也能枚举samba服务。 比nmap那个更清晰。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-10 19:13" pubdate>
-              2024-09-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tryhackme/">#tryhackme</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
