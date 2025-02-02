@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>HTB-Backfire</title>
+    <link href="/2025/02/02/HTB-Backfire/"/>
+    <url>/2025/02/02/HTB-Backfire/</url>
+    
+    <content type="html"><![CDATA[<h1 id="HTB-Backfire"><a href="#HTB-Backfire" class="headerlink" title="HTB-Backfire"></a>HTB-Backfire</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>8000 22 443端口开启。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201047681.png" alt="image-20250120104720463"></p><p>访问8000端口 发现有两个文件</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201051480.png" alt="image-20250120105106407"></p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>下载下来看看 发现是一个Havoc</p><p>经过搜索得到一个SSRF的漏洞 参考链接：<a href="https://github.com/HimmeL-Byte/CVE-2024-41570-SSRF-RCE">https://github.com/HimmeL-Byte/CVE-2024-41570-SSRF-RCE</a></p><p>尝试着打一下 发现可以 </p><p>登录进去之后发现shell并不长久 我们可以通过ssh的公私钥对 进行一个ssh的持久化。</p><p>首先输入 ssh-keygen 让系统生成一个公钥和私钥 然后我们将公钥放在authorized_keys中 并且赋予权限600 对.ssh赋予700的权限</p><p>将私钥拉下来 然后同样赋予600权限 最后利用私钥进行ssh登录。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212057866.png" alt="image-20250121205735620"></p><p>home目录下存在两个用户 下一步要获取另外一个用户的权限。</p><p>netstat -tuln 看一下 发现两个内部的端口 ssh映射一下。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212114686.png" alt="image-20250121211421473"></p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">7096</span>:<span class="hljs-number">127.0.0.1:7096</span> -L <span class="hljs-number">5000</span>:<span class="hljs-number">127.0.0.1:5000</span> ilya@<span class="hljs-number">10.10.11.49</span> -i id_rsa<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212127121.png" alt="image-20250121212752925"></p><p>搜索到一个身份验证绕过的漏洞。</p><p><a href="https://github.com/thisisveryfunny/HardHat-C2-Auth-Bypass/tree/main">https://github.com/thisisveryfunny/HardHat-C2-Auth-Bypass/tree/main</a></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212153785.png" alt="image-20250121215349572"></p><p>会自动生成一个用户和密码让去登录。</p><p>然后将公钥文件输入到同样的文件中</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm/pUT/9gMKllPLVgrNw8VMetEBvjG5IuKq3qjCSHSP ilya@backfire&quot;</span> &gt;&gt;<span class="hljs-regexp">/home/</span>sergej<span class="hljs-regexp">/.ssh/</span>authorized_keys<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233779.png" alt="image-20250121223321587"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233098.png" alt="image-20250121223337004"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>sudo -l 看一下 发现可以iptables和iptables-save提权</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212235334.png" alt="image-20250121223538200"></p><p>参考链接：<a href="https://cn-sec.com/archives/3193918.html">https://cn-sec.com/archives/3193918.html</a></p><p>就是将公钥文件以注释的方式添加到规则中 然后利用iptables -save 进行一个覆盖。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo /usr/sbin/iptables -A INPUT -i lo -j ACCEPT -m comment --comment $<span class="hljs-string">&#x27;\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm/pUT/9gMKllxxxxxw8VMetEBvjG5IuKq3qjCSHSP ilya@backfire\n&#x27;</span><br>sudo /usr/sbin/iptables-save -f /root/.ssh/authorized_keys<br>sudo /usr/sbin/iptables -S<br></code></pre></td></tr></table></figure><p>之前的那个公钥搞的太长了 后面又换了一个</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> <span class="hljs-symbol">ed25519</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212353586.png" alt="image-20250121235316188"></p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501220004040.png" alt="image-20250122000457903"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux靶机中级</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>HTB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>HTB-Trickster</title>
     <link href="/2025/01/25/HTB-Trickster/"/>
     <url>/2025/01/25/HTB-Trickster/</url>
