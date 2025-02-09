@@ -16,34 +16,42 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HTB-Backfire信息收集8000 22 443端口开启。  访问8000端口 发现有两个文件  漏洞利用下载下来看看 发现是一个Havoc 经过搜索得到一个SSRF的漏洞 参考链接：https:&#x2F;&#x2F;github.com&#x2F;HimmeL-Byte&#x2F;CVE-2024-41570-SSRF-RCE 尝试着打一下 发现可以  登录进去之后发现shell并不长久 我们可以通过ssh的公私钥对 进行一个">
+    <meta name="description" content="HTB-Heal信息收集扫描端口信息 22和80端口开放。 将域名和对应ip添加到&#x2F;etc&#x2F;hosts中   扫下后台  123&#x2F;index.html&#x2F;robots.txt&#x2F;manifest.json  没什么有用的信息。 进行子域名爆破，看是否存在子域名。 1ffuf -w subdomains-top1million-110000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &amp;quo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTB-Backfire">
-<meta property="og:url" content="http://example.com/2025/02/02/HTB-Backfire/index.html">
+<meta property="og:title" content="HTB-Heal">
+<meta property="og:url" content="http://example.com/2025/02/07/HTB-Heal/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="HTB-Backfire信息收集8000 22 443端口开启。  访问8000端口 发现有两个文件  漏洞利用下载下来看看 发现是一个Havoc 经过搜索得到一个SSRF的漏洞 参考链接：https:&#x2F;&#x2F;github.com&#x2F;HimmeL-Byte&#x2F;CVE-2024-41570-SSRF-RCE 尝试着打一下 发现可以  登录进去之后发现shell并不长久 我们可以通过ssh的公私钥对 进行一个">
+<meta property="og:description" content="HTB-Heal信息收集扫描端口信息 22和80端口开放。 将域名和对应ip添加到&#x2F;etc&#x2F;hosts中   扫下后台  123&#x2F;index.html&#x2F;robots.txt&#x2F;manifest.json  没什么有用的信息。 进行子域名爆破，看是否存在子域名。 1ffuf -w subdomains-top1million-110000.txt -u http:&#x2F;&#x2F;heal.htb&#x2F; -H &amp;quo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201047681.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201051480.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212057866.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212114686.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212127121.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212153785.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233779.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233098.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212235334.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212353586.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501220004040.png">
-<meta property="article:published_time" content="2025-02-02T15:44:37.609Z">
-<meta property="article:modified_time" content="2025-02-02T15:44:10.460Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072052999.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072247211.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072327761.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092028628.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092128346.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092133154.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092134224.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092137558.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092139768.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092201127.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092235537.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092237930.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092253674.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092254066.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092312801.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092341406.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092357259.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502100005178.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502100005308.png">
+<meta property="article:published_time" content="2025-02-07T11:34:15.789Z">
+<meta property="article:modified_time" content="2025-02-09T16:07:56.260Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="HTB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201047681.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072052999.png">
   
   
   
-  <title>HTB-Backfire - FSRM</title>
+  <title>HTB-Heal - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -250,7 +258,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HTB-Backfire"></span>
+            <span id="subtitle" data-typed-text="HTB-Heal"></span>
           
         </div>
 
@@ -261,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-02 23:44" pubdate>
-          2025年2月2日 晚上
+        <time datetime="2025-02-07 19:34" pubdate>
+          2025年2月7日 晚上
         </time>
       </span>
     
@@ -273,7 +281,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.3k 字
         
       </span>
     
@@ -284,7 +292,7 @@
         
         
         
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -329,48 +337,81 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">HTB-Backfire</h1>
+            <h1 id="seo-header">HTB-Heal</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="HTB-Backfire"><a href="#HTB-Backfire" class="headerlink" title="HTB-Backfire"></a>HTB-Backfire</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>8000 22 443端口开启。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201047681.png" srcset="/img/loading.gif" lazyload alt="image-20250120104720463"></p>
-<p>访问8000端口 发现有两个文件</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501201051480.png" srcset="/img/loading.gif" lazyload alt="image-20250120105106407"></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>下载下来看看 发现是一个Havoc</p>
-<p>经过搜索得到一个SSRF的漏洞 参考链接：<a target="_blank" rel="noopener" href="https://github.com/HimmeL-Byte/CVE-2024-41570-SSRF-RCE">https://github.com/HimmeL-Byte/CVE-2024-41570-SSRF-RCE</a></p>
-<p>尝试着打一下 发现可以 </p>
-<p>登录进去之后发现shell并不长久 我们可以通过ssh的公私钥对 进行一个ssh的持久化。</p>
-<p>首先输入 ssh-keygen 让系统生成一个公钥和私钥 然后我们将公钥放在authorized_keys中 并且赋予权限600 对.ssh赋予700的权限</p>
-<p>将私钥拉下来 然后同样赋予600权限 最后利用私钥进行ssh登录。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212057866.png" srcset="/img/loading.gif" lazyload alt="image-20250121205735620"></p>
-<p>home目录下存在两个用户 下一步要获取另外一个用户的权限。</p>
-<p>netstat -tuln 看一下 发现两个内部的端口 ssh映射一下。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212114686.png" srcset="/img/loading.gif" lazyload alt="image-20250121211421473"></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">7096</span>:<span class="hljs-number">127.0.0.1:7096</span> -L <span class="hljs-number">5000</span>:<span class="hljs-number">127.0.0.1:5000</span> ilya@<span class="hljs-number">10.10.11.49</span> -i id_rsa<br></code></pre></td></tr></table></figure>
+                <h1 id="HTB-Heal"><a href="#HTB-Heal" class="headerlink" title="HTB-Heal"></a>HTB-Heal</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>扫描端口信息 22和80端口开放。</p>
+<p>将域名和对应ip添加到/etc/hosts中 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072052999.png" srcset="/img/loading.gif" lazyload alt="image-20250207205220894"></p>
+<p>扫下后台 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">/index.html<br>/robots.txt<br>/manifest.json<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212127121.png" srcset="/img/loading.gif" lazyload alt="image-20250121212752925"></p>
-<p>搜索到一个身份验证绕过的漏洞。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/thisisveryfunny/HardHat-C2-Auth-Bypass/tree/main">https://github.com/thisisveryfunny/HardHat-C2-Auth-Bypass/tree/main</a></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212153785.png" srcset="/img/loading.gif" lazyload alt="image-20250121215349572"></p>
-<p>会自动生成一个用户和密码让去登录。</p>
-<p>然后将公钥文件输入到同样的文件中</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm/pUT/9gMKllPLVgrNw8VMetEBvjG5IuKq3qjCSHSP ilya@backfire&quot;</span> &gt;&gt;<span class="hljs-regexp">/home/</span>sergej<span class="hljs-regexp">/.ssh/</span>authorized_keys<br></code></pre></td></tr></table></figure>
+<p>没什么有用的信息。</p>
+<p>进行子域名爆破，看是否存在子域名。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ffuf</span> -w subdomains-top1million-<span class="hljs-number">110000</span>.txt -u http://heal.htb/ -H <span class="hljs-string">&quot;Host:FUZZ.heal.htb&quot;</span> -mc <span class="hljs-number">200</span> <br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233779.png" srcset="/img/loading.gif" lazyload alt="image-20250121223321587"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212233098.png" srcset="/img/loading.gif" lazyload alt="image-20250121223337004"></p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>sudo -l 看一下 发现可以iptables和iptables-save提权</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212235334.png" srcset="/img/loading.gif" lazyload alt="image-20250121223538200"></p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://cn-sec.com/archives/3193918.html">https://cn-sec.com/archives/3193918.html</a></p>
-<p>就是将公钥文件以注释的方式添加到规则中 然后利用iptables -save 进行一个覆盖。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo /usr/sbin/iptables -A INPUT -i lo -j ACCEPT -m comment --comment $<span class="hljs-string">&#x27;\nssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINm/pUT/9gMKllxxxxxw8VMetEBvjG5IuKq3qjCSHSP ilya@backfire\n&#x27;</span><br>sudo /usr/sbin/iptables-save -f /root/.ssh/authorized_keys<br>sudo /usr/sbin/iptables -S<br></code></pre></td></tr></table></figure>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072247211.png" srcset="/img/loading.gif" lazyload alt="image-20250207224720029"></p>
+<p>同样加到/etc/hosts中</p>
+<p>这个子域名扫后台也没得到什么有用的信息 再次回到heal,htb中 </p>
+<p>进行一个用户的注册，然后就会跳转到下面的一个地方。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502072327761.png" srcset="/img/loading.gif" lazyload alt="image-20250207232710488"></p>
+<p>点击survey会跳转到一个新的子域名信息。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092028628.png" srcset="/img/loading.gif" lazyload alt="image-20250209202838222"></p>
+<p>加到hosts里面</p>
+<p>添加完成之后能得到一个用户名</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092128346.png" srcset="/img/loading.gif" lazyload alt="image-20250209212818278"></p>
+<p>扫后台 扫到了登录地址 /admin/ 用户名知道，但是密码不知道</p>
+<p>之前 注册完成之后 登录进去还有一个地方</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092133154.png" srcset="/img/loading.gif" lazyload alt="image-20250209213314094"></p>
+<p>抓包之后 再放几次包之后能测出来一个任意文件读取</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092134224.png" srcset="/img/loading.gif" lazyload alt="image-20250209213452120"></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>上面的host地址是api.heal.htb 这个网站是一个Ruby on Rails 网上找一下数据库存放的位置 读取一下数据库的内容</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092137558.png" srcset="/img/loading.gif" lazyload alt="image-20250209213725492"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092139768.png" srcset="/img/loading.gif" lazyload alt="image-20250209213907673"></p>
+<p>读取一下storage/development.sqlite3</p>
+<p>能读到ralph账户的hash</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit">$2a$12$dUZ/O7KJT3.zE4TOK8p4RuxH3t.Bz45DSr7A94VLvY9SWx1GCSZnG<br></code></pre></td></tr></table></figure>
 
-<p>之前的那个公钥搞的太长了 后面又换了一个</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">ssh-keygen -<span class="hljs-built_in">t</span> <span class="hljs-symbol">ed25519</span><br></code></pre></td></tr></table></figure>
+<p>是一种bcrypt生成的哈希值 然后利用john进行破解一下。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">john <span class="hljs-number">1</span>.txt --wordlist=<span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>rockyou.txt --format=bcrypt<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501212353586.png" srcset="/img/loading.gif" lazyload alt="image-20250121235316188"></p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202501220004040.png" srcset="/img/loading.gif" lazyload alt="image-20250122000457903"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092201127.png" srcset="/img/loading.gif" lazyload alt="image-20250209220146047"></p>
+<p>得到密码是147258369</p>
+<p>尝试ssh登录进去，密码不对 那就试一下之前的后台地址，成功登录。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Y1LD1R1M-1337/Limesurvey-RCE">https://github.com/Y1LD1R1M-1337/Limesurvey-RCE</a> 这有一个可以使用</p>
+<p>得修改一些东西 </p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092235537.png" srcset="/img/loading.gif" lazyload alt="image-20250209223537457"></p>
+<p>这个地方加一个6.0 因为登录进去的就是6.6.4版本的。</p>
+<p>然后重新生成一个zip文件 将原来的删除 创建一个同文件名的zip压缩包</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">zip -r Y1LD1R1M.zip config.<span class="hljs-keyword">xml</span> <span class="hljs-title">php-rev</span>.php<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092237930.png" srcset="/img/loading.gif" lazyload alt="image-20250209223745867"></p>
+<p>然后上传那个zip文件</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092253674.png" srcset="/img/loading.gif" lazyload alt="image-20250209225355613"></p>
+<p>打开activate</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092254066.png" srcset="/img/loading.gif" lazyload alt="image-20250209225455003"></p>
+<p>然后访问</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>take-survey.heal.htb<span class="hljs-regexp">/upload/</span>plugins<span class="hljs-regexp">/Y1LD1R1M/</span>php-rev.php<br></code></pre></td></tr></table></figure>
+
+<p>即可得到shell</p>
+<p>再/var/www/limesurvey/application/config下找到数据库的密码</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-string">&#x27;username&#x27;</span> =&gt; <span class="hljs-string">&#x27;db_user&#x27;</span>,<br><span class="hljs-string">&#x27;password&#x27;</span> =&gt; <span class="hljs-string">&#x27;AdmiDi0_pA$<span class="hljs-subst">$w0rd</span>&#x27;</span>,<br></code></pre></td></tr></table></figure>
+
+<p>mysql服务没有 那这个密码可能是ssh的密码,再home目录下存在两个用户 另外一个是ron 尝试了一下，这个密码就是ron的</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092312801.png" srcset="/img/loading.gif" lazyload alt="image-20250209231242744"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>上传一个fscan看一下是否有内网的其他服务。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092341406.png" srcset="/img/loading.gif" lazyload alt="image-20250209234121258"></p>
+<p>有一个内网的服务 ssh映射出来。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">8500</span>:<span class="hljs-number">127.0.0.1:8500</span> ron@<span class="hljs-number">10.10.11.46</span> <br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502092357259.png" srcset="/img/loading.gif" lazyload alt="image-20250209235716122"></p>
+<p>下面存在服务和版本信息 </p>
+<p><a target="_blank" rel="noopener" href="http://exploit-db.com/exploits/51117">http://exploit-db.com/exploits/51117</a>  利用这个来打。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502100005178.png" srcset="/img/loading.gif" lazyload alt="image-20250210000500102"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502100005308.png" srcset="/img/loading.gif" lazyload alt="image-20250210000511244"></p>
+<p>提权成功。</p>
 
                 
               </div>
@@ -416,8 +457,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HTB-Backfire</div>
-      <div>http://example.com/2025/02/02/HTB-Backfire/</div>
+      <div>HTB-Heal</div>
+      <div>http://example.com/2025/02/07/HTB-Heal/</div>
     </div>
     <div class="license-meta">
       
@@ -429,13 +470,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年2月2日</div>
+          <div>2025年2月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年2月2日</div>
+          <div>2025年2月10日</div>
         </div>
       
       
@@ -466,18 +507,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/07/HTB-Heal/" title="HTB-Heal">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HTB-Heal</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/02/HTB-cat/" title="HTB-cat">
-                        <span class="hidden-mobile">HTB-cat</span>
+                      <a href="/2025/02/02/HTB-Backfire/" title="HTB-Backfire">
+                        <span class="hidden-mobile">HTB-Backfire</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
